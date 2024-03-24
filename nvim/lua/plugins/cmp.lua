@@ -15,44 +15,41 @@ return {
           end
           return 'make install_jsregexp'
         end)(),
+        config = true,
         dependencies = {
-          -- `friendly-snippets` contains a variety of premade snippets.
-          --    See the README about individual language/framework/plugin snippets:
-          --    https://github.com/rafamadriz/friendly-snippets
-          -- {
-          --   'rafamadriz/friendly-snippets',
-          --   config = function()
-          --     require('luasnip.loaders.from_vscode').lazy_load()
-          --   end,
-          -- },
+          {
+            'rafamadriz/friendly-snippets',
+            config = function()
+              require('luasnip.loaders.from_vscode').lazy_load()
+            end,
+          },
         },
       },
       'saadparwaiz1/cmp_luasnip',
 
-      -- Adds other completion capabilities.
       --  nvim-cmp does not ship with all sources by default. They are split
       --  into multiple repos for maintenance purposes.
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-nvim-lsp-signature-help',
+      'hrsh7th/cmp-cmdline',
     },
-    config = function()
-      -- See `:help cmp`
+    opts = function()
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
-      luasnip.config.setup {}
+      local defaults = require 'cmp.config.default'()
+      -- luasnip.config.setup {}
 
-      cmp.setup {
+      return {
         snippet = {
           expand = function(args)
             luasnip.lsp_expand(args.body)
           end,
         },
+
         completion = { completeopt = 'menu,menuone,noinsert' },
 
-        -- For an understanding of why these mappings were
-        -- chosen, you will need to read `:help ins-completion`
-        --
-        -- No, but seriously. Please read `:help ins-completion`, it is really good!
         mapping = cmp.mapping.preset.insert {
           -- Select the [n]ext item
           ['<C-n>'] = cmp.mapping.select_next_item(),
@@ -91,16 +88,35 @@ return {
               luasnip.jump(-1)
             end
           end, { 'i', 's' }),
-
-          -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
-          --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
         },
+
         sources = {
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
+          { name = 'buffer' },
+          { name = 'nvim_lsp_signature_help' },
         },
+        experimental = { ghost_text = { hl_group = 'CmpGhostText' } },
+        sorting = defaults.sorting,
       }
+    end,
+    config = function(_, opts)
+      local cmp = require 'cmp'
+      local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
+      cmp.setup(opts)
+      ---@diagnostic disable-next-line: missing-fields
+      cmp.setup.cmdline('/', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = { { name = 'buffer' } },
+      })
+      ---@diagnostic disable-next-line: missing-fields
+      cmp.setup.cmdline(':', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources { { name = 'path' }, { name = 'cmdline' } },
+      })
+      -- nvim-autopairs integration
+      cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
     end,
   },
 }
