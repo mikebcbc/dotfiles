@@ -1,6 +1,7 @@
 return {
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
+    event = 'BufEnter',
     config = function()
       -- Better Around/Inside textobjects
       --
@@ -18,6 +19,14 @@ return {
       require('mini.surround').setup()
 
       require('mini.bufremove').setup()
+
+      require('mini.comment').setup()
+
+      -- require('mini.completion').setup {
+      --   lsp_completion = {
+      --     source_func = 'omnifunc',
+      --   },
+      -- }
     end,
     keys = {
       {

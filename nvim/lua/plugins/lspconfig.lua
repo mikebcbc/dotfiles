@@ -127,7 +127,27 @@ return {
         -- But for many setups, the LSP (`tsserver`) will work just fine
         -- tsserver = {},
         --
-
+        -- tsserver = {
+        --   settings = {
+        --     completions = {
+        --       completeFunctionCalls = true,
+        --     },
+        --   },
+        -- },
+        vtsls = {
+          settings = {
+            typescript = {
+              suggest = {
+                completeFunctionCalls = true,
+              },
+            },
+            javascript = {
+              suggest = {
+                completeFunctionCalls = true,
+              },
+            },
+          },
+        },
         lua_ls = {
           -- cmd = {...},
           -- filetypes = { ...},

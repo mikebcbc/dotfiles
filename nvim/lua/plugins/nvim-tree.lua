@@ -18,6 +18,9 @@ return {
           git_placement = 'signcolumn',
         },
       },
+      update_focused_file = {
+        enable = true,
+      },
     }
     vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', { desc = 'Toggle file explorer', silent = true })
   end,

@@ -16,6 +16,9 @@ return {
         fidget = true,
         gitsigns = true,
         mason = true,
+        mini = {
+          enabled = true,
+        },
         -- notify = true,
         nvimtree = true,
         semantic_tokens = true,

@@ -39,7 +39,6 @@ return {
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
       local defaults = require 'cmp.config.default'()
-      -- luasnip.config.setup {}
 
       return {
         snippet = {
@@ -48,7 +47,25 @@ return {
           end,
         },
 
-        completion = { completeopt = 'menu,menuone,noinsert' },
+        completion = {
+          completeopt = 'menu,menuone,noinsert',
+          keyword_length = 4,
+        },
+
+        performance = { fetching_timeout = 800 },
+
+        window = {
+          completion = cmp.config.window.bordered {
+            col_offset = -2,
+            side_padding = 0,
+            border = 'rounded',
+            winhighlight = 'Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None',
+          },
+          documentation = cmp.config.window.bordered {
+            border = 'rounded',
+            winhighlight = 'Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None',
+          },
+        },
 
         mapping = cmp.mapping.preset.insert {
           -- Select the [n]ext item
