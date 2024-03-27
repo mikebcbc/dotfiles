@@ -21,6 +21,7 @@ return {
       update_focused_file = {
         enable = true,
       },
+      sync_root_with_cwd = true,
     }
     vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', { desc = 'Toggle file explorer', silent = true })
   end,

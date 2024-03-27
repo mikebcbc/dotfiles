@@ -27,6 +27,7 @@ return {
         ['<leader>g'] = { name = 'Git Actions', _ = 'which_key_ignore' },
         ['<leader>d'] = { name = 'Diagnostic Actions', _ = 'which_key_ignore' },
         ['<leader>t'] = { name = 'Terminal', _ = 'which_key_ignore' },
+        ['<leader>s'] = { name = 'Sessions', _ = 'which_key_ignore' },
       }
     end,
   },

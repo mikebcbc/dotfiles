@@ -20,13 +20,34 @@ return {
 
       require('mini.bufremove').setup()
 
-      require('mini.comment').setup()
+      require('mini.comment').setup {
+        options = {
+          custom_commentstring = function()
+            return require('ts_context_commentstring').calculate_commentstring() or vim.bo.commentstring
+          end,
+        },
+      }
 
-      -- require('mini.completion').setup {
-      --   lsp_completion = {
-      --     source_func = 'omnifunc',
-      --   },
-      -- }
+      require('mini.sessions').setup {
+        hooks = {
+          pre = {
+            -- close all non-normal bufferrs before writing the session (native mksession conflicts with neotree)
+            write = function()
+              for _, win_id in ipairs(vim.api.nvim_list_wins()) do
+                local buf_id = vim.api.nvim_win_get_buf(win_id)
+                if vim.bo[buf_id].buftype ~= '' then
+                  vim.api.nvim_win_close(win_id, true)
+                end
+              end
+            end,
+          },
+        },
+      }
+
+      -- setup keymaps for sessions
+      vim.keymap.set('n', '<leader>so', '<cmd>:lua MiniSessions.select("read")<CR>', { desc = 'Open a session' })
+      vim.keymap.set('n', '<leader>sd', '<cmd>:lua MiniSessions.select("delete")<CR>', { desc = 'Delete a session' })
+      vim.keymap.set('n', '<leader>sa', '<cmd>:lua MiniSessions.select("write")<CR>', { desc = 'Save a session' })
     end,
     keys = {
       {
