@@ -134,6 +134,19 @@ return {
         --     },
         --   },
         -- },
+        gopls = {
+          settings = {
+            gopls = {
+              gofumpt = true,
+              env = {
+                GOFLAGS = '-tags=integration',
+              },
+            },
+          },
+          flags = {
+            debounce_text_changes = 150,
+          },
+        },
         vtsls = {
           settings = {
             typescript = {
