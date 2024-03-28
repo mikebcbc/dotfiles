@@ -33,6 +33,15 @@ return {
             require('telescope.themes').get_dropdown(),
           },
         },
+        pickers = {
+          buffers = {
+            mappings = {
+              i = {
+                ['<c-d>'] = 'delete_buffer',
+              },
+            },
+          },
+        },
       }
 
       -- Enable Telescope extensions if they are installed
@@ -41,6 +50,7 @@ return {
 
       -- Telescope find/text actions
       local builtin = require 'telescope.builtin'
+
       vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Find help' })
       vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = 'Find keymaps' })
       vim.keymap.set('n', '<leader>fC', builtin.commands, { desc = 'Find commands' })
@@ -59,7 +69,7 @@ return {
       -- Telescope buffer/LSP actions
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = 'Find open buffers' })
       vim.keymap.set('n', '<leader>ls', builtin.lsp_document_symbols, { desc = 'Find document symbols' })
-
+      -- vim.keymap.set('n', '[c-d]', actions.delete_buffer, { desc = 'Delete buffer' })
       -- Slightly advanced example of overriding default behavior and theme
       -- vim.keymap.set('n', '<leader>/', function()
       --   -- You can pass additional configuration to Telescope to change the theme, layout, etc.
