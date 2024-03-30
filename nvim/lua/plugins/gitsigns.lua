@@ -17,6 +17,7 @@ return {
       })
     end,
     ft = 'gitcommit',
+    event = { 'BufRead' },
     keys = {
       {
         '<leader>gB',

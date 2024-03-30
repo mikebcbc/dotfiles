@@ -1,7 +1,8 @@
 return {
   'nvim-tree/nvim-tree.lua',
   version = '*',
-  lazy = false,
+  lazy = true,
+  event = 'BufEnter',
   dependencies = {
     'nvim-tree/nvim-web-devicons',
   },
@@ -18,6 +19,7 @@ return {
         signcolumn = 'yes',
         float = {
           enable = true,
+          quit_on_focus_loss = false,
           open_win_config = function()
             local screen_w = vim.opt.columns:get()
             local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
@@ -44,13 +46,25 @@ return {
       renderer = {
         icons = {
           git_placement = 'signcolumn',
+          glyphs = {
+            default = ' ',
+            symlink = ' ',
+            git = {
+              untracked = ' ',
+            },
+          },
+          show = {
+            git = true,
+            folder = true,
+            file = true,
+            folder_arrow = false,
+          },
         },
       },
       update_focused_file = {
         enable = true,
       },
       sync_root_with_cwd = true,
-      respect_buf_cwd = true,
       disable_netrw = true,
       hijack_netrw = true,
     }

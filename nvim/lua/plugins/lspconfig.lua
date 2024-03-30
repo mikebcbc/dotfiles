@@ -1,28 +1,12 @@
 return {
   { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
+    event = { 'BufRead', 'BufNewFile' },
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
-      -- Useful status updates for LSP.
-      {
-        'j-hui/fidget.nvim',
-        opts = {
-          integration = {
-            ['nvim-tree'] = {
-              enable = true, -- Integrate with nvim-tree/nvim-tree.lua (if installed)
-            },
-          },
-          notification = {
-            override_vim_notify = true,
-            window = {
-              winblend = 0,
-            },
-          },
-        },
-      },
 
       -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
       -- used for completion, annotations and signatures of Neovim apis

@@ -1,6 +1,9 @@
 return {
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
+    dependencies = {
+      { 'rubiin/fortune.nvim', config = true },
+    },
     event = 'BufEnter',
     config = function()
       -- Better Around/Inside textobjects
@@ -42,6 +45,34 @@ return {
             end,
           },
         },
+      }
+
+      require('mini.starter').setup {
+        items = {
+          require('mini.starter').sections.sessions(7, true),
+          require('mini.starter').sections.builtin_actions(),
+          require('mini.starter').sections.recent_files(5, false),
+          { name = 'Lazy', action = 'Lazy', section = 'Lazy' },
+        },
+        header = [[
+             __n__n__
+      .------`-\00/-'
+     /  ##  ## (oo)
+    / \## __   ./
+       |//YY \|/
+       |||   |||
+███╗   ███╗██╗██╗  ██╗███████╗   ███╗   ██╗██╗   ██╗██╗███╗   ███╗
+████╗ ████║██║██║ ██╔╝██╔════╝   ████╗  ██║██║   ██║██║████╗ ████║
+██╔████╔██║██║█████╔╝ █████╗     ██╔██╗ ██║██║   ██║██║██╔████╔██║
+██║╚██╔╝██║██║██╔═██╗ ██╔══╝     ██║╚██╗██║╚██╗ ██╔╝██║██║╚██╔╝██║
+██║ ╚═╝ ██║██║██║  ██╗███████╗██╗██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║
+╚═╝     ╚═╝╚═╝╚═╝  ╚═╝╚══════╝╚═╝╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝
+  
+¯`·.¸¸.·´¯`·.¸¸.·´¯`·.¸¸.·´¯`·.¸¸.·´¯`·.¸¸.·´¯`·.¸¸.·´¯`·.¸¸.·´¯`·.
+        ]],
+        footer = function()
+          return '\n \n \nI should really put a quote or something here.'
+        end,
       }
 
       -- setup keymaps for sessions
