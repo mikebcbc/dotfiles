@@ -1,6 +1,11 @@
 return {
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
+    dependencies = {
+      { 'rubiin/fortune.nvim', config = {
+        max_width = 999,
+      } },
+    },
     event = 'BufEnter',
     config = function()
       -- Better Around/Inside textobjects
@@ -68,7 +73,7 @@ return {
 ¯`·.¸¸.·´¯`·.¸¸.·´¯`·.¸¸.·´¯`·.¸¸.·´¯`·.¸¸.·´¯`·.¸¸.·´¯`·.¸¸.·´¯`·.
         ]],
         footer = function()
-          return '\n \n \nI should really put a quote or something here.'
+          return '\n \n \n' .. require('fortune').get_fortune()[2]
         end,
       }
 
