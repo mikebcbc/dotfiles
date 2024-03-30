@@ -20,7 +20,7 @@ return {
                   include_icon = true,
                 }
               else
-                return ''
+                return '󰛢'
               end
             end,
           },

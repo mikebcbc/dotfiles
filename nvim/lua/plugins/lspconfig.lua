@@ -20,47 +20,38 @@ return {
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
         callback = function(event)
-          -- NOTE: Remember that Lua is a real programming language, and as such it is possible
-          -- to define small helper and utility functions so you don't have to repeat yourself.
-          --
-          -- In this case, we create a function that lets us more easily define mappings specific
-          -- for LSP related items. It sets the mode, buffer and description for us each time.
-          local map = function(keys, func, desc)
-            vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
-          end
-
           -- Jump to the definition of the word under your cursor.
           --  This is where a variable was first declared, or where a function is defined, etc.
           --  To jump back, press <C-t>.
-          map('gd', require('telescope.builtin').lsp_definitions, 'Goto definition')
+          vim.keymap.set('n', 'gd', require('telescope.builtin').lsp_definitions, { desc = 'Goto definition' })
 
           -- Find references for the word under your cursor.
-          map('gr', require('telescope.builtin').lsp_references, 'Goto reference')
+          vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_references, { desc = 'Goto reference' })
 
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
-          map('gI', require('telescope.builtin').lsp_implementations, 'Goto implementation')
+          vim.keymap.set('n', 'gI', require('telescope.builtin').lsp_implementations, { desc = 'Goto implementation' })
 
           -- Jump to the type of the word under your cursor.
           --  Useful when you're not sure what type a variable is and you want to see
           --  the definition of its *type*, not where it was *defined*.
-          map('<leader>lD', require('telescope.builtin').lsp_type_definitions, 'Type definition')
+          vim.keymap.set('n', '<leader>lD', require('telescope.builtin').lsp_type_definitions, { desc = 'Type definition' })
 
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.
-          map('<leader>lv', vim.lsp.buf.rename, 'Rename variable')
+          vim.keymap.set('n', '<leader>lv', vim.lsp.buf.rename, { desc = 'Rename variable' })
 
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
-          map('<leader>lc', vim.lsp.buf.code_action, 'Code action')
+          vim.keymap.set('n', '<leader>lc', vim.lsp.buf.code_action, { desc = 'Code action' })
 
           -- Opens a popup that displays documentation about the word under your cursor
           --  See `:help K` for why this keymap.
-          map('K', vim.lsp.buf.hover, 'Hover documentation')
+          vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'Hover documentation' })
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
-          map('gD', vim.lsp.buf.declaration, 'Goto declaration')
+          vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = 'Goto declaration' })
 
           -- The following two autocommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.
@@ -99,25 +90,6 @@ return {
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        -- clangd = {},
-        -- gopls = {},
-        -- pyright = {},
-        -- rust_analyzer = {},
-        -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-        --
-        -- Some languages (like typescript) have entire language plugins that can be useful:
-        --    https://github.com/pmizio/typescript-tools.nvim
-        --
-        -- But for many setups, the LSP (`tsserver`) will work just fine
-        -- tsserver = {},
-        --
-        -- tsserver = {
-        --   settings = {
-        --     completions = {
-        --       completeFunctionCalls = true,
-        --     },
-        --   },
-        -- },
         gopls = {
           settings = {
             gopls = {
@@ -146,16 +118,14 @@ return {
           },
         },
         lua_ls = {
-          -- cmd = {...},
-          -- filetypes = { ...},
-          -- capabilities = {},
           settings = {
             Lua = {
               completion = {
                 callSnippet = 'Replace',
               },
-              -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
+              diagnostics = {
+                globals = { 'vim' },
+              },
             },
           },
         },
@@ -165,7 +135,6 @@ return {
       --  To check the current status of installed tools and/or manually install
       --  other tools, you can run
       --    :Mason
-      --
       --  You can press `g?` for help in this menu.
       require('mason').setup()
 
@@ -192,4 +161,3 @@ return {
     end,
   },
 }
--- vim: ts=2 sts=2 sw=2 et

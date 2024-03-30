@@ -23,11 +23,6 @@ return {
     },
     config = function()
       require('telescope').setup {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
-        -- pickers = {}
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
@@ -63,22 +58,13 @@ return {
       vim.keymap.set('n', '<leader>fw', builtin.live_grep, { desc = 'Find word' })
       vim.keymap.set('n', '<leader>f/', builtin.live_grep, { desc = 'Find word in current buffer' })
       vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = 'Find diagnostics' })
-      vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = 'Resume previous search' })
+      -- vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = 'Resume previous search' })
       vim.keymap.set('n', '<leader>f.', builtin.oldfiles, { desc = 'Find history' })
+      vim.keymap.set('n', '<leader>fq', builtin.quickfix, { desc = 'Find quickfix' })
 
       -- Telescope buffer/LSP actions
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = 'Find open buffers' })
       vim.keymap.set('n', '<leader>ls', builtin.lsp_document_symbols, { desc = 'Find document symbols' })
-      -- vim.keymap.set('n', '[c-d]', actions.delete_buffer, { desc = 'Delete buffer' })
-      -- Slightly advanced example of overriding default behavior and theme
-      -- vim.keymap.set('n', '<leader>/', function()
-      --   -- You can pass additional configuration to Telescope to change the theme, layout, etc.
-      --   builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-      --     winblend = 10,
-      --     previewer = false,
-      --   })
-      -- end, { desc = '[/] Fuzzily search in current buffer' })
     end,
   },
 }
--- vim: ts=2 sts=2 sw=2 et

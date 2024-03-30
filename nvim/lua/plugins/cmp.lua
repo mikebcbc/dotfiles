@@ -49,7 +49,7 @@ return {
 
         completion = {
           completeopt = 'menu,menuone,noinsert',
-          keyword_length = 4,
+          keyword_length = 2,
         },
 
         performance = { fetching_timeout = 800 },
@@ -100,6 +100,7 @@ return {
               luasnip.expand_or_jump()
             end
           end, { 'i', 's' }),
+
           ['<C-h>'] = cmp.mapping(function()
             if luasnip.locally_jumpable(-1) then
               luasnip.jump(-1)
@@ -136,4 +137,3 @@ return {
     end,
   },
 }
--- vim: ts=2 sts=2 sw=2 et

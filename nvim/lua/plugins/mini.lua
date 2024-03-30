@@ -1,9 +1,6 @@
 return {
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
-    dependencies = {
-      { 'rubiin/fortune.nvim', config = true },
-    },
     event = 'BufEnter',
     config = function()
       -- Better Around/Inside textobjects
@@ -34,7 +31,7 @@ return {
       require('mini.sessions').setup {
         hooks = {
           pre = {
-            -- close all non-normal bufferrs before writing the session (native mksession conflicts with neotree)
+            -- close all non-normal bufferrs before writing the session (native mksession conflicts with nvim-tree)
             write = function()
               for _, win_id in ipairs(vim.api.nvim_list_wins()) do
                 local buf_id = vim.api.nvim_win_get_buf(win_id)
@@ -102,4 +99,3 @@ return {
     },
   },
 }
--- vim: ts=2 sts=2 sw=2 et

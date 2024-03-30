@@ -10,8 +10,6 @@ return {
     end,
     opts = {
       integrations = {
-        -- alpha = true,
-        -- aerial = true,
         cmp = true,
         fidget = true,
         gitsigns = true,
@@ -19,7 +17,6 @@ return {
         mini = {
           enabled = true,
         },
-        -- notify = true,
         nvimtree = true,
         semantic_tokens = true,
         symbols_outline = true,
