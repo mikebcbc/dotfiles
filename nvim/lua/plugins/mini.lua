@@ -49,6 +49,11 @@ return {
         },
       }
 
+      -- setup keymaps for sessions
+      vim.keymap.set('n', '<leader>so', '<cmd>:lua MiniSessions.select("read")<CR>', { desc = 'Open a session' })
+      vim.keymap.set('n', '<leader>sd', '<cmd>:lua MiniSessions.select("delete")<CR>', { desc = 'Delete a session' })
+      vim.keymap.set('n', '<leader>sa', '<cmd>:lua MiniSessions.select("write")<CR>', { desc = 'Save a session' })
+
       require('mini.starter').setup {
         items = {
           require('mini.starter').sections.sessions(7, true),
@@ -76,11 +81,6 @@ return {
           return '\n \n \n' .. require('fortune').get_fortune()[2]
         end,
       }
-
-      -- setup keymaps for sessions
-      vim.keymap.set('n', '<leader>so', '<cmd>:lua MiniSessions.select("read")<CR>', { desc = 'Open a session' })
-      vim.keymap.set('n', '<leader>sd', '<cmd>:lua MiniSessions.select("delete")<CR>', { desc = 'Delete a session' })
-      vim.keymap.set('n', '<leader>sa', '<cmd>:lua MiniSessions.select("write")<CR>', { desc = 'Save a session' })
     end,
     keys = {
       {
