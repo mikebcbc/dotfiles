@@ -1,7 +1,7 @@
 return {
   {
     'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    dependencies = { 'nvim-tree/nvim-web-devicons', 'AndreM222/copilot-lualine' },
     event = 'VeryLazy',
     opts = {
       options = {
@@ -9,7 +9,17 @@ return {
         icons_enabled = true,
       },
       sections = {
+        lualine_c = {
+          {
+            'filename',
+            path = 1,
+          },
+        },
         lualine_x = {
+          {
+            'copilot',
+            show_colors = true,
+          },
           {
             function()
               local grapple = require 'grapple'
@@ -29,6 +39,8 @@ return {
       extensions = {
         'nvim-tree',
         'lazy',
+        'toggleterm',
+        'mason',
       },
     },
   },
