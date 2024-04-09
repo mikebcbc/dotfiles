@@ -21,6 +21,7 @@ return {
         semantic_tokens = true,
         symbols_outline = true,
         telescope = true,
+        ufo = true,
         which_key = true,
       },
     },

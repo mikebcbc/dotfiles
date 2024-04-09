@@ -36,7 +36,7 @@ vim.opt.smartcase = false
 vim.opt.signcolumn = 'auto'
 
 -- Decrease update time
-vim.opt.updatetime = 250
+vim.opt.updatetime = 100
 
 -- Decrease mapped sequence wait time
 -- Displays which-key popup sooner
@@ -67,3 +67,6 @@ vim.opt.foldcolumn = '0' -- '0' is not bad
 vim.opt.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
 vim.opt.foldlevelstart = 99
 vim.opt.foldenable = true
+
+-- no wrap!
+vim.wo.wrap = false
