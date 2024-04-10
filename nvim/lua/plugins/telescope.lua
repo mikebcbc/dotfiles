@@ -34,6 +34,9 @@ return {
               i = {
                 ['<c-d>'] = 'delete_buffer',
               },
+              n = {
+                ['<c-d>'] = 'delete_buffer',
+              },
             },
           },
         },
@@ -58,7 +61,6 @@ return {
       vim.keymap.set('n', '<leader>fw', builtin.live_grep, { desc = 'Find word' })
       vim.keymap.set('n', '<leader>f/', builtin.live_grep, { desc = 'Find word in current buffer' })
       vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = 'Find diagnostics' })
-      -- vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = 'Resume previous search' })
       vim.keymap.set('n', '<leader>f.', builtin.oldfiles, { desc = 'Find history' })
       vim.keymap.set('n', '<leader>fq', builtin.quickfix, { desc = 'Find quickfix' })
 

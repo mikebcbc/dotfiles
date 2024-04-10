@@ -5,7 +5,6 @@ return {
     config = function()
       require('which-key').setup()
 
-      -- Document existing key chains
       require('which-key').register {
         ['<leader>f'] = { name = 'Find', _ = 'which_key_ignore' },
         ['<leader>l'] = { name = 'LSP Actions', _ = 'which_key_ignore' },
