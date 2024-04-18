@@ -2,9 +2,6 @@ return {
   {
     'zbirenbaum/copilot.lua',
     enabled = true,
-    dependencies = {
-      'hrsh7th/nvim-cmp',
-    },
     cmd = 'Copilot',
     build = ':Copilot auth',
     event = 'InsertEnter',
