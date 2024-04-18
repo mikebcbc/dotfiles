@@ -32,9 +32,6 @@ vim.opt.ignorecase = true
 -- Keep case-insensitive searching even if a capital letter is used
 vim.opt.smartcase = false
 
--- Keep signcolumn on by default
-vim.opt.signcolumn = 'auto'
-
 -- Decrease update time
 vim.opt.updatetime = 100
 

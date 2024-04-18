@@ -36,7 +36,7 @@ return {
       require('mini.sessions').setup {
         hooks = {
           pre = {
-            -- close all non-normal bufferrs before writing the session (native mksession conflicts with nvim-tree)
+            -- close all non-normal buffers before writing the session (native mksession conflicts with tree plugins)
             write = function()
               for _, win_id in ipairs(vim.api.nvim_list_wins()) do
                 local buf_id = vim.api.nvim_win_get_buf(win_id)
@@ -53,6 +53,15 @@ return {
       vim.keymap.set('n', '<leader>so', '<cmd>:lua MiniSessions.select("read")<CR>', { desc = 'Open a session' })
       vim.keymap.set('n', '<leader>sd', '<cmd>:lua MiniSessions.select("delete")<CR>', { desc = 'Delete a session' })
       vim.keymap.set('n', '<leader>sa', '<cmd>:lua MiniSessions.select("write")<CR>', { desc = 'Save a session' })
+
+      require('mini.diff').setup {
+        view = {
+          style = 'number',
+        },
+        mappings = {
+          reset = '<leader>gr',
+        },
+      }
 
       require('mini.starter').setup {
         items = {

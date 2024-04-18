@@ -15,7 +15,24 @@ return {
       },
     },
     config = function()
-      require('triptych').setup()
+      require('triptych').setup {
+        extension_mappings = {
+          ['<c-f>'] = {
+            mode = 'n',
+            fn = function(target)
+              require('telescope.builtin').live_grep {
+                search_dirs = { target.path },
+              }
+            end,
+          },
+          ['<c-r>'] = {
+            mode = 'n',
+            fn = function(target)
+              vim.cmd('cd ' .. target.dirname)
+            end,
+          },
+        },
+      }
       vim.keymap.set('n', '<leader>e', '<cmd>Triptych<CR>')
 
       -- let's make sure to open Triptych if we open neovim with an argument
