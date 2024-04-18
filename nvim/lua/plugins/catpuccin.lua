@@ -9,20 +9,22 @@ return {
       vim.cmd.hi 'Comment gui=none'
     end,
     opts = {
+      default_integrations = false,
       integrations = {
-        cmp = true,
         fidget = true,
-        gitsigns = true,
+        indent_blankline = {
+          enabled = true,
+        },
         mason = true,
         mini = {
           enabled = true,
         },
-        nvimtree = true,
         semantic_tokens = true,
-        symbols_outline = true,
-        telescope = true,
+        telescope = {
+          enabled = true,
+        },
+        treesitter = true,
         ufo = true,
-        which_key = true,
       },
     },
   },

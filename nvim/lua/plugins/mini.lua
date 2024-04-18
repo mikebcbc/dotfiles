@@ -144,6 +144,8 @@ return {
         },
       }
 
+      require('mini.pairs').setup()
+
       require('mini.completion').setup {
         lsp_completion = {
           source_func = 'omnifunc',
@@ -158,7 +160,7 @@ return {
         },
         window = {
           info = { border = 'rounded', winhighlight = 'Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None' },
-          signature = { border = 'double' },
+          signature = { border = 'rounded', winhighlight = 'Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None' },
         },
       }
 
