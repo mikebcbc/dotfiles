@@ -67,3 +67,7 @@ vim.opt.foldenable = true
 
 -- no wrap!
 vim.wo.wrap = false
+
+-- Make builtin completion menus slightly transparent and smaller
+vim.opt.pumblend = 10
+vim.opt.pumheight = 10 -- Make popup menu smaller

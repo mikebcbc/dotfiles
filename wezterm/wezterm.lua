@@ -31,12 +31,12 @@ function MacCMDtoMeta()
 	return keymappings
 end
 
-config.font = wezterm.font_with_fallback({ "FiraCode Nerd Font" })
+config.font = wezterm.font_with_fallback({ "Inconsolata Nerd Font" })
 config.color_scheme = "Catppuccin Macchiato"
 -- config.keys = MacCMDtoMeta()
 config.keys = {}
 config.hide_tab_bar_if_only_one_tab = true
-config.font_size = 12.0
+config.font_size = 13.5
 
 -- Swap  Cmd <-> Option on macOS
 if wezterm.target_triple:match("darwin$") then
