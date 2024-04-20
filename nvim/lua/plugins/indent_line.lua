@@ -6,7 +6,7 @@ return {
     opts = {
       scope = { enabled = true },
       indent = {
-        tab_char = '▎',
+        tab_char = '|',
       },
     },
   },

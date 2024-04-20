@@ -150,6 +150,7 @@ return {
         lsp_completion = {
           source_func = 'omnifunc',
           auto_setup = false,
+          delay = { completion = 250 },
           process_items = function(items, base)
             -- Don't show 'Text' and 'Snippet' suggestions
             items = vim.tbl_filter(function(x)

@@ -120,7 +120,6 @@ return {
   --   end,
   --   config = function(_, opts)
   --     local cmp = require 'cmp'
-  --     local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
   --     cmp.setup(opts)
   --     ---@diagnostic disable-next-line: missing-fields
   --     cmp.setup.cmdline('/', {
@@ -132,8 +131,6 @@ return {
   --       mapping = cmp.mapping.preset.cmdline(),
   --       sources = cmp.config.sources { { name = 'path' }, { name = 'cmdline' } },
   --     })
-  --     -- nvim-autopairs integration
-  --     cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
   --   end,
   -- },
 }

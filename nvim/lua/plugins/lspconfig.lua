@@ -20,6 +20,8 @@ return {
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
         callback = function(event)
+          local client = vim.lsp.get_client_by_id(event.data.client_id)
+
           -- Set the omnifunc to use the completion function provided by mini-completion
           vim.bo[event.buf].omnifunc = 'v:lua.MiniCompletion.completefunc_lsp'
 
@@ -58,12 +60,17 @@ return {
           --  For example, in C this would take you to the header.
           vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = 'Goto declaration' })
 
+          -- setup typescript lsp specific keybindings
+          if client ~= nil and client.name == 'typescript-tools' then
+            vim.keymap.set('n', '<leader>lo', '<cmd>TSToolsOrganizeImports<CR>', { buffer = event.buf, desc = 'Organize Imports' })
+            vim.keymap.set('n', '<leader>lR', '<cmd>TSToolsRenameFile<CR>', { buffer = event.buf, desc = 'Rename File' })
+            -- vim.keymap.set('n', '<leader>lo', '<cmd>VtsOrganizeImports<CR>', { buffer = event.buf, desc = 'Organize Imports' })
+            -- vim.keymap.set('n', '<leader>lR', '<cmd>VtsExec rename_file<CR>', { buffer = event.buf, desc = 'Rename File' })
+          end
+
           -- The following two autocommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.
-          --    See `:help CursorHold` for information about when this is executed
-          --
           -- When you move your cursor, the highlights will be cleared (the second autocommand).
-          local client = vim.lsp.get_client_by_id(event.data.client_id)
           if client and client.server_capabilities.documentHighlightProvider then
             vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
               buffer = event.buf,
@@ -108,20 +115,28 @@ return {
             debounce_text_changes = 150,
           },
         },
-        vtsls = {
-          settings = {
-            typescript = {
-              suggest = {
-                completeFunctionCalls = true,
-              },
-            },
-            javascript = {
-              suggest = {
-                completeFunctionCalls = true,
-              },
-            },
-          },
-        },
+        -- vtsls = {
+        --   settings = {
+        --     experimental = {
+        --       completion = {
+        --         enableServerSideFuzzyMatch = true,
+        --       },
+        --     },
+        --     typescript = {
+        --       suggest = {
+        --         completeFunctionCalls = true,
+        --       },
+        --     },
+        --     javascript = {
+        --       suggest = {
+        --         completeFunctionCalls = true,
+        --       },
+        --     },
+        --   },
+        --   capabilities = {
+        --     documentFormattingProvider = false,
+        --   },
+        -- },
         lua_ls = {
           settings = {
             Lua = {
@@ -137,10 +152,6 @@ return {
       }
 
       -- Ensure the servers and tools above are installed
-      --  To check the current status of installed tools and/or manually install
-      --  other tools, you can run
-      --    :Mason
-      --  You can press `g?` for help in this menu.
       require('mason').setup()
 
       -- You can add other tools here that you want Mason to install
