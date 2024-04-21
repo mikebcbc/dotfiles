@@ -27,7 +27,7 @@ return {
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        -- Conform can also run multiple formatters sequentially
+        -- Conform can run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
         -- You can use a sub-list to tell conform to run *until* a formatter
@@ -38,6 +38,7 @@ return {
         typescriptreact = { { 'prettierd', 'prettier' } },
         graphql = { { 'prettierd', 'prettier' } },
         json = { { 'prettierd', 'prettier' } },
+        go = { 'gofmt', 'goimports' },
       },
     },
     init = function()
