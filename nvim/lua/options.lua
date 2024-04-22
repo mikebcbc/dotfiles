@@ -72,9 +72,30 @@ vim.wo.wrap = false
 vim.opt.pumblend = 10
 vim.opt.pumheight = 10
 
+-- make diagnostic window show all sources, sort severity, and replace signs
+vim.diagnostic.config {
+  severity_sort = true,
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = '',
+      [vim.diagnostic.severity.WARN] = '',
+      [vim.diagnostic.severity.INFO] = '',
+      [vim.diagnostic.severity.HINT] = '',
+    },
+  },
+  float = {
+    source = true,
+    border = 'rounded',
+    focusable = false,
+    show_header = true,
+  },
+}
+
 -- outdated qf list is ugly
 vim.o.qftf = '{info -> v:lua._G.qftf(info)}'
 
+-- [[ Functions ]]
+--
 -- util function to override quickfix
 local fn = vim.fn
 
