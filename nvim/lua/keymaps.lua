@@ -45,5 +45,6 @@ vim.api.nvim_create_autocmd('TermOpen', {
     vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], { buffer = 0 })
     vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], { buffer = 0 })
     vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], { buffer = 0 })
+    vim.keymap.set('n', 'q', [[<Cmd>close<CR>]], { buffer = 0 })
   end,
 })
