@@ -54,7 +54,7 @@ return {
           vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'Hover documentation' })
 
           -- Show the signature of the function call under your cursor.
-          vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, { desc = 'Signature help' })
+          vim.keymap.set('n', '<leader>lk', vim.lsp.buf.signature_help, { desc = 'Signature help' })
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
@@ -115,28 +115,28 @@ return {
             debounce_text_changes = 150,
           },
         },
-        -- vtsls = {
-        --   settings = {
-        --     experimental = {
-        --       completion = {
-        --         enableServerSideFuzzyMatch = true,
-        --       },
-        --     },
-        --     typescript = {
-        --       suggest = {
-        --         completeFunctionCalls = true,
-        --       },
-        --     },
-        --     javascript = {
-        --       suggest = {
-        --         completeFunctionCalls = true,
-        --       },
-        --     },
-        --   },
-        --   capabilities = {
-        --     documentFormattingProvider = false,
-        --   },
-        -- },
+        vtsls = {
+          settings = {
+            experimental = {
+              completion = {
+                enableServerSideFuzzyMatch = true,
+              },
+            },
+            typescript = {
+              suggest = {
+                completeFunctionCalls = true,
+              },
+            },
+            javascript = {
+              suggest = {
+                completeFunctionCalls = true,
+              },
+            },
+          },
+          capabilities = {
+            documentFormattingProvider = false,
+          },
+        },
         lua_ls = {
           settings = {
             Lua = {

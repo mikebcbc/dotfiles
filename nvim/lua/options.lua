@@ -74,6 +74,9 @@ vim.opt.pumheight = 10
 
 -- make diagnostic window show all sources, sort severity, and replace signs
 vim.diagnostic.config {
+  virtual_text = {
+    severity = { vim.diagnostic.severity.ERROR, vim.diagnostic.severity.WARN },
+  },
   severity_sort = true,
   signs = {
     text = {

@@ -29,7 +29,7 @@ return {
       vim.g['test#echo_command'] = 0
       vim.cmd [[
 				function! ToggleTermStrategy(cmd) abort
-					call luaeval("require('toggleterm').exec(_A[1], 1, 10, vim.fn.getcwd(), 'float')", [a:cmd])
+					call luaeval("require('toggleterm').exec(_A[1], 3, 10, vim.fn.getcwd(), 'float')", [a:cmd])
 				endfunction
 				let g:test#custom_strategies = {'patchedtoggle': function('ToggleTermStrategy')}
 			]]

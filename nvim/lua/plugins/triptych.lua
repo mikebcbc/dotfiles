@@ -3,19 +3,20 @@ return {
     'simonmclean/triptych.nvim',
     event = 'VeryLazy',
     dependencies = {
-      'nvim-lua/plenary.nvim', -- required
-      'nvim-tree/nvim-web-devicons', -- optional
-    },
-    opts = {
-      options = {
-        show_hidden = true,
-        line_numbers = {
-          relative = true,
-        },
-      },
+      'nvim-lua/plenary.nvim',
+      'nvim-tree/nvim-web-devicons',
     },
     config = function()
       require('triptych').setup {
+        options = {
+          show_hidden = true,
+          line_numbers = {
+            relative = true,
+          },
+        },
+        mappings = {
+          cd = '<c-r>',
+        },
         extension_mappings = {
           ['<c-f>'] = {
             mode = 'n',
@@ -23,12 +24,6 @@ return {
               require('telescope.builtin').live_grep {
                 search_dirs = { target.path },
               }
-            end,
-          },
-          ['<c-r>'] = {
-            mode = 'n',
-            fn = function(target)
-              vim.cmd('cd ' .. target.dirname)
             end,
           },
         },

@@ -7,7 +7,7 @@ return {
     keys = {
       {
         '<leader>tf',
-        '<Cmd>ToggleTerm direction=float<CR>',
+        '<Cmd>ToggleTerm direction=float border=double<CR>',
         desc = 'Open Terminal (float)',
       },
       {
@@ -22,6 +22,7 @@ return {
 
           local Terminal = require('toggleterm.terminal').Terminal
           local lazygit = Terminal:new {
+            id = 2,
             cmd = 'lazygit',
             dir = 'git_dir',
             direction = 'float',
