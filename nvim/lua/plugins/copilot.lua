@@ -12,9 +12,11 @@ return {
         },
         suggestion = {
           enabled = true,
-          auto_trigger = true,
           keymap = {
-            accept = '<C-CR>',
+            accept = '<M-l>',
+            next = '<M-k>',
+            previous = '<M-j>',
+            dismiss = '<M-h>',
           },
         },
       }

@@ -22,16 +22,8 @@ return {
           },
           {
             function()
-              local grapple = require 'grapple'
-              if grapple.exists() then
-                return grapple.statusline {
-                  icon = '󰛢',
-                  inactive = ' %s ',
-                  include_icon = true,
-                }
-              else
-                return '󰛢'
-              end
+              local arrow = require 'arrow.statusline'
+              return arrow.text_for_statusline_with_icons()
             end,
           },
         },

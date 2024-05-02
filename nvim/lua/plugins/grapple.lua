@@ -1,18 +1,22 @@
 return {
-  {
-    'cbochs/grapple.nvim',
-    dependencies = {
-      { 'nvim-tree/nvim-web-devicons', lazy = true },
+  'otavioschwanck/arrow.nvim',
+  opts = {
+    show_icons = true,
+    leader_key = '<leader>m',
+    buffer_leader_key = ';',
+    seperate_by_branch = true,
+    mappings = {
+      edit = 'e',
+      delete_mode = 'D',
+      clear_all_items = 'C',
+      toggle = 'r',
+      open_vertical = 'v',
+      open_horizontal = 'S',
+      quit = 'q',
+      remove = 'x',
+      next_item = ']',
+      prev_item = '[',
     },
-    event = { 'BufReadPost', 'BufNewFile' },
-    opts = {
-      scope = 'git_branch',
-      icons = true,
-      quick_select = '123456789',
-    },
-    keys = {
-      { "'", '<cmd>Grapple toggle_tags<cr>', desc = 'Toggle tags menu' },
-      { "'a", '<cmd>Grapple toggle<cr>', desc = 'Toggle tag' },
-    },
+    index_keys = 'asdfjkl;1234567890',
   },
 }

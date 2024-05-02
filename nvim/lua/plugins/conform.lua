@@ -38,6 +38,7 @@ return {
         typescriptreact = { { 'prettierd', 'prettier' } },
         graphql = { { 'prettierd', 'prettier' } },
         json = { { 'prettierd', 'prettier' } },
+        astro = { { 'prettierd', 'prettier' } },
         go = { 'gofmt', 'goimports' },
       },
     },

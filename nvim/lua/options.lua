@@ -68,6 +68,9 @@ vim.opt.foldenable = true
 -- no wrap!
 vim.wo.wrap = false
 
+-- stop jitters by making sign column always on
+vim.wo.signcolumn = 'yes'
+
 -- Make builtin completion menus slightly transparent and smaller
 vim.opt.pumblend = 10
 vim.opt.pumheight = 10
