@@ -41,7 +41,7 @@ vim.api.nvim_create_autocmd('TermOpen', {
   desc = 'Assign keybinds on terminal open',
   group = vim.api.nvim_create_augroup('term-open-binds', { clear = true }),
   callback = function()
-    vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], { buffer = 0 })
+    vim.keymap.set('t', '<C-esc>', [[<C-\><C-n>]], { buffer = 0 })
     vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], { buffer = 0 })
     vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], { buffer = 0 })
     vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], { buffer = 0 })
