@@ -11,7 +11,16 @@ return {
         typescript = { 'eslint_d' },
         javascriptreact = { 'eslint_d' },
         typescriptreact = { 'eslint_d' },
-        go = { 'golangcilint' },
+        go = { 'revive' },
+        rego = { 'opa_check' },
+      }
+
+      lint.linters.golangcilint.args = {
+        'run',
+        '--out-format',
+        'json',
+        '--enable',
+        'golint',
       }
 
       -- Create autocommand which carries out the actual linting

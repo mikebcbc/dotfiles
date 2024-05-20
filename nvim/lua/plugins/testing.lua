@@ -25,6 +25,8 @@ return {
     },
     config = function()
       vim.g['test#go#runner'] = 'richgo'
+      vim.g['test#javascript#runner'] = 'jest'
+      vim.g['test#javascript#jest#executable'] = 'yarn test --'
       vim.g['test#go#richgo#options'] = '-v'
       vim.g['test#echo_command'] = 0
       vim.cmd [[

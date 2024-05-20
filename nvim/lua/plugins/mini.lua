@@ -89,6 +89,7 @@ return {
           { mode = 'n', keys = '<leader>t', desc = '+Terminal' },
           { mode = 'n', keys = '<leader>s', desc = '+Sessions' },
           { mode = 'n', keys = '<leader>;', desc = '+Testing' },
+          { mode = 'n', keys = '<leader>m', desc = 'Arrow' },
           -- all the vim abolish mappings
           { mode = 'n', keys = 'cr', desc = '+Abolish' },
           { mode = 'v', keys = 'cr', desc = '+Abolish' },

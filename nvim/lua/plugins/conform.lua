@@ -37,9 +37,10 @@ return {
         typescript = { { 'prettierd', 'prettier' } },
         typescriptreact = { { 'prettierd', 'prettier' } },
         graphql = { { 'prettierd', 'prettier' } },
-        json = { { 'prettierd', 'prettier' } },
+        json = { { 'fixjson', 'prettierd', 'prettier' } },
         astro = { { 'prettierd', 'prettier' } },
         go = { 'gofmt', 'goimports' },
+        rego = { 'opa_fmt' },
       },
     },
     init = function()
