@@ -5,40 +5,22 @@ local act = wezterm.action
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
-function MacCMDtoMeta()
-	local keys = "abdefghijklmnopqrstuwxyz" -- no c,v
-	local keymappings = {}
-
-	for i = 1, #keys do
-		local c = keys:sub(i, i)
-		table.insert(keymappings, {
-			key = c,
-			mods = "CMD",
-			action = act.SendKey({
-				key = c,
-				mods = "META",
-			}),
-		})
-		table.insert(keymappings, {
-			key = c,
-			mods = "CMD|CTRL",
-			action = act.SendKey({
-				key = c,
-				mods = "META|CTRL",
-			}),
-		})
-	end
-	return keymappings
-end
-
 config.font = wezterm.font_with_fallback({ "Inconsolata Nerd Font" })
 config.color_scheme = "Catppuccin Macchiato"
--- config.keys = MacCMDtoMeta()
 config.keys = {}
 config.hide_tab_bar_if_only_one_tab = true
-config.font_size = 13.5
+config.font_size = 14
+config.window_decorations = "RESIZE"
 
--- Swap  Cmd <-> Option on macOS
+-- Command Palette
+config.command_palette_font_size = 14
+config.command_palette_bg_color = "#363a4f"
+config.command_palette_fg_color = "#cad3f5"
+config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
+config.default_cursor_style = "BlinkingBar"
+config.force_reverse_video_cursor = true
+
+-- Swap  Cmd <-> Alt on macOS
 if wezterm.target_triple:match("darwin$") then
 	for i = 0, 127 do
 		local key = string.char(i)

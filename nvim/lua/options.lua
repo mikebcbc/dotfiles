@@ -75,6 +75,17 @@ vim.wo.signcolumn = 'yes'
 vim.opt.pumblend = 10
 vim.opt.pumheight = 10
 
+-- -- set neovide font
+-- vim.opt.guifont = 'Inconsolata Nerd Font:h14:#e-subpixelantialias'
+-- vim.g.neovide_show_border = true
+-- vim.g.neovide_window_blurred = true
+-- vim.g.neovide_position_animation_length = 0
+-- vim.g.neovide_input_macos_option_key_is_meta = 'only_left'
+-- vim.g.neovide_cursor_animation_length = 0.10
+-- vim.g.neovide_cursor_trail_size = 0.2
+-- vim.g.neovide_text_contrast = 0.1
+-- vim.g.neovide_text_gamma = 0.8
+
 -- make diagnostic window show all sources, sort severity, and replace signs
 vim.diagnostic.config {
   virtual_text = {
@@ -94,6 +105,9 @@ vim.diagnostic.config {
     border = 'rounded',
     focusable = false,
     show_header = true,
+  },
+  jump = {
+    float = true,
   },
 }
 

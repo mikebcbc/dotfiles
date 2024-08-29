@@ -1,43 +1,50 @@
 return {
-  {
-    'akinsho/toggleterm.nvim',
-    version = '*',
-    config = true,
-    cmd = 'ToggleTerm',
-    keys = {
-      {
-        '<leader>tf',
-        '<Cmd>ToggleTerm direction=float border=double<CR>',
-        desc = 'Open Terminal (float)',
-      },
-      {
-        '<leader>tv',
-        '<Cmd>ToggleTerm direction=vertical size=80<CR>',
-        desc = 'Open Terminal (vertical)',
-      },
-      {
-        '<leader>tl',
-        function()
-          require('toggleterm').setup()
-
-          local Terminal = require('toggleterm.terminal').Terminal
-          local lazygit = Terminal:new {
-            id = 2,
-            cmd = 'lazygit',
-            dir = 'git_dir',
-            direction = 'float',
-            float_opts = {
-              border = 'double',
-            },
-            -- function to run on closing the terminal
-            on_close = function()
-              vim.cmd 'startinsert!'
-            end,
-          }
-          lazygit:toggle()
-        end,
-        desc = 'Open Lazygit',
-      },
-    },
-  },
+  -- {
+  --   'akinsho/toggleterm.nvim',
+  --   version = '*',
+  --   config = {
+  --     open_mapping = '<leader>tf',
+  --     hide_numbers = true,
+  --     start_in_insert = true,
+  --     insert_mappings = true,
+  --     terminal_mappings = true,
+  --     direction = 'float',
+  --     close_on_exit = true,
+  --     auto_scroll = false,
+  --     float_opts = {
+  --       border = 'double',
+  --     },
+  --   },
+  --   keys = {
+  --     { '<leader>tf', '<Cmd>ToggleTerm<CR>', desc = 'Toggle Floating Terminal' },
+  --     {
+  --       '<leader>tv',
+  --       '<Cmd>ToggleTerm name="vertical" direction=vertical size=80<CR>',
+  --       desc = 'Open Terminal (vertical)',
+  --     },
+  --     {
+  --       '<leader>tl',
+  --       function()
+  --         require('toggleterm').setup()
+  --
+  --         local Terminal = require('toggleterm.terminal').Terminal
+  --         local lazygit = Terminal:new {
+  --           name = 'Lazygit',
+  --           cmd = 'lazygit',
+  --           dir = 'git_dir',
+  --           direction = 'float',
+  --           float_opts = {
+  --             border = 'double',
+  --           },
+  --           -- function to run on closing the terminal
+  --           on_close = function()
+  --             vim.cmd 'startinsert!'
+  --           end,
+  --         }
+  --         lazygit:toggle()
+  --       end,
+  --       desc = 'Open Lazygit',
+  --     },
+  --   },
+  -- },
 }

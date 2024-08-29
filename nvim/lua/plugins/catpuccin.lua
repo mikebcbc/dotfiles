@@ -10,6 +10,7 @@ return {
     end,
     opts = {
       default_integrations = false,
+      term_colors = true,
       integrations = {
         fidget = true,
         indent_blankline = {

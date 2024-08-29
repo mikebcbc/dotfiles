@@ -48,6 +48,7 @@ return {
 
       -- Telescope find/text actions
       local builtin = require 'telescope.builtin'
+      -- local toggleterm = require 'toggleterm-manager'
 
       vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Find help' })
       vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = 'Find keymaps' })
@@ -63,6 +64,9 @@ return {
       vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = 'Find diagnostics' })
       vim.keymap.set('n', '<leader>f.', builtin.oldfiles, { desc = 'Find history' })
       vim.keymap.set('n', '<leader>fq', builtin.quickfix, { desc = 'Find quickfix' })
+      -- vim.keymap.set('n', '<leader>ft', function()
+      --   toggleterm.open { initial_mode = 'insert' }
+      -- end, { desc = 'Find Terminals' })
 
       -- Telescope buffer/LSP actions
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = 'Find open buffers' })

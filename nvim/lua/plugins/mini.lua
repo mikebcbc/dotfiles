@@ -25,13 +25,13 @@ return {
 
       require('mini.bufremove').setup()
 
-      require('mini.comment').setup {
-        options = {
-          custom_commentstring = function()
-            return require('ts_context_commentstring').calculate_commentstring() or vim.bo.commentstring
-          end,
-        },
-      }
+      --     require('mini.comment').setup {
+      --       options = {
+      --         custom_commentstring = function()
+      --          return require('ts_context_commentstring').calculate_commentstring() or vim.bo.commentstring
+      --       end,
+      --   },
+      -- }
 
       require('mini.clue').setup {
         triggers = {
@@ -150,7 +150,7 @@ return {
 
       require('mini.completion').setup {
         lsp_completion = {
-          source_func = 'omnifunc',
+          source_func = 'completefunc',
           auto_setup = false,
           delay = { completion = 250 },
           process_items = function(items, base)
