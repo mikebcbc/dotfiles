@@ -5,9 +5,9 @@ return {
       require('supermaven-nvim').setup {
         log_level = 'off',
         keymaps = {
-          accept_suggestion = '<M-l>',
-          accept_word = '<M-k>',
-          clear_suggestion = '<M-j>',
+          accept_suggestion = '<C-l>',
+          accept_word = '<C-k>',
+          clear_suggestion = '<C-j>',
         },
       }
     end,

@@ -9,6 +9,7 @@ return {
       vim.cmd.hi 'Comment gui=none'
     end,
     opts = {
+      transparent_background = true,
       default_integrations = false,
       term_colors = true,
       integrations = {

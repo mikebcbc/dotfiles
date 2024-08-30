@@ -20,6 +20,10 @@ config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
 config.default_cursor_style = "BlinkingBar"
 config.force_reverse_video_cursor = true
 
+-- Transparency
+config.window_background_opacity = 0.9
+config.macos_window_background_blur = 10
+
 -- Swap  Cmd <-> Alt on macOS
 if wezterm.target_triple:match("darwin$") then
 	for i = 0, 127 do
