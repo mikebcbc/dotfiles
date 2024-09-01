@@ -1,0 +1,39 @@
+# Resize windows
+alt + cmd - pagedown : yabai -m window --resize bottom:0:-60 
+alt + cmd - home :      yabai -m window --resize bottom:0:60
+alt + cmd - end :      yabai -m window --resize top:0:60
+alt + cmd - pageup :      yabai -m window --resize top:0:-60
+
+# Navigation
+# cycle through all windows sorted by: coordinates -> space index -> display index
+alt + cmd - right : yabai -m window --focus "$(yabai -m query --windows | jq -re "sort_by(.display, .space, .frame.x, .frame.y, .id) | map(select(.\"is-visible\" == true and .role != \"AXUnknown\")) | reverse | nth(index(map(select(.\"has-focus\" == true))) - 1).id")"
+alt + cmd - left : yabai -m window --focus "$(yabai -m query --windows | jq -re "sort_by(.display, .space, .frame.x, .frame.y, .id) | map(select(.\"is-visible\" == true and .role != \"AXUnknown\")) | nth(index(map(select(.\"has-focus\" == true))) - 1).id")"
+
+# Mimic Rectangle app shortcuts and behavior
+
+# make floating window fill right fourth of screen
+alt + cmd - 7   : yabai -m window --grid 1:4:0:0:1:1
+
+# make floating window fill center half of screen
+alt + cmd - 8   : yabai -m window --grid 1:4:1:0:2:1
+
+# make floating window fill left fourth of screen
+alt + cmd - 9   : yabai -m window --grid 1:4:3:0:1:1
+
+# make floating window fill screen
+alt + cmd - 0 : yabai -m window --grid 1:1:0:0:1:1
+
+# make floating window fill left-half of screen
+#shift + alt - left   : yabai -m window --grid 1:2:0:0:1:1
+
+# make floating window fill right-half of screen
+#shift + alt - right  : yabai -m window --grid 1:2:1:0:1:1
+
+# Enable / Disable gaps in current workspace
+lctrl + alt - g : yabai -m space --toggle padding; yabai -m space --toggle gap
+
+# Restart Yabai
+shift + lctrl + alt - r : \
+    /usr/bin/env osascript <<< \
+        "display notification \"Restarting Yabai\" with title \"Yabai\""; \
+    launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"

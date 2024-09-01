@@ -140,7 +140,7 @@ keybinds clear-defaults=true{
     shared_except "pane" "locked" {
         bind "Alt p" { SwitchToMode "Pane"; }
 
-        bind "Alt h" {
+        bind "Alt Left" "Alt h" {
             MessagePlugin "https://github.com/hiasr/vim-zellij-navigator/releases/download/0.2.1/vim-zellij-navigator.wasm" {
                 name "move_focus";
                 payload "left";
@@ -148,7 +148,7 @@ keybinds clear-defaults=true{
             };
         }
 
-        bind "Alt j" {
+        bind "Alt Down" "Alt j" {
             MessagePlugin "https://github.com/hiasr/vim-zellij-navigator/releases/download/0.2.1/vim-zellij-navigator.wasm" {
                 name "move_focus";
                 payload "down";
@@ -156,7 +156,7 @@ keybinds clear-defaults=true{
             };
         }
 
-        bind "Alt k" {
+        bind "Alt Up" "Alt k" {
             MessagePlugin "https://github.com/hiasr/vim-zellij-navigator/releases/download/0.2.1/vim-zellij-navigator.wasm" {
                 name "move_focus";
                 payload "up";
@@ -164,7 +164,7 @@ keybinds clear-defaults=true{
             };
         }
 
-        bind "Alt l" {
+        bind "Alt Right" "Alt l" {
             MessagePlugin "https://github.com/hiasr/vim-zellij-navigator/releases/download/0.2.1/vim-zellij-navigator.wasm" {
                 name "move_focus";
                 payload "right";

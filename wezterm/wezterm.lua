@@ -22,7 +22,7 @@ config.force_reverse_video_cursor = true
 
 -- Transparency
 config.window_background_opacity = 0.9
-config.macos_window_background_blur = 10
+config.macos_window_background_blur = 35
 
 -- Swap  Cmd <-> Alt on macOS
 if wezterm.target_triple:match("darwin$") then
