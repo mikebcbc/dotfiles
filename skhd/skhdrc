@@ -24,16 +24,7 @@ alt + cmd - 9   : yabai -m window --grid 1:4:3:0:1:1
 alt + cmd - 0 : yabai -m window --grid 1:1:0:0:1:1
 
 # make floating window fill left-half of screen
-#shift + alt - left   : yabai -m window --grid 1:2:0:0:1:1
+alt + cmd - 1 : yabai -m window --grid 1:2:0:0:1:1
 
 # make floating window fill right-half of screen
-#shift + alt - right  : yabai -m window --grid 1:2:1:0:1:1
-
-# Enable / Disable gaps in current workspace
-lctrl + alt - g : yabai -m space --toggle padding; yabai -m space --toggle gap
-
-# Restart Yabai
-shift + lctrl + alt - r : \
-    /usr/bin/env osascript <<< \
-        "display notification \"Restarting Yabai\" with title \"Yabai\""; \
-    launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
+alt + cmd - 2 : yabai -m window --grid 1:2:1:0:1:1
