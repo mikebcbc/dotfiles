@@ -5,19 +5,7 @@ return {
     branch = '0.1.x',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      {
-        'nvim-telescope/telescope-fzf-native.nvim',
-
-        -- `build` is used to run some command when the plugin is installed/updated.
-        -- This is only run then, not every time Neovim starts up.
-        build = 'make',
-
-        -- `cond` is a condition used to determine whether this plugin should be
-        -- installed and loaded.
-        cond = function()
-          return vim.fn.executable 'make' == 1
-        end,
-      },
+      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
       { 'nvim-telescope/telescope-ui-select.nvim' },
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
@@ -26,6 +14,12 @@ return {
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
+          },
+          fzf = {
+            fuzzy = true, -- false will only do exact matching
+            override_generic_sorter = true, -- override the generic sorter
+            override_file_sorter = true, -- override the file sorter
+            case_mode = 'smart_case', -- or "ignore_case" or "respect_case"
           },
         },
         pickers = {
@@ -43,12 +37,11 @@ return {
       }
 
       -- Enable Telescope extensions if they are installed
-      pcall(require('telescope').load_extension, 'fzf')
-      pcall(require('telescope').load_extension, 'ui-select')
+      require('telescope').load_extension 'fzf'
+      require('telescope').load_extension 'ui-select'
 
       -- Telescope find/text actions
       local builtin = require 'telescope.builtin'
-      -- local toggleterm = require 'toggleterm-manager'
 
       vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Find help' })
       vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = 'Find keymaps' })
@@ -60,13 +53,10 @@ return {
       vim.keymap.set('n', '<leader>fs', builtin.builtin, { desc = 'Select what to find' })
       vim.keymap.set('n', '<leader>fc', builtin.grep_string, { desc = 'Find word under cursor' })
       vim.keymap.set('n', '<leader>fw', builtin.live_grep, { desc = 'Find word' })
-      vim.keymap.set('n', '<leader>f/', builtin.live_grep, { desc = 'Find word in current buffer' })
+      -- vim.keymap.set('n', '<leader>f/', builtin.live_grep, { desc = 'Find word in current buffer' })
       vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = 'Find diagnostics' })
       vim.keymap.set('n', '<leader>f.', builtin.oldfiles, { desc = 'Find history' })
       vim.keymap.set('n', '<leader>fq', builtin.quickfix, { desc = 'Find quickfix' })
-      -- vim.keymap.set('n', '<leader>ft', function()
-      --   toggleterm.open { initial_mode = 'insert' }
-      -- end, { desc = 'Find Terminals' })
 
       -- Telescope buffer/LSP actions
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = 'Find open buffers' })

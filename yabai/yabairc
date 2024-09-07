@@ -17,7 +17,6 @@ sudo yabai --load-sa
 # global settings
 yabai -m config     \
     mouse_follows_focus          off \
-    focus_follows_mouse          autofocus \
     window_placement             second_child \
     window_animation_duration    0.0 \
     window_opacity_duration      0.0 \

@@ -21,7 +21,7 @@ config.default_cursor_style = "BlinkingBar"
 config.force_reverse_video_cursor = true
 
 -- Transparency
-config.window_background_opacity = 0.9
+config.window_background_opacity = 0.8
 config.macos_window_background_blur = 35
 
 -- Swap  Cmd <-> Alt on macOS
@@ -47,6 +47,10 @@ if wezterm.target_triple:match("darwin$") then
 		end
 	end
 end
+
+config.set_environment_variables = {
+	SHELL = "/opt/homebrew/bin/fish",
+}
 
 -- and finally, return the configuration to wezterm
 return config

@@ -25,7 +25,7 @@ vim.keymap.set('n', '<leader>a', '<cmd>lua require("supermaven-nvim.api").toggle
 vim.keymap.set(
   'n',
   '<leader>gl',
-  [[:lua os.execute('zellij run --floating --width "80%" --height "80%" --x "10%" --y "10%" --close-on-exit -- lazygit --work-tree ' .. vim.fn.getcwd())<CR>]],
+  [[:lua os.execute('zellij run --floating --width "80%" --height "80%" --x "10%" --y "10%" --close-on-exit -- lazygit')<CR>]],
   { desc = 'Open Lazygit' }
 )
 

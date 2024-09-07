@@ -29,13 +29,6 @@ return {
         },
       }
       vim.keymap.set('n', '<leader>e', '<cmd>Triptych<CR>', { desc = 'File Explorer' })
-
-      -- let's make sure to open Triptych if we open neovim with an argument
-      if vim.fn.argc() == 1 then
-        vim.defer_fn(function()
-          vim.cmd 'Triptych'
-        end, 0)
-      end
     end,
   },
 }
