@@ -150,6 +150,9 @@ return {
             },
           },
         },
+        mdx_analyzer = {
+          filetypes = { 'markdown.mdx', 'mdx' },
+        },
       }
 
       -- Ensure the servers and tools above are installed

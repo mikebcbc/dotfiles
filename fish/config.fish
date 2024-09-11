@@ -21,6 +21,8 @@ if status is-interactive
 
     fish_vi_key_bindings
 
+    bind --mode default q 'exit'
+
     if not set -q ZELLIJ
       if test "$ZELLIJ_AUTO_ATTACH" = "true"
           zellij attach -c

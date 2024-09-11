@@ -7,6 +7,41 @@ layout {
         }
     }
     pane size=1 borderless=true {
-        plugin location="compact-bar"
+        plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
+            color_orange "#f5a97f"
+
+            
+            format_left     "{mode} {tabs} #[fg=black]"
+            format_center   "{session}"
+            format_right    "#[fg=#6867AF,bold]  {datetime}#[fg=cyan]↖ "
+            format_space    "#[fg=yellow] "
+            hide_frame_for_single_pane "false"
+            border_enabled  "false"
+            mode_normal     "#[fg=yellow]   "
+            mode_pane       "#[fg=$orange]   {name} "
+            mode_tab        "#[fg=$orange] 󱏈  {name} "
+            mode_session    "#[fg=$orange]   {name} "
+            mode_search     "#[fg=$orange]   {name} "
+            mode_scroll     "#[fg=$orange] 󱕒  {name} "
+            mode_locked     "#[fg=red]   "
+
+            // formatting for inactive tabs
+            tab_normal              "#[fg=#6C7086] {name}"
+            tab_normal_fullscreen   "#[fg=#6C7086] {name}"
+            tab_normal_sync         "#[fg=#6C7086] {name}"
+
+            // formatting for the current active tab
+            tab_active              "#[fg=#363a4f]#[bg=#363a4f,fg=blue]{name} {floating_indicator}#[fg=#363a4f]"
+            tab_active_fullscreen              "#[fg=#363a4f]#[bg=#363a4f,fg=blue]{name} {fullscreen_indicator}#[fg=#363a4f]"
+
+            tab_separator           "#[fg=cyan,bold] ⋮ "
+            tab_sync_indicator       " "
+            tab_fullscreen_indicator " "
+            tab_floating_indicator   ""
+
+            datetime        "#[fg=#6C7086,bold] {format} "
+            datetime_format "%A, %d %b %Y %H:%M"
+            datetime_timezone "America/New_York"
+        }
     }
 }

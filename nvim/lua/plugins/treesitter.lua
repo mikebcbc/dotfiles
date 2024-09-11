@@ -17,6 +17,7 @@ return {
     config = function(_, opts)
       ---@diagnostic disable-next-line: missing-fields
       require('nvim-treesitter.configs').setup(opts)
+      vim.treesitter.language.register('markdown', { 'md', 'mdx' })
     end,
   },
 }

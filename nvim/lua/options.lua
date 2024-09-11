@@ -106,6 +106,13 @@ vim.diagnostic.config {
   },
 }
 
+-- add new filetypes to the list of known filetypes
+vim.filetype.add {
+  extension = {
+    mdx = 'mdx',
+  },
+}
+
 -- outdated qf list is ugly
 vim.o.qftf = '{info -> v:lua._G.qftf(info)}'
 

@@ -25,14 +25,6 @@ return {
 
       require('mini.bufremove').setup()
 
-      --     require('mini.comment').setup {
-      --       options = {
-      --         custom_commentstring = function()
-      --          return require('ts_context_commentstring').calculate_commentstring() or vim.bo.commentstring
-      --       end,
-      --   },
-      -- }
-
       require('mini.clue').setup {
         triggers = {
           -- Leader triggers
@@ -89,7 +81,8 @@ return {
           { mode = 'n', keys = '<leader>t', desc = '+Terminal' },
           { mode = 'n', keys = '<leader>s', desc = '+Sessions' },
           { mode = 'n', keys = '<leader>;', desc = '+Testing' },
-          { mode = 'n', keys = '<leader>m', desc = 'Arrow' },
+          { mode = 'n', keys = '<leader><leader>', desc = 'Arrow Files' },
+          { mode = 'n', keys = '<leader>b', desc = 'Arrow Buffer' },
           -- all the vim abolish mappings
           { mode = 'n', keys = 'cr', desc = '+Abolish' },
           { mode = 'v', keys = 'cr', desc = '+Abolish' },
@@ -132,6 +125,12 @@ return {
                   vim.api.nvim_win_close(win_id, true)
                 end
               end
+            end,
+          },
+          post = {
+            read = function()
+              require('arrow.git').refresh_git_branch() -- only if separated_by_branch is true
+              require('arrow.persist').load_cache_file()
             end,
           },
         },

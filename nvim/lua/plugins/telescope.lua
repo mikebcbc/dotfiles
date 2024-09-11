@@ -59,7 +59,7 @@ return {
       vim.keymap.set('n', '<leader>fq', builtin.quickfix, { desc = 'Find quickfix' })
 
       -- Telescope buffer/LSP actions
-      vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = 'Find open buffers' })
+      vim.keymap.set('n', '<leader>f<leader>', builtin.buffers, { desc = 'Find open buffers' })
       vim.keymap.set('n', '<leader>ls', builtin.lsp_document_symbols, { desc = 'Find document symbols' })
     end,
   },

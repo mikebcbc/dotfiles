@@ -21,12 +21,19 @@ vim.keymap.set('n', 'N', 'Nzzzv')
 
 -- Extra leader keybinds
 vim.keymap.set('n', '<leader>fr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'Replace word under cursor' })
-vim.keymap.set('n', '<leader>a', '<cmd>lua require("supermaven-nvim.api").toggle()<CR>', { desc = 'Toggle Supermaven Auto' })
+-- vim.keymap.set('n', '<leader>a', '<cmd>lua require("supermaven-nvim.api").toggle()<CR>', { desc = 'Toggle Supermaven Auto' })
+vim.keymap.set('n', '<leader>a', '<cmd>lua require("copilot.suggestion").toggle_auto_trigger()<CR>', { desc = 'Toggle Copilot Auto' })
 vim.keymap.set(
   'n',
-  '<leader>gl',
+  '<leader>tl',
   [[:lua os.execute('zellij run --floating --width "80%" --height "80%" --x "10%" --y "10%" --close-on-exit -- lazygit')<CR>]],
   { desc = 'Open Lazygit' }
+)
+vim.keymap.set(
+  'n',
+  '<leader>tf',
+  [[:lua os.execute('zellij run --floating --width "80%" --height "80%" --x "10%" --y "10%" --close-on-exit -- fish')<CR>]],
+  { desc = 'Open Floating Terminal' }
 )
 
 -- [[Autocommands]]
@@ -38,6 +45,14 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
     vim.highlight.on_yank()
   end,
+})
+
+-- Enable wrap for markdown files
+vim.api.nvim_create_autocmd('FileType', {
+  desc = 'Enable wrap for markdown files',
+  group = vim.api.nvim_create_augroup('markdown-wrap', { clear = true }),
+  pattern = { 'markdown', 'mdx' },
+  command = 'setlocal wrap',
 })
 
 -- Add keybinds to terminal buffers
