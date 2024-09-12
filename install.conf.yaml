@@ -1,0 +1,30 @@
+---
+- defaults:
+    link:
+        create: true
+        force: true
+        relink: true
+    shell:
+        stderr: true
+        stdout: true
+- shell:
+    - [git submodule update --init --recursive, Installing submodules]
+- create:
+    - ~/projects
+    - ~/.config
+- clean:
+    - '~'
+- shell:
+    - [brew bundle, Installing Homebrew formulas from Brewfile]
+    - [poetry config virtualenvs.in-project true]
+- link:
+    ~/.config/borders: borders
+    ~/.config/fish: fish
+    ~/.config/nvim: nvim
+    ~/.config/skhd: skhd
+    ~/.config/starship.toml: starship.toml
+    ~/.config/wezterm: wezterm
+    ~/.config/yabai: yabai
+    ~/.config/zellij: zellij
+- shell:
+    - [git submodule update --init --recursive, Installing submodules]

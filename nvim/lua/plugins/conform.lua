@@ -19,6 +19,15 @@ return {
         timeout_ms = 500,
         lsp_format = 'fallback',
       },
+      formatters = {
+        yamlfix = {
+          env = {
+            YAMLFIX_SEQUENCE_STYLE = 'block_style',
+            YAMLFIX_INDENT_MAPPING = '4',
+            YAMLFIX_INDENT_OFFSET = '4',
+          },
+        },
+      },
       formatters_by_ft = {
         lua = { 'stylua' },
         -- Conform can run multiple formatters sequentially
@@ -37,6 +46,7 @@ return {
         rego = { 'opa_fmt' },
         markdown = { 'mdformat' },
         mdx = { 'prettierd', 'prettier', stop_after_first = true },
+        yaml = { 'yamlfix' },
       },
     },
     init = function()
