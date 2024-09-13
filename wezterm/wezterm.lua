@@ -19,6 +19,7 @@ config.command_palette_fg_color = "#cad3f5"
 config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
 config.default_cursor_style = "BlinkingBar"
 config.force_reverse_video_cursor = true
+config.max_fps = 120
 
 -- Transparency
 config.window_background_opacity = 0.8

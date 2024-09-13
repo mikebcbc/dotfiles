@@ -81,6 +81,8 @@ return {
           { mode = 'n', keys = '<leader>t', desc = '+Terminal' },
           { mode = 'n', keys = '<leader>s', desc = '+Sessions' },
           { mode = 'n', keys = '<leader>;', desc = '+Testing' },
+          { mode = 'n', keys = '<leader>a', desc = '+Copilot' },
+          { mode = 'x', keys = '<leader>a', desc = '+Copilot' },
           { mode = 'n', keys = '<leader><leader>', desc = 'Arrow Files' },
           { mode = 'n', keys = '<leader>b', desc = 'Arrow Buffer' },
           -- all the vim abolish mappings

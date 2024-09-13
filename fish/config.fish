@@ -25,9 +25,9 @@ if status is-interactive
 
     if not set -q ZELLIJ
       if test "$ZELLIJ_AUTO_ATTACH" = "true"
-          zellij attach -c
+         zellij attach -c
       else
-          zellij -l welcome
+         zellij -l welcome
       end
 
       kill $fish_pid

@@ -22,7 +22,7 @@ vim.keymap.set('n', 'N', 'Nzzzv')
 -- Extra leader keybinds
 vim.keymap.set('n', '<leader>fr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'Replace word under cursor' })
 -- vim.keymap.set('n', '<leader>a', '<cmd>lua require("supermaven-nvim.api").toggle()<CR>', { desc = 'Toggle Supermaven Auto' })
-vim.keymap.set('n', '<leader>a', '<cmd>lua require("copilot.suggestion").toggle_auto_trigger()<CR>', { desc = 'Toggle Copilot Auto' })
+vim.keymap.set('n', '<leader>aa', '<cmd>lua require("copilot.suggestion").toggle_auto_trigger()<CR>', { desc = 'Toggle Copilot Auto' })
 vim.keymap.set(
   'n',
   '<leader>tl',
@@ -53,18 +53,4 @@ vim.api.nvim_create_autocmd('FileType', {
   group = vim.api.nvim_create_augroup('markdown-wrap', { clear = true }),
   pattern = { 'markdown', 'mdx' },
   command = 'setlocal wrap',
-})
-
--- Add keybinds to terminal buffers
-vim.api.nvim_create_autocmd('TermOpen', {
-  desc = 'Assign keybinds on terminal open',
-  group = vim.api.nvim_create_augroup('term-open-binds', { clear = true }),
-  callback = function()
-    vim.keymap.set('t', '<C-esc>', [[<C-\><C-n>]], { buffer = 0 })
-    vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], { buffer = 0 })
-    vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], { buffer = 0 })
-    vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], { buffer = 0 })
-    vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], { buffer = 0 })
-    vim.keymap.set('n', 'q', [[<Cmd>close<CR>]], { buffer = 0 })
-  end,
 })
