@@ -31,22 +31,29 @@ return {
       clear_chat_on_new_prompt = true,
       context = 'buffers',
       window = {
-        layout = 'float', -- 'vertical', 'horizontal', 'float', 'replace'
-        relative = 'editor', -- 'editor', 'win', 'cursor', 'mouse'
-        border = 'rounded', -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
-        title = 'Copilot Chat', -- title of chat window
-        zindex = 1, -- determines if window is on top or below other floating windows
+        layout = 'float',
+        relative = 'editor',
+        border = 'rounded',
+        title = 'Copilot Chat',
+        zindex = 1,
+        relativenumber = true,
       },
     },
     config = function(_, opts)
       local chat = require 'CopilotChat'
       local select = require 'CopilotChat.select'
-      -- opts.selection = select.unnamed
       chat.setup(opts)
 
       vim.api.nvim_create_user_command('CopilotQuickChat', function(args)
         chat.ask(args.args, { selection = select.buffer })
       end, { nargs = '*', range = true })
+
+      vim.api.nvim_create_autocmd('BufEnter', {
+        pattern = 'copilot-*',
+        callback = function()
+          vim.opt_local.relativenumber = true
+        end,
+      })
     end,
     keys = {
       {

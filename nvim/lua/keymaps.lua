@@ -36,6 +36,18 @@ vim.keymap.set(
   { desc = 'Open Floating Terminal' }
 )
 
+vim.keymap.set('n', '<leader>e', function(...)
+  if not MiniFiles.close() then
+    MiniFiles.open(vim.api.nvim_buf_get_name(0))
+  end
+end, { silent = true, desc = 'File explorer' })
+
+vim.keymap.set('n', '<leader>E', function(...)
+  if not MiniFiles.close() then
+    MiniFiles.open()
+  end
+end, { silent = true, desc = 'File explorer (cwd)' })
+
 -- [[Autocommands]]
 
 -- Highlight when yanking (copying) text

@@ -40,7 +40,7 @@ layout {
             tab_floating_indicator   ""
 
             datetime        "#[fg=#6C7086,bold] {format} "
-            datetime_format "%A, %d %b %Y %H:%M"
+            datetime_format "%A, %d %b %Y %I:%M %p"
             datetime_timezone "America/New_York"
         }
     }

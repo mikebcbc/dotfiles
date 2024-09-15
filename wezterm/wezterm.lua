@@ -23,7 +23,7 @@ config.max_fps = 120
 
 -- Transparency
 config.window_background_opacity = 0.8
-config.macos_window_background_blur = 35
+config.macos_window_background_blur = 30
 
 -- Swap  Cmd <-> Alt on macOS
 if wezterm.target_triple:match("darwin$") then

@@ -16,6 +16,67 @@ return {
       --  - ci'  - [C]hange [I]nside [']quote
       require('mini.ai').setup { n_lines = 500 }
 
+      require('mini.icons').setup {}
+      require('mini.icons').mock_nvim_web_devicons()
+
+      -- File explorer (like oil, without preview bugs)
+      require('mini.files').setup {
+        windows = {
+          preview = true,
+          width_preview = 100,
+        },
+        mappings = {
+          go_in = 'L',
+          go_in_plus = 'l',
+        },
+      }
+
+      -- Set mappings for opening file in split using `MiniFiles`
+      local map_split = function(buf_id, lhs, direction)
+        local rhs = function()
+          -- Make new window and set it as target
+          local new_target_window
+          vim.api.nvim_win_call(MiniFiles.get_target_window(), function()
+            vim.cmd(direction .. ' split')
+            new_target_window = vim.api.nvim_get_current_win()
+          end)
+
+          MiniFiles.set_target_window(new_target_window)
+        end
+        local desc = 'Split ' .. direction
+        vim.keymap.set('n', lhs, rhs, { buffer = buf_id, desc = desc })
+      end
+
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'MiniFilesBufferCreate',
+        callback = function(args)
+          local buf_id = args.data.buf_id
+          -- Tweak keys to your liking
+          map_split(buf_id, '<C-s>', 'belowright horizontal')
+          map_split(buf_id, '<C-v>', 'belowright vertical')
+        end,
+      })
+
+      -- Set mappings to replace CWD
+      local files_set_cwd = function()
+        -- Works only if cursor is on the valid file system entry
+        local cur_entry = MiniFiles.get_fs_entry()
+        if cur_entry then
+          local cur_directory = vim.fs.dirname(cur_entry.path)
+          vim.api.nvim_set_current_dir(cur_directory)
+          vim.notify('CWD changed to ' .. cur_directory, vim.log.levels.ERROR)
+        else
+          vim.notify('Invalid file system entry', vim.log.levels.ERROR)
+        end
+      end
+
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'MiniFilesBufferCreate',
+        callback = function(args)
+          vim.keymap.set('n', '<C-r>', files_set_cwd, { buffer = args.data.buf_id })
+        end,
+      })
+
       -- Add/delete/replace surroundings (brackets, quotes, etc.)
       --
       -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
