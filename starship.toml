@@ -1,11 +1,11 @@
-# [custom.neovim]
-# command = 'bob ls | rg Used | awk "{print \$2}"'  # shows output of command
-# detect_folders = ["lua"]
-# style = "green"
-# format = "[ $output ]($style)"
-# shell =["bash"]
-
 palette = "catppuccin_macchiato"
+
+[custom.neovim]
+command = 'bob ls | rg Used | awk "{print \$2}"'
+detect_folders = ["lua"]
+style = "green"
+format = "[ $output ]($style)"
+shell =["bash"]
 
 [git_status]
 untracked = '[ $count](bold yellow) '
@@ -15,7 +15,6 @@ deleted = '[ $count](bold maroon) '
 modified= '[ $count](bold blue) '
 behind = '[ ](bold mauve) '
 ahead = '[ ](bold mauve) '
-format = '([$all_status$ahead_behind]($style))'
 
 [[battery.display]]
 threshold = 50

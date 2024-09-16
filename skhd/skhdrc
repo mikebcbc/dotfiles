@@ -6,8 +6,11 @@ alt + cmd - pageup :      yabai -m window --resize top:0:-60
 
 # Navigation
 # cycle through all windows sorted by: coordinates -> space index -> display index
-alt + cmd - right : yabai -m window --focus "$(yabai -m query --windows | jq -re "sort_by(.display, .space, .frame.x, .frame.y, .id) | map(select(.\"is-visible\" == true and .role != \"AXUnknown\")) | reverse | nth(index(map(select(.\"has-focus\" == true))) - 1).id")"
-alt + cmd - left : yabai -m window --focus "$(yabai -m query --windows | jq -re "sort_by(.display, .space, .frame.x, .frame.y, .id) | map(select(.\"is-visible\" == true and .role != \"AXUnknown\")) | nth(index(map(select(.\"has-focus\" == true))) - 1).id")"
+# alt + cmd - right : yabai -m window --focus "$(yabai -m query --windows | jq -re "sort_by(.display, .space, .frame.x, .frame.y, .id) | map(select(.\"is-visible\" == true and .role != \"AXUnknown\")) | reverse | nth(index(map(select(.\"has-focus\" == true))) - 1).id")"
+# alt + cmd - left : yabai -m window --focus "$(yabai -m query --windows | jq -re "sort_by(.display, .space, .frame.x, .frame.y, .id) | map(select(.\"is-visible\" == true and .role != \"AXUnknown\")) | nth(index(map(select(.\"has-focus\" == true))) - 1).id")"
+alt + cmd - right : [ $(yabai -m query --windows --space | jq -re "map(select(.\"has-focus\" == true)) | length != 0") = true ] && yabai -m window --focus "$(yabai -m query --windows --space | jq -re "[sort_by(.id, .frame) | reverse | .[] | select(.role == \"AXWindow\" and .subrole == \"AXStandardWindow\") | .id] | nth(index($(yabai -m query --windows --window | jq -re ".id")) - 1)")" ||  yabai -m window --focus "$(yabai -m query --spaces --space | jq -re ".windows[0]?")" &> /dev/null
+alt + cmd - left : [ $(yabai -m query --windows --space | jq -re "map(select(.\"has-focus\" == true)) | length != 0") = true ] && yabai -m window --focus "$(yabai -m query --windows --space | jq -re "[sort_by(.id, .frame) | .[] | select(.role == \"AXWindow\" and .subrole == \"AXStandardWindow\") | .id] | nth(index($(yabai -m query --windows --window | jq -re ".id")) - 1)")" ||  yabai -m window --focus "$(yabai -m query --spaces --space | jq -re ".windows[0]?")" &> /dev/null
+
 
 # Mimic Rectangle app shortcuts and behavior
 
@@ -23,8 +26,11 @@ alt + cmd - 9   : yabai -m window --grid 1:4:3:0:1:1
 # make floating window fill screen
 alt + cmd - 0 : yabai -m window --grid 1:1:0:0:1:1
 
-# make floating window fill left-half of screen
-alt + cmd - 1 : yabai -m window --grid 1:2:0:0:1:1
+# send floating window to space 1
+alt + cmd - 1 : yabai -m window --space 1
 
-# make floating window fill right-half of screen
-alt + cmd - 2 : yabai -m window --grid 1:2:1:0:1:1
+# send floating window to space 2
+alt + cmd - 2 : yabai -m window --space 2
+
+# send floating window to space 3
+alt + cmd - 3 : yabai -m window --space 3
