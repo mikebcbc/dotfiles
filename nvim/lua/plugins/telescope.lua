@@ -15,10 +15,10 @@ return {
             require('telescope.themes').get_dropdown(),
           },
           fzf = {
-            fuzzy = true, -- false will only do exact matching
-            override_generic_sorter = true, -- override the generic sorter
-            override_file_sorter = true, -- override the file sorter
-            case_mode = 'smart_case', -- or "ignore_case" or "respect_case"
+            fuzzy = true,
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            case_mode = 'smart_case',
           },
         },
         pickers = {
@@ -52,7 +52,6 @@ return {
       vim.keymap.set('n', '<leader>fs', builtin.builtin, { desc = 'Select what to find' })
       vim.keymap.set('n', '<leader>fc', builtin.grep_string, { desc = 'Find word under cursor' })
       vim.keymap.set('n', '<leader>fw', builtin.live_grep, { desc = 'Find word' })
-      -- vim.keymap.set('n', '<leader>f/', builtin.live_grep, { desc = 'Find word in current buffer' })
       vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = 'Find diagnostics' })
       vim.keymap.set('n', '<leader>f.', builtin.oldfiles, { desc = 'Find history' })
       vim.keymap.set('n', '<leader>fq', builtin.quickfix, { desc = 'Find quickfix' })
@@ -60,6 +59,10 @@ return {
       -- Telescope buffer/LSP actions
       vim.keymap.set('n', '<leader>f<leader>', builtin.buffers, { desc = 'Find open buffers' })
       vim.keymap.set('n', '<leader>ls', builtin.lsp_document_symbols, { desc = 'Find document symbols' })
+      vim.keymap.set('n', 'gd', builtin.lsp_definitions, { desc = 'Goto definition' })
+      vim.keymap.set('n', 'gr', builtin.lsp_references, { desc = 'Goto reference' })
+      vim.keymap.set('n', 'gI', builtin.lsp_implementations, { desc = 'Goto implementation' })
+      vim.keymap.set('n', '<leader>lD', builtin.lsp_type_definitions, { desc = 'Type definition' })
     end,
   },
 }

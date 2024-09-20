@@ -30,12 +30,12 @@ return {
       vim.g['test#go#richgo#options'] = '-v'
       vim.g['test#echo_command'] = 0
       vim.cmd [[
-				function! ToggleTermStrategy(cmd) abort
-					call luaeval("require('toggleterm').exec(_A[1], 3, 10, vim.fn.getcwd(), 'float')", [a:cmd])
-				endfunction
-				let g:test#custom_strategies = {'patchedtoggle': function('ToggleTermStrategy')}
-			]]
-      vim.g['test#strategy'] = 'patchedtoggle'
+        function! ZellijStrategy(cmd)
+          call system('zellij run --floating --width "80%" --height "80%" --x "10%" --y "10%" -- ' . a:cmd)
+        endfunction
+        let g:test#custom_strategies = {'zellij': function('ZellijStrategy')}
+      ]]
+      vim.g['test#strategy'] = 'zellij'
     end,
   },
 }

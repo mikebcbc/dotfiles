@@ -64,7 +64,7 @@ return {
         if cur_entry then
           local cur_directory = vim.fs.dirname(cur_entry.path)
           vim.api.nvim_set_current_dir(cur_directory)
-          vim.notify('CWD changed to ' .. cur_directory, vim.log.levels.ERROR)
+          vim.notify('CWD changed to ' .. cur_directory, vim.log.levels.INFO)
         else
           vim.notify('Invalid file system entry', vim.log.levels.ERROR)
         end
@@ -210,24 +210,24 @@ return {
 
       require('mini.pairs').setup()
 
-      require('mini.completion').setup {
-        lsp_completion = {
-          source_func = 'completefunc',
-          auto_setup = false,
-          delay = { completion = 250 },
-          process_items = function(items, base)
-            -- Don't show 'Text' and 'Snippet' suggestions
-            items = vim.tbl_filter(function(x)
-              return x.kind ~= 1 and x.kind ~= 15
-            end, items)
-            return MiniCompletion.default_process_items(items, base)
-          end,
-        },
-        window = {
-          info = { border = 'rounded', winhighlight = 'Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None' },
-          signature = { border = 'rounded', winhighlight = 'Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None' },
-        },
-      }
+      -- require('mini.completion').setup {
+      --   lsp_completion = {
+      --     source_func = 'completefunc',
+      --     auto_setup = false,
+      --     delay = { completion = 250 },
+      --     process_items = function(items, base)
+      --       -- Don't show 'Text' and 'Snippet' suggestions
+      --       items = vim.tbl_filter(function(x)
+      --         return x.kind ~= 1 and x.kind ~= 15
+      --       end, items)
+      --       return MiniCompletion.default_process_items(items, base)
+      --     end,
+      --   },
+      --   window = {
+      --     info = { border = 'rounded', winhighlight = 'Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None' },
+      --     signature = { border = 'rounded', winhighlight = 'Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None' },
+      --   },
+      -- }
 
       require('mini.hipatterns').setup {
         highlighters = {
