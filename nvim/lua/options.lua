@@ -36,7 +36,7 @@ vim.opt.smartcase = false
 vim.opt.updatetime = 100
 
 -- Decrease mapped sequence wait time
--- Displays which-key popup sooner
+-- Displays completion popup sooner
 vim.opt.timeoutlen = 300
 
 -- Configure how new splits should be opened
@@ -47,7 +47,7 @@ vim.opt.splitbelow = true
 vim.opt.list = true
 vim.opt.listchars = { tab = '  ', trail = '·', nbsp = '␣' }
 
--- Preview substitutions live, as you type!
+-- Preview substitutions live
 vim.opt.inccommand = 'split'
 
 -- Show which line your cursor is on
@@ -61,7 +61,7 @@ vim.opt.cmdheight = 0
 
 -- fold settings for nvim-ufo
 vim.opt.foldcolumn = '0' -- '0' is not bad
-vim.opt.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+vim.opt.foldlevel = 99 -- Using ufo provider needs a large value
 vim.opt.foldlevelstart = 99
 vim.opt.foldenable = true
 

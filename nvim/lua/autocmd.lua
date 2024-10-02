@@ -20,15 +20,15 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 -- Automatically trigger file completion after typing '/'
-vim.api.nvim_create_autocmd('InsertCharPre', {
-  pattern = '*',
-  callback = function()
-    local char = vim.v.char
-    if char == '/' then
-      utils.feedkeys '<C-x><C-f>'
-    end
-  end,
-})
+-- vim.api.nvim_create_autocmd('InsertCharPre', {
+--   pattern = '*',
+--   callback = function()
+--     local char = vim.v.char
+--     if char == '/' then
+--       utils.feedkeys '<C-x><C-f>'
+--     end
+--   end,
+-- })
 
 -- Automatically trigger file completion after accepting a completion
 vim.api.nvim_create_autocmd('CompleteDonePre', {
