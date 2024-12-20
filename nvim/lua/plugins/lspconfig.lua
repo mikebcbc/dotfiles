@@ -47,8 +47,11 @@ return {
           },
         },
         vtsls = {
-          settings = {
+          {
+            enableMoveToFileCodeAction = true,
+            autoUseWorkspaceTsdk = true,
             experimental = {
+              maxInlayHintLength = 30,
               completion = {
                 enableServerSideFuzzyMatch = true,
               },

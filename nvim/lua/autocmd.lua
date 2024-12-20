@@ -20,15 +20,22 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 -- Automatically trigger file completion after typing '/'
--- vim.api.nvim_create_autocmd('InsertCharPre', {
---   pattern = '*',
---   callback = function()
---     local char = vim.v.char
---     if char == '/' then
---       utils.feedkeys '<C-x><C-f>'
---     end
---   end,
--- })
+vim.api.nvim_create_autocmd('InsertCharPre', {
+  pattern = '*',
+  callback = function()
+    local char = vim.v.char
+    if char == '/' then
+      -- Get the current line and cursor position
+      local line = vim.fn.getline '.'
+      local col = vim.fn.col '.'
+
+      -- Ensure the character before '/' is not also '/'
+      if col <= 1 or string.sub(line, col - 1, col - 1) ~= '/' then
+        utils.feedkeys '<C-x><C-f>'
+      end
+    end
+  end,
+})
 
 -- Automatically trigger file completion after accepting a completion
 vim.api.nvim_create_autocmd('CompleteDonePre', {
@@ -40,6 +47,14 @@ vim.api.nvim_create_autocmd('CompleteDonePre', {
     if col > 1 and string.sub(line, col - 1, col - 1) == '/' then
       utils.feedkeys '<C-x><C-f>'
     end
+  end,
+})
+
+-- snacks.nvim rename on mini files rename
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'MiniFilesActionRename',
+  callback = function(event)
+    Snacks.rename.on_rename_file(event.data.from, event.data.to)
   end,
 })
 

@@ -24,12 +24,12 @@ vim.keymap.set('n', '<leader>fr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left>
 vim.keymap.set('n', '<leader>aa', '<cmd>lua require("copilot.suggestion").toggle_auto_trigger()<CR>', { desc = 'Toggle Copilot Auto' })
 
 -- Terminal keybinds
-vim.keymap.set(
-  'n',
-  '<leader>tl',
-  [[:lua os.execute('zellij run --floating --width "80%" --height "80%" --x "10%" --y "10%" --close-on-exit -- lazygit')<CR>]],
-  { desc = 'Open Lazygit' }
-)
+-- vim.keymap.set(
+--   'n',
+--   '<leader>tl',
+--   [[:lua os.execute('zellij run --floating --width "80%" --height "80%" --x "10%" --y "10%" --close-on-exit -- lazygit')<CR>]],
+--   { desc = 'Open Lazygit' }
+-- )
 vim.keymap.set(
   'n',
   '<leader>tf',

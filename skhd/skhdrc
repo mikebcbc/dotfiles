@@ -14,6 +14,12 @@ alt + cmd - right : [ $(yabai -m query --windows --space | jq -re "map(select(.\
 
 # Mimic Rectangle app shortcuts and behavior
 
+# make floating window fill left half of screen
+alt + cmd - z : yabai -m window --grid 1:2:0:0:1:1
+
+# make floating window fill right half of screen
+alt + cmd - x : yabai -m window --grid 1:2:1:0:1:1
+
 # make floating window fill right fourth of screen
 alt + cmd - 7   : yabai -m window --grid 1:4:0:0:1:1
 
