@@ -23,14 +23,14 @@ if status is-interactive
 
     bind --mode default q 'exit'
 
-    if not set -q ZELLIJ
-      if test "$ZELLIJ_AUTO_ATTACH" = "true"
-         zellij attach -c
-      else
-         zellij -l welcome
-      end
+    # if not set -q ZELLIJ
+    #   if test "$ZELLIJ_AUTO_ATTACH" = "true"
+    #      zellij attach -c
+    #   else
+         # zellij -l welcome
+      # end
 
-      kill $fish_pid
+      # kill $fish_pid
     end
 
     starship init fish | source
@@ -52,4 +52,3 @@ if status is-interactive
 \033[0m'
 
 end
-

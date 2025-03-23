@@ -5,7 +5,7 @@ keybinds clear-defaults=true{
         // bind "Alt c" { Copy; }
     }
     locked {
-        bind "Alt g" { SwitchToMode "Normal"; }
+        bind "Super g" { SwitchToMode "Normal"; }
     }
     resize {
         bind "h" "Left" { Resize "Increase Left"; }
@@ -106,8 +106,8 @@ keybinds clear-defaults=true{
         bind "Esc" { UndoRenamePane; SwitchToMode "Pane"; }
     }
     session {
-        bind "Alt o" { SwitchToMode "Normal"; }
-        bind "Alt s" { SwitchToMode "Scroll"; }
+        bind "Super o" { SwitchToMode "Normal"; }
+        bind "Super s" { SwitchToMode "Scroll"; }
         bind "d" { Detach; }
         bind "w" {
             LaunchOrFocusPlugin "session-manager" {
@@ -119,7 +119,7 @@ keybinds clear-defaults=true{
         bind "x" { Quit; }
     }
     shared_except "locked" {
-        bind "Alt g" { SwitchToMode "Locked"; }
+        bind "Super g" { SwitchToMode "Locked"; }
         // bind "Ctrl q" { Quit; }
         // bind "Alt n" { NewPane; }
         // bind "Alt i" { MoveTab "Left"; }
@@ -128,16 +128,16 @@ keybinds clear-defaults=true{
         // bind "Alt l" "Alt Right" { MoveFocusOrTab "Right"; }
         // bind "Alt j" "Alt Down" { MoveFocus "Down"; }
         // bind "Alt k" "Alt Up" { MoveFocus "Up"; }
-        bind "Alt =" "Alt +" { Resize "Increase"; }
-        bind "Alt -" { Resize "Decrease"; }
-        bind "Alt [" { PreviousSwapLayout; }
-        bind "Alt ]" { NextSwapLayout; }
+        bind "Super =" "Super +" { Resize "Increase"; }
+        bind "Super -" { Resize "Decrease"; }
+        bind "Super [" { PreviousSwapLayout; }
+        bind "Super ]" { NextSwapLayout; }
     }
     shared_except "normal" "locked" {
         bind "Enter" "Esc" { SwitchToMode "Normal"; }
     }
     shared_except "pane" "locked" {
-        bind "Alt p" { SwitchToMode "Pane"; }
+        bind "Super p" { SwitchToMode "Pane"; }
 
         bind "Alt Left" "Alt h" {
             MessagePlugin "https://github.com/hiasr/vim-zellij-navigator/releases/download/0.2.1/vim-zellij-navigator.wasm" {
@@ -172,13 +172,13 @@ keybinds clear-defaults=true{
         }
     }
     shared_except "scroll" "locked" {
-        bind "Alt s" { SwitchToMode "Scroll"; }
+        bind "Super s" { SwitchToMode "Scroll"; }
     }
     shared_except "session" "locked" {
-        bind "Alt o" { SwitchToMode "Session"; }
+        bind "Super o" { SwitchToMode "Session"; }
     }
     shared_except "tab" "locked" {
-        bind "Alt t" { SwitchToMode "Tab"; }
+        bind "Super t" { SwitchToMode "Tab"; }
     }
 }
 

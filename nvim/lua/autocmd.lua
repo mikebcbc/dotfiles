@@ -19,37 +19,6 @@ vim.api.nvim_create_autocmd('FileType', {
   command = 'setlocal wrap',
 })
 
--- Automatically trigger file completion after typing '/'
-vim.api.nvim_create_autocmd('InsertCharPre', {
-  pattern = '*',
-  callback = function()
-    local char = vim.v.char
-    if char == '/' then
-      -- Get the current line and cursor position
-      local line = vim.fn.getline '.'
-      local col = vim.fn.col '.'
-
-      -- Ensure the character before '/' is not also '/'
-      if col <= 1 or string.sub(line, col - 1, col - 1) ~= '/' then
-        utils.feedkeys '<C-x><C-f>'
-      end
-    end
-  end,
-})
-
--- Automatically trigger file completion after accepting a completion
-vim.api.nvim_create_autocmd('CompleteDonePre', {
-  pattern = '*',
-  callback = function()
-    -- Check if the character before the cursor is '/'
-    local line = vim.fn.getline '.'
-    local col = vim.fn.col '.'
-    if col > 1 and string.sub(line, col - 1, col - 1) == '/' then
-      utils.feedkeys '<C-x><C-f>'
-    end
-  end,
-})
-
 -- snacks.nvim rename on mini files rename
 vim.api.nvim_create_autocmd('User', {
   pattern = 'MiniFilesActionRename',
@@ -65,13 +34,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local client = vim.lsp.get_client_by_id(event.data.client_id)
     if client == nil then
       return
-    end
-
-    -- Enable native autocompletion
-    if client.supports_method(vim.lsp.protocol.Methods.textDocument_completion) then
-      vim.lsp.completion.enable(true, client.id, event.buf, { autotrigger = true })
-      require('utils.lsp').show_complete_documentation(client, event.buf)
-      require('utils.lsp').setup_completion_keymaps(event.buf)
     end
 
     -- Highlight references of word under cursor on hover

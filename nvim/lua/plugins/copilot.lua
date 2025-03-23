@@ -1,96 +1,53 @@
 return {
   {
-    'zbirenbaum/copilot.lua',
-    enabled = true,
-    cmd = 'Copilot',
-    build = ':Copilot auth',
-    event = 'VeryLazy',
+    'olimorris/codecompanion.nvim',
     config = function()
-      require('copilot').setup {
-        panel = {
-          enabled = false,
+      require('codecompanion').setup {
+        -- adapters = {
+        --   copilot = function()
+        --     return require('codecompanion.adapters').extend('copilot', {
+        --       schema = {
+        --         model = {
+        --           default = 'claude-3.7-sonnet',
+        --         },
+        --       },
+        --     })
+        --   end,
+        -- },
+        strategies = {
+          chat = {
+            adapter = 'copilot',
+          },
+          inline = {
+            adapter = 'copilot',
+          },
         },
-        suggestion = {
-          enabled = true,
-          debounce = 25,
-          keymap = {
-            accept = '<C-l>',
-            next = '<C-k>',
-            previous = '<C-j>',
-            dismiss = '<C-h>',
+        display = {
+          chat = {
+            window = {
+              layout = 'float',
+            },
+          },
+          diff = {
+            enabled = true,
+            close_chat_at = 240, -- Close an open chat buffer if the total columns of your display are less than...
+            provider = 'mini_diff', -- default|mini_diff
           },
         },
       }
-    end,
-  },
-  {
-    'CopilotC-Nvim/CopilotChat.nvim',
-    branch = 'canary',
-    build = 'make tiktoken',
-    opts = {
-      clear_chat_on_new_prompt = true,
-      context = 'buffers',
-      window = {
-        layout = 'float',
-        relative = 'editor',
-        border = 'rounded',
-        title = 'Copilot Chat',
-        zindex = 1,
-        relativenumber = true,
-      },
-    },
-    config = function(_, opts)
-      local chat = require 'CopilotChat'
-      local select = require 'CopilotChat.select'
-      chat.setup(opts)
 
-      vim.api.nvim_create_user_command('CopilotQuickChat', function(args)
-        chat.ask(args.args, { selection = select.buffer })
-      end, { nargs = '*', range = true })
-
-      vim.api.nvim_create_autocmd('BufEnter', {
-        pattern = 'copilot-*',
-        callback = function()
-          vim.opt_local.relativenumber = true
-        end,
-      })
+      -- Expand 'cc' into 'CodeCompanion' in the command line
+      vim.cmd [[cab cc CodeCompanion]]
     end,
     keys = {
-      {
-        '<leader>aq',
-        function()
-          local input = vim.fn.input 'Quick Chat: '
-          if input ~= '' then
-            vim.cmd('CopilotQuickChat ' .. input)
-          end
-        end,
-        desc = 'Quick Chat',
-      },
-      {
-        '<leader>ap',
-        function()
-          local actions = require 'CopilotChat.actions'
-          require('CopilotChat.integrations.telescope').pick(actions.prompt_actions())
-        end,
-        desc = 'Choose an action',
-      },
-      {
-        '<leader>ap',
-        ":lua require('CopilotChat.integrations.telescope').pick(require('CopilotChat.actions').prompt_actions({selection = require('CopilotChat.select').visual}))<CR>",
-        mode = 'x',
-        desc = 'Choose an action',
-      },
-      { '<leader>ae', '<cmd>CopilotChatExplain<cr>', mode = 'n', desc = 'Explain code' },
-      { '<leader>ae', ":'<,'>CopilotChatExplain<cr>", mode = 'x', desc = 'Explain selected code' },
-      { '<leader>ar', '<cmd>CopilotChatReview<cr>', desc = 'Review code' },
-      { '<leader>ar', ":'<,'>CopilotChatReview<cr>", mode = 'x', desc = 'Review selected code' },
-      { '<leader>ao', '<cmd>CopilotChatOptimize<cr>', desc = 'Optimize code' },
-      { '<leader>ao', ":'<,'>CopilotChatOptimize<cr>", mode = 'x', desc = 'Optimize selected code' },
-      { '<leader>af', '<cmd>CopilotChatFix<cr>', desc = 'Fix code' },
-      { '<leader>af', ":'<,'>CopilotChatFix<cr>", mode = 'x', desc = 'Fix selected code' },
-      { '<leader>ag', '<cmd>CopilotChatCommitStaged<cr>', desc = 'Write commit message for staged changes' },
-      { '<leader>a;', '<cmd>CopilotChatTests<cr>', desc = 'Write tests for selected file' },
-      { '<leader>at', '<cmd>CopilotChatToggle<cr>', desc = 'Toggle chat window' },
+      { '<leader>al', '<cmd>CodeCompanionActions<cr>', mode = { 'n', 'v' }, noremap = true, silent = true, desc = 'Actions List' },
+      { '<leader>aa', '<cmd>CodeCompanionChat Toggle<cr>', mode = { 'n', 'v' }, noremap = true, silent = true, desc = 'Toggle Chat Window' },
+      { '<leader>ag', '<cmd>CodeCompanionChat Add<cr>', mode = 'v', noremap = true, silent = true, desc = 'Add to Chat' },
+      { '<leader>ap', '<cmd>CodeCompanion<cr>', mode = { 'n', 'v' }, noremap = true, silent = true, desc = 'Inline Prompt' },
+    },
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-treesitter/nvim-treesitter',
     },
   },
 }

@@ -1,0 +1,56 @@
+background-opacity = 0.8
+macos-titlebar-style = tabs
+background-blur-radius = 20
+font-size = 14
+font-family = "Inconsolata Nerd Font"
+theme = "catppuccin-macchiato"
+quick-terminal-position = "center"
+mouse-hide-while-typing = true
+window-padding-x = 0
+window-padding-y = 0
+clipboard-read = "allow"
+clipboard-paste-protection = false
+unfocused-split-opacity = 0.7
+unfocused-split-fill = #2d2d2d
+
+## Keybinds for tabs
+keybind = cmd+t>n=new_tab
+keybind = cmd+t>l=next_tab
+keybind = cmd+t>h=previous_tab
+keybind = cmd+t>f=toggle_quick_terminal
+keybind = cmd+t>r=prompt_surface_title
+
+## Keybinds for splits
+keybind = cmd+p>n=new_split:auto
+keybind = cmd+p>d=new_split:down
+keybind = cmd+p>f=toggle_split_zoom
+keybind = cmd+l=goto_split:right
+keybind = cmd+j=goto_split:down
+keybind = cmd+k=goto_split:up
+keybind = cmd+h=goto_split:left
+keybind = cmd+shift+k=resize_split:up,10
+keybind = cmd+shift+j=resize_split:down,10
+keybind = cmd+shift+h=resize_split:left,10
+keybind = cmd+shift+l=resize_split:right,10
+
+## Keybinds for scrolling
+keybind = cmd+shift+,=scroll_page_up
+keybind = cmd+shift+m=scroll_page_down
+
+## Weirdness with alt-backward and binding in neovim without this
+keybind = alt+right=unbind
+keybind = alt+left=unbind
+keybind = alt+down=unbind
+keybind = alt+up=unbind
+
+# unbinds
+keybind = cmd+d=unbind
+
+# Features
+link-url = true
+auto-update = download
+auto-update-channel = tip
+font-feature = -calt
+font-feature = -liga
+font-feature = -dlig
+window-save-state = always

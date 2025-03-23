@@ -19,6 +19,18 @@ return {
       require('mini.icons').setup {}
       require('mini.icons').mock_nvim_web_devicons()
 
+      require('mini.notify').setup {
+        lsp_progress = {
+          level = 'ERROR',
+        },
+        window = {
+          config = { border = 'double' },
+          winblend = 0,
+        },
+      }
+
+      vim.notify = require('mini.notify').make_notify()
+
       -- File explorer (like oil, without preview bugs)
       require('mini.files').setup {
         windows = {
@@ -209,25 +221,6 @@ return {
       }
 
       require('mini.pairs').setup()
-
-      -- require('mini.completion').setup {
-      --   lsp_completion = {
-      --     source_func = 'completefunc',
-      --     auto_setup = false,
-      --     delay = { completion = 250 },
-      --     process_items = function(items, base)
-      --       -- Don't show 'Text' and 'Snippet' suggestions
-      --       items = vim.tbl_filter(function(x)
-      --         return x.kind ~= 1 and x.kind ~= 15
-      --       end, items)
-      --       return MiniCompletion.default_process_items(items, base)
-      --     end,
-      --   },
-      --   window = {
-      --     info = { border = 'rounded', winhighlight = 'Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None' },
-      --     signature = { border = 'rounded', winhighlight = 'Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None' },
-      --   },
-      -- }
 
       require('mini.hipatterns').setup {
         highlighters = {
