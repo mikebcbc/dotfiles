@@ -31,7 +31,7 @@ if status is-interactive
       # end
 
       # kill $fish_pid
-    end
+    # end
 
     starship init fish | source
     echo -e '\033[34m
