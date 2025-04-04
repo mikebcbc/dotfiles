@@ -19,3 +19,6 @@ require 'lazy-bootstrap'
 
 -- [[ Configure and install plugins ]]
 require 'lazy-plugins'
+
+-- Set configs for servers and enable them in the Neovim LSP Client
+require 'lsp/setup'

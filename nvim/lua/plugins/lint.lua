@@ -12,16 +12,18 @@ return {
         javascriptreact = { 'eslint_d' },
         typescriptreact = { 'eslint_d' },
         astro = { 'eslint_d' },
-        go = { 'revive' },
+        go = { 'golangcilint' },
         rego = { 'opa_check' },
       }
 
       lint.linters.golangcilint.args = {
         'run',
-        '--out-format',
-        'json',
-        '--enable',
-        'golint',
+        '--output.json.path=stdout',
+        '--issues-exit-code=0',
+        '--show-stats=false',
+        function()
+          return vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':h')
+        end,
       }
 
       lint.linters.markdownlint.args = {
