@@ -1,6 +1,7 @@
 return {
   {
     'nvim-lualine/lualine.nvim',
+    dependencies = { 'catppuccin/nvim' },
     event = 'VeryLazy',
     config = function()
       -- Codecompanion component
@@ -53,7 +54,6 @@ return {
       -- config for lualine
       require('lualine').setup {
         options = {
-          theme = 'catppuccin',
           icons_enabled = true,
         },
         sections = {
@@ -74,9 +74,7 @@ return {
           },
         },
         extensions = {
-          'nvim-tree',
           'lazy',
-          'toggleterm',
           'mason',
         },
       }

@@ -5,9 +5,6 @@ global_capabilities.offsetEncoding = { 'utf-16' }
 
 vim.lsp.config('*', {
   capabilities = global_capabilities,
-  handlers = {
-    ['textDocument/publishDiagnostics'] = vim.lsp.diagnostic.on_publish_diagnostics,
-  },
   root_markers = { '.git' },
 })
 

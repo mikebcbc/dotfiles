@@ -2,7 +2,8 @@ return {
   {
     'catppuccin/nvim',
     name = 'catppuccin',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
+    lazy = false,
+    priority = 1000,
     init = function()
       vim.cmd.colorscheme 'catppuccin-macchiato'
 
@@ -13,6 +14,7 @@ return {
       default_integrations = false,
       term_colors = true,
       integrations = {
+        lualine = {},
         blink_cmp = true,
         fidget = true,
         indent_blankline = {

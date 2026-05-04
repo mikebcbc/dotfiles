@@ -107,9 +107,6 @@ vim.diagnostic.config {
     focusable = false,
     show_header = true,
   },
-  jump = {
-    float = true,
-  },
 }
 
 -- add new filetypes to the list of known filetypes

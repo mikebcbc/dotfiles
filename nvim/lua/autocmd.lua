@@ -19,34 +19,36 @@ vim.api.nvim_create_autocmd('FileType', {
   command = 'setlocal wrap',
 })
 
--- snacks.nvim rename on mini files rename
+-- snacks.nvim: sync rename when using mini.files
 vim.api.nvim_create_autocmd('User', {
   pattern = 'MiniFilesActionRename',
   callback = function(event)
-    Snacks.rename.on_rename_file(event.data.from, event.data.to)
+    local ok, snacks = pcall(require, 'snacks')
+    if ok and snacks.rename and snacks.rename.on_rename_file then
+      snacks.rename.on_rename_file(event.data.from, event.data.to)
+    end
   end,
 })
 
--- Completion, etc on LSP attach
+-- Document highlight (buffer-local group so re-attaching doesn’t stack autocmds)
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
   callback = function(event)
     local client = vim.lsp.get_client_by_id(event.data.client_id)
-    if client == nil then
+    if client == nil or not client.server_capabilities.documentHighlightProvider then
       return
     end
-
-    -- Highlight references of word under cursor on hover
-    if client.server_capabilities.documentHighlightProvider then
-      vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-        buffer = event.buf,
-        callback = vim.lsp.buf.document_highlight,
-      })
-
-      vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-        buffer = event.buf,
-        callback = vim.lsp.buf.clear_references,
-      })
-    end
+    local buf = event.buf
+    local aug = vim.api.nvim_create_augroup('lsp-document-highlight-' .. buf, { clear = true })
+    vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+      group = aug,
+      buffer = buf,
+      callback = vim.lsp.buf.document_highlight,
+    })
+    vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+      group = aug,
+      buffer = buf,
+      callback = vim.lsp.buf.clear_references,
+    })
   end,
 })
