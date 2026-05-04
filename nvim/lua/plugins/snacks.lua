@@ -93,6 +93,13 @@ return {
         desc = 'Git Blame',
       },
       {
+        '<leader>gc',
+        function()
+          Snacks.gitbrowse.get_url()
+        end,
+        desc = 'Copy Git URL',
+      },
+      {
         '<leader>gf',
         function()
           Snacks.lazygit.log_file()

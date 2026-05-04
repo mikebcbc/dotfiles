@@ -1,0 +1,4 @@
+# Linked to ~/.config/git/config — Git reads this when using XDG paths (modern Git).
+# https://git-scm.com/docs/git-config#Documentation/git-config.txt-featuremanyFiles
+[feature]
+	manyFiles = true

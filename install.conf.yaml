@@ -12,6 +12,7 @@
 - create:
     - ~/projects
     - ~/.config
+    - ~/.config/git
 - clean:
     - '~'
 - shell:
@@ -23,6 +24,7 @@
     ~/.config/nvim: nvim
     ~/.config/skhd: skhd
     ~/.config/starship.toml: starship.toml
+    ~/.config/git/config: git/config
     ~/.config/wezterm: wezterm
     ~/.config/yabai: yabai
     ~/.config/zellij: zellij

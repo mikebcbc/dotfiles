@@ -23,6 +23,12 @@ vim.opt.clipboard = 'unnamedplus'
 -- Enable break indent
 vim.opt.breakindent = true
 
+-- Make tabs spaces and change defaults
+vim.opt.expandtab = true
+vim.opt.shiftwidth = 3
+vim.opt.tabstop = 3
+vim.opt.softtabstop = 3
+
 -- Save undo history
 vim.opt.undofile = true
 

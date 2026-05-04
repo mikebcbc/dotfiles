@@ -1,6 +1,7 @@
 palette = "catppuccin_macchiato"
 
 [custom.neovim]
+disabled = true # not needed
 command = 'bob ls | rg Used | awk "{print \$2}"'
 detect_folders = ["lua"]
 style = "green"
@@ -8,7 +9,12 @@ format = "[ $output ]($style)"
 shell =["bash"]
 
 [git_status]
-untracked = '[ $count](bold yellow) '
+# Empty `untracked`: skip scanning the working tree for untracked files (same idea as
+# `git status --untracked-files=no`). That walk dominates cost in large repos.
+untracked = ""
+ignore_submodules = true
+# Empty `renamed`: skip rename-tracking during the status pass (cheaper scan).
+renamed = ""
 staged = '[ $count](bold green) '
 stashed = "[ ](cyan) "
 deleted = '[ $count](bold maroon) '
@@ -24,7 +30,12 @@ detect_folders = []
 symbol = " "
 
 [git_metrics]
-disabled = false
+# Runs diff-based stats (+/- lines). Disabled for prompt speed; use `git diff --stat` when needed.
+disabled = true
+
+[git_commit]
+# Omit short SHA segment — avoids an extra git subprocess each prompt (`git_branch` still shows name).
+disabled = true
 
 [aws]
 symbol = "  "

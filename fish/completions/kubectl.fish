@@ -1,0 +1,1 @@
+/Applications/OrbStack.app/Contents/Resources/completions/fish/kubectl.fish

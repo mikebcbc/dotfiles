@@ -17,8 +17,17 @@ return {
         strategies = {
           chat = {
             adapter = 'copilot',
+            slash_commands = {
+              buffer = { opts = { provider = 'telescope' } },
+              file = { opts = { provider = 'telescope' } },
+              help = { opts = { provider = 'telescope' } },
+              symbols = { opts = { provider = 'telescope' } },
+            },
           },
           inline = {
+            adapter = 'copilot',
+          },
+          agent = {
             adapter = 'copilot',
           },
         },
@@ -44,6 +53,13 @@ return {
       { '<leader>aa', '<cmd>CodeCompanionChat Toggle<cr>', mode = { 'n', 'v' }, noremap = true, silent = true, desc = 'Toggle Chat Window' },
       { '<leader>ag', '<cmd>CodeCompanionChat Add<cr>', mode = 'v', noremap = true, silent = true, desc = 'Add to Chat' },
       { '<leader>ap', '<cmd>CodeCompanion<cr>', mode = { 'n', 'v' }, noremap = true, silent = true, desc = 'Inline Prompt' },
+      {
+        '<leader>as',
+        function()
+          require('codecompanion.adapters.copilot').show_copilot_stats()
+        end,
+        desc = 'Copilot Usage Stats',
+      },
     },
     dependencies = {
       'nvim-lua/plenary.nvim',
