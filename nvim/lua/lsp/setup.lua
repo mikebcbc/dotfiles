@@ -1,6 +1,8 @@
 local utils = require 'utils'
 
-local global_capabilities = require('blink.cmp').get_lsp_capabilities()
+-- Merge Blink's completion caps with |vim.lsp.protocol.make_client_capabilities()|.
+-- Without `true`, documentHighlight, hover, etc. are missing and servers/LSP features break.
+local global_capabilities = require('blink.cmp').get_lsp_capabilities(nil, true)
 global_capabilities.offsetEncoding = { 'utf-16' }
 
 vim.lsp.config('*', {

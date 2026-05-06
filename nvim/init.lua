@@ -14,7 +14,7 @@ require 'keymaps'
 -- [[ Autocommands ]]
 require 'autocmd'
 
--- [[ Tree-sitter: core only (:help treesitter); no nvim-treesitter plugin ]]
+-- [[ Tree-sitter: core API + tree-sitter-manager.nvim for extra parsers ]]
 require 'config.treesitter'
 
 -- [[ Install `lazy.nvim` plugin manager ]]

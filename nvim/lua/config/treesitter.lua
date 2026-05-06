@@ -1,7 +1,7 @@
--- Core Tree-sitter only (Neovim 0.12+): bundled parsers and queries ship with Nvim.
--- :help treesitter-parsers — bundled: C, Lua, Markdown, Vimscript, Vimdoc, Query.
--- Extra parsers: place `parser/<lang>.so` (or .wasm) under stdpath('data') .. '/site/'
--- or load explicitly with vim.treesitter.language.add(lang, { path = ... }).
+-- Core Tree-sitter (Neovim 0.12+): |vim.treesitter.start()| when a parser exists on rtp.
+-- :help treesitter-parsers — Nvim bundles C, Lua, Markdown, Vimscript, Vimdoc, Query only.
+-- Extra grammars + queries: `plugins/treesitter-manager.lua` (tree-sitter-manager.nvim).
+-- LSP hover markdown needs injected parsers (e.g. go, typescript) under site/parser/.
 
 vim.treesitter.language.register('markdown', { 'md', 'mdx' })
 
