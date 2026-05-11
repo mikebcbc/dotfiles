@@ -16,6 +16,9 @@
 //   Untitled tab beside the terminal on the first open. EmptyPane avoids that. From Terminal: plain pane::Split*.
 // - cmd-h / cmd-j / cmd-k / cmd-l: focus pane left / down / up / right (Editor, workspace away from terminal,
 //   and Terminal — same as Ghostty). In Terminal this overrides cmd-k = clear scrollback.
+// - cmd-shift-h/j/k/l: resize split toward left / down / up / right (Ghostty resize_split; uses vim::ResizePane*
+//   → workspace.resize_pane). Step size is one “m” width or one buffer line height per press, not Ghostty’s 10px.
+//   Overrides Zed defaults: cmd-shift-k (delete line), cmd-shift-l (select all matches), cmd-shift-h in Pane (search replace).
 //
 // cmd-k trade-off: Zed normally uses cmd-k only as a chord prefix (cmd-k cmd-s, folds, etc.). To make cmd-k move
 // focus up immediately, every stock cmd-k … binding below is set to null. Re-map anything you still want via the
@@ -55,6 +58,10 @@
       "cmd-j": "workspace::ActivatePaneDown",
       "cmd-k": "workspace::ActivatePaneUp",
       "cmd-l": "workspace::ActivatePaneRight",
+      "cmd-shift-h": "vim::ResizePaneRight",
+      "cmd-shift-j": "vim::ResizePaneDown",
+      "cmd-shift-k": "vim::ResizePaneUp",
+      "cmd-shift-l": "vim::ResizePaneLeft",
       "cmd-t h": "pane::SplitLeft",
       "cmd-t j": "pane::SplitDown",
       "cmd-t k": "pane::SplitUp",
@@ -68,6 +75,10 @@
       "cmd-j": "workspace::ActivatePaneDown",
       "cmd-k": "workspace::ActivatePaneUp",
       "cmd-l": "workspace::ActivatePaneRight",
+      "cmd-shift-h": "vim::ResizePaneRight",
+      "cmd-shift-j": "vim::ResizePaneDown",
+      "cmd-shift-k": "vim::ResizePaneUp",
+      "cmd-shift-l": "vim::ResizePaneLeft",
       "cmd-t h": "pane::SplitLeft",
       "cmd-t j": "pane::SplitDown",
       "cmd-t k": "pane::SplitUp",
@@ -81,6 +92,10 @@
       "cmd-j": "workspace::ActivatePaneDown",
       "cmd-k": "workspace::ActivatePaneUp",
       "cmd-l": "workspace::ActivatePaneRight",
+      "cmd-shift-h": "vim::ResizePaneRight",
+      "cmd-shift-j": "vim::ResizePaneDown",
+      "cmd-shift-k": "vim::ResizePaneUp",
+      "cmd-shift-l": "vim::ResizePaneLeft",
       "cmd-p h": "pane::SplitLeft",
       "cmd-p j": "pane::SplitDown",
       "cmd-p k": "pane::SplitUp",
@@ -134,7 +149,11 @@
       "cmd-h": "workspace::ActivatePaneLeft",
       "cmd-j": "workspace::ActivatePaneDown",
       "cmd-k": "workspace::ActivatePaneUp",
-      "cmd-l": "workspace::ActivatePaneRight"
+      "cmd-l": "workspace::ActivatePaneRight",
+      "cmd-shift-h": "vim::ResizePaneRight",
+      "cmd-shift-j": "vim::ResizePaneDown",
+      "cmd-shift-k": "vim::ResizePaneUp",
+      "cmd-shift-l": "vim::ResizePaneLeft"
     }
   },
   {
