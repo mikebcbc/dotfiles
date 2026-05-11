@@ -5,31 +5,204 @@
 //
 // To see the default key bindings run `zed: open default keymap`
 // from the command palette.
+//
+// Ghostty + Neovim alignment (see ghostty/config and nvim/lua/keymaps.lua):
+// - cmd-p: file finder + chords (see below).
+// - cmd-p h/j/k/l (workspace, not terminal): editor splits — left / down / up / right.
+// - cmd-p n/d + h/j/k/l: editor splits (only under Workspace && !Terminal). cmd-p f: toggle zoom (workspace-wide).
+// - cmd-t f (cmd-t cmd-f) / cmd-alt-t: toggle terminal panel.
+// - cmd-t h/j/k/l: From the editor: pane::Split* with mode EmptyPane (sync empty split), then workspace::NewCenterTerminal.
+//   Default split mode is ClonePane, which duplicates the active buffer — a scratch “untitled” buffer becomes a second
+//   Untitled tab beside the terminal on the first open. EmptyPane avoids that. From Terminal: plain pane::Split*.
+// - cmd-h / cmd-j / cmd-k / cmd-l: focus pane left / down / up / right (Editor, workspace away from terminal,
+//   and Terminal — same as Ghostty). In Terminal this overrides cmd-k = clear scrollback.
+//
+// cmd-k trade-off: Zed normally uses cmd-k only as a chord prefix (cmd-k cmd-s, folds, etc.). To make cmd-k move
+// focus up immediately, every stock cmd-k … binding below is set to null. Re-map anything you still want via the
+// command palette or new chords (e.g. ctrl-alt-cmd-…). Terminal and Keymap Editor keep their default cmd-k actions.
+// - alt-arrows in vim normal: same idea as Neovim <M-arrows> → <C-w> h/j/k/l.
 [
   {
     "context": "Workspace",
     "bindings": {
-      // "shift shift": "file_finder::Toggle"
       "cmd-i": "workspace::ToggleRightDock",
-      "alt-cmd-s": "workspace::ToggleLeftDock"
-    },
+      "alt-cmd-s": "workspace::ToggleLeftDock",
+      "cmd-t cmd-f": "terminal_panel::Toggle",
+      "cmd-alt-t": "terminal_panel::Toggle",
+      "cmd-p": "file_finder::Toggle",
+      "cmd-p f": "workspace::ToggleZoom",
+      "cmd-k cmd-down": null,
+      "cmd-k cmd-left": null,
+      "cmd-k cmd-m": null,
+      "cmd-k cmd-right": null,
+      "cmd-k cmd-s": null,
+      "cmd-k cmd-shift-t": null,
+      "cmd-k cmd-t": null,
+      "cmd-k cmd-up": null,
+      "cmd-k m": null,
+      "cmd-k n": null,
+      "cmd-k s": null,
+      "cmd-k shift-down": null,
+      "cmd-k shift-left": null,
+      "cmd-k shift-right": null,
+      "cmd-k shift-up": null
+    }
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "cmd-h": "workspace::ActivatePaneLeft",
+      "cmd-j": "workspace::ActivatePaneDown",
+      "cmd-k": "workspace::ActivatePaneUp",
+      "cmd-l": "workspace::ActivatePaneRight",
+      "cmd-t h": "pane::SplitLeft",
+      "cmd-t j": "pane::SplitDown",
+      "cmd-t k": "pane::SplitUp",
+      "cmd-t l": "pane::SplitRight"
+    }
+  },
+  {
+    "context": "AgentPanel > Terminal",
+    "bindings": {
+      "cmd-h": "workspace::ActivatePaneLeft",
+      "cmd-j": "workspace::ActivatePaneDown",
+      "cmd-k": "workspace::ActivatePaneUp",
+      "cmd-l": "workspace::ActivatePaneRight",
+      "cmd-t h": "pane::SplitLeft",
+      "cmd-t j": "pane::SplitDown",
+      "cmd-t k": "pane::SplitUp",
+      "cmd-t l": "pane::SplitRight"
+    }
+  },
+  {
+    "context": "Workspace && !Terminal",
+    "bindings": {
+      "cmd-h": "workspace::ActivatePaneLeft",
+      "cmd-j": "workspace::ActivatePaneDown",
+      "cmd-k": "workspace::ActivatePaneUp",
+      "cmd-l": "workspace::ActivatePaneRight",
+      "cmd-p h": "pane::SplitLeft",
+      "cmd-p j": "pane::SplitDown",
+      "cmd-p k": "pane::SplitUp",
+      "cmd-p l": "pane::SplitRight",
+      "cmd-p n": "pane::SplitRight",
+      "cmd-p d": "pane::SplitDown",
+      "cmd-t h": [
+        "action::Sequence",
+        [["pane::SplitLeft", { "mode": "EmptyPane" }], "workspace::NewCenterTerminal"]
+      ],
+      "cmd-t j": [
+        "action::Sequence",
+        [["pane::SplitDown", { "mode": "EmptyPane" }], "workspace::NewCenterTerminal"]
+      ],
+      "cmd-t k": [
+        "action::Sequence",
+        [["pane::SplitUp", { "mode": "EmptyPane" }], "workspace::NewCenterTerminal"]
+      ],
+      "cmd-t l": [
+        "action::Sequence",
+        [["pane::SplitRight", { "mode": "EmptyPane" }], "workspace::NewCenterTerminal"]
+      ]
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "cmd-k cmd-/": null,
+      "cmd-k cmd-0": null,
+      "cmd-k cmd-1": null,
+      "cmd-k cmd-2": null,
+      "cmd-k cmd-3": null,
+      "cmd-k cmd-4": null,
+      "cmd-k cmd-5": null,
+      "cmd-k cmd-6": null,
+      "cmd-k cmd-7": null,
+      "cmd-k cmd-8": null,
+      "cmd-k cmd-9": null,
+      "cmd-k cmd-[": null,
+      "cmd-k cmd-b": null,
+      "cmd-k cmd-d": null,
+      "cmd-k cmd-i": null,
+      "cmd-k cmd-j": null,
+      "cmd-k cmd-l": null,
+      "cmd-k cmd-q": null,
+      "cmd-k cmd-]": null,
+      "cmd-k ctrl-cmd-d": null,
+      "cmd-k p": null,
+      "cmd-k q": null,
+      "cmd-k r": null,
+      "cmd-h": "workspace::ActivatePaneLeft",
+      "cmd-j": "workspace::ActivatePaneDown",
+      "cmd-k": "workspace::ActivatePaneUp",
+      "cmd-l": "workspace::ActivatePaneRight"
+    }
+  },
+  {
+    "context": "Editor && mode == full",
+    "bindings": {
+      "cmd-k z": null
+    }
+  },
+  {
+    "context": "Editor && extension == md",
+    "bindings": {
+      "cmd-k v": null
+    }
+  },
+  {
+    "context": "Editor && extension == svg",
+    "bindings": {
+      "cmd-k v": null
+    }
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "cmd-k cmd-w": null,
+      "cmd-k down": null,
+      "cmd-k e": null,
+      "cmd-k left": null,
+      "cmd-k right": null,
+      "cmd-k shift-enter": null,
+      "cmd-k t": null,
+      "cmd-k u": null,
+      "cmd-k up": null,
+      "cmd-k w": null
+    }
+  },
+  {
+    "context": "FileFinder || (FileFinder > Picker > Editor) || (FileFinder > Picker > menu)",
+    "bindings": {
+      "cmd-k": null
+    }
+  },
+  {
+    "context": "RecentProjects || (RecentProjects > Picker > Editor)",
+    "bindings": {
+      "cmd-k": null
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal",
+    "bindings": {
+      "alt-left": "workspace::ActivatePaneLeft",
+      "alt-down": "workspace::ActivatePaneDown",
+      "alt-up": "workspace::ActivatePaneUp",
+      "alt-right": "workspace::ActivatePaneRight"
+    }
   },
   {
     "context": "Editor && vim_mode == insert",
     "bindings": {
       // "j k": "vim::NormalBefore"
-    },
+    }
   },
   {
     "bindings": {
-      "cmd-p": [
-        "task::Spawn",
-        { "task_name": "File Finder", "reveal_target": "center" }
-      ],
       "cmd-f": [
         "task::Spawn",
         { "task_name": "Find in Files", "reveal_target": "center" }
       ]
-    },
-  },
+    }
+  }
 ]
