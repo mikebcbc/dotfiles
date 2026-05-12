@@ -268,7 +268,21 @@
           "close_pinned": false
         }
       ],
-      "space e": "project_panel::Toggle",
+      "space shift-e": [
+        "task::Spawn",
+        {
+          "task_name": "Yazi (choose file)",
+          "reveal_target": "center"
+        }
+      ],
+      "space e": [
+        "task::Spawn",
+        {
+          "task_name": "Yazi (choose file, here)",
+          "reveal_target": "center"
+        }
+      ],
+      "ctrl-e": "project_panel::Toggle",
       "space g g": [
         "task::Spawn",
         {
@@ -322,7 +336,21 @@
   {
     "context": "Editor && VimControl && vim_mode == insert",
     "bindings": {
-      "space e": "project_panel::Toggle"
+      "space shift-e": [
+        "task::Spawn",
+        {
+          "task_name": "Yazi (choose file)",
+          "reveal_target": "center"
+        }
+      ],
+      "space e": [
+        "task::Spawn",
+        {
+          "task_name": "Yazi (choose file, here)",
+          "reveal_target": "center"
+        }
+      ],
+      "ctrl-e": "project_panel::Toggle"
     }
   },
   {

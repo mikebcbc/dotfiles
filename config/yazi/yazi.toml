@@ -1,0 +1,12 @@
+"$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
+# Merged with the built-in preset (see yazi-config preset merge). Only override `edit`
+# so “open for edit” uses Zed. Use "$@" / %* so Yazi 0.3.x spread mode matches paths.
+
+[opener]
+edit = [
+	{ run = 'zed "$@"', desc = "Zed", for = "macos", orphan = true },
+	{ run = 'zed "$@"', desc = "Zed", for = "linux", orphan = true },
+	{ run = '${EDITOR:-vi} "$@"', desc = "$EDITOR", for = "unix", block = true },
+	{ run = "code %*", orphan = true, desc = "code", for = "windows" },
+	{ run = "code -w %*", block = true, desc = "code (block)", for = "windows" },
+]

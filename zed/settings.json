@@ -21,8 +21,8 @@
     "metrics": false
   },
   "vim_mode": true,
-  // With project_panel::Toggle (ctrl-e / space e): when focus leaves the file tree, close that panel only
-  // (does not toggle the whole left dock / agent strip).
+  // With project_panel::Toggle on ctrl-e: when focus leaves the file tree, close that panel only
+  // (does not toggle the whole left dock / agent strip). space e: Yazi from worktree root; space shift-e (space E): Yazi from the current file's directory (center terminal).
   "close_panel_on_toggle": true,
   "agent_servers": {
     "cursor": {

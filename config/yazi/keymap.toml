@@ -1,0 +1,8 @@
+"$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
+# Merged with the preset. Single <Esc> stays default (clear modes / cancel). Double <Esc>
+# quits like a “top-level exit” without stealing Esc from visual mode or filters.
+
+[manager]
+prepend_keymap = [
+	{ on = [ "<Esc>", "<Esc>" ], run = "quit", desc = "Quit (double Esc)" },
+]

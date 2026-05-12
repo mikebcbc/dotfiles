@@ -38,6 +38,7 @@
     ~/.config/wezterm: wezterm
     ~/.config/yabai: yabai
     ~/.config/zellij: zellij
+    ~/.config/yazi: config/yazi
     ~/.config/zed: zed
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
