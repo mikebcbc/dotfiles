@@ -34,6 +34,9 @@ Temporary Items
 ### Cursor ###
 .cursor/prompts/
 
+### Zed ###
+zed/prompts/
+
 ### Fish ###
 fishd.*
 fish_history

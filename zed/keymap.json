@@ -1,29 +1,3 @@
-// Zed keymap
-//
-// For information on binding keys, see the Zed
-// documentation: https://zed.dev/docs/key-bindings
-//
-// To see the default key bindings run `zed: open default keymap`
-// from the command palette.
-//
-// Ghostty + Neovim alignment (see ghostty/config and nvim/lua/keymaps.lua):
-// - cmd-p: file finder + chords (see below).
-// - cmd-p h/j/k/l (workspace, not terminal): editor splits — left / down / up / right.
-// - cmd-p n/d + h/j/k/l: editor splits (only under Workspace && !Terminal). cmd-p f: toggle zoom (workspace-wide).
-// - cmd-t f (cmd-t cmd-f) / cmd-alt-t: toggle terminal panel.
-// - cmd-t h/j/k/l: From the editor: pane::Split* with mode EmptyPane (sync empty split), then workspace::NewCenterTerminal.
-//   Default split mode is ClonePane, which duplicates the active buffer — a scratch “untitled” buffer becomes a second
-//   Untitled tab beside the terminal on the first open. EmptyPane avoids that. From Terminal: plain pane::Split*.
-// - cmd-h / cmd-j / cmd-k / cmd-l: focus pane left / down / up / right (Editor, workspace away from terminal,
-//   and Terminal — same as Ghostty). In Terminal this overrides cmd-k = clear scrollback.
-// - cmd-shift-h/j/k/l: resize split toward left / down / up / right (Ghostty resize_split; uses vim::ResizePane*
-//   → workspace.resize_pane). Step size is one “m” width or one buffer line height per press, not Ghostty’s 10px.
-//   Overrides Zed defaults: cmd-shift-k (delete line), cmd-shift-l (select all matches), cmd-shift-h in Pane (search replace).
-//
-// cmd-k trade-off: Zed normally uses cmd-k only as a chord prefix (cmd-k cmd-s, folds, etc.). To make cmd-k move
-// focus up immediately, every stock cmd-k … binding below is set to null. Re-map anything you still want via the
-// command palette or new chords (e.g. ctrl-alt-cmd-…). Terminal and Keymap Editor keep their default cmd-k actions.
-// - alt-arrows in vim normal: same idea as Neovim <M-arrows> → <C-w> h/j/k/l.
 [
   {
     "context": "Workspace",
@@ -54,6 +28,27 @@
   {
     "context": "Terminal",
     "bindings": {
+      "escape": [
+        "pane::CloseActiveItem",
+        {
+          "close_pinned": false
+        }
+      ],
+      "space g g": [
+        "pane::CloseActiveItem",
+        {
+          "close_pinned": false
+        }
+      ],
+      "ctrl-u": [
+        "terminal::SendKeystroke",
+        "pageup"
+      ],
+      "ctrl-d": [
+        "terminal::SendKeystroke",
+        "pagedown"
+      ],
+      "cmd-p f": "workspace::ToggleZoom",
       "cmd-h": "workspace::ActivatePaneLeft",
       "cmd-j": "workspace::ActivatePaneDown",
       "cmd-k": "workspace::ActivatePaneUp",
@@ -71,6 +66,27 @@
   {
     "context": "AgentPanel > Terminal",
     "bindings": {
+      "escape": [
+        "pane::CloseActiveItem",
+        {
+          "close_pinned": false
+        }
+      ],
+      "space g g": [
+        "pane::CloseActiveItem",
+        {
+          "close_pinned": false
+        }
+      ],
+      "ctrl-u": [
+        "terminal::SendKeystroke",
+        "pageup"
+      ],
+      "ctrl-d": [
+        "terminal::SendKeystroke",
+        "pagedown"
+      ],
+      "cmd-p f": "workspace::ToggleZoom",
       "cmd-h": "workspace::ActivatePaneLeft",
       "cmd-j": "workspace::ActivatePaneDown",
       "cmd-k": "workspace::ActivatePaneUp",
@@ -83,6 +99,35 @@
       "cmd-t j": "pane::SplitDown",
       "cmd-t k": "pane::SplitUp",
       "cmd-t l": "pane::SplitRight"
+    }
+  },
+  {
+    "context": "ProjectPanel",
+    "bindings": {
+      "alt-left": "workspace::ActivatePaneLeft",
+      "alt-down": "workspace::ActivatePaneDown",
+      "alt-up": "workspace::ActivatePaneUp",
+      "alt-right": "workspace::ActivatePaneRight",
+      "cmd-h": "workspace::ActivatePaneLeft",
+      "cmd-j": "workspace::ActivatePaneDown",
+      "cmd-k": "workspace::ActivatePaneUp",
+      "cmd-l": "workspace::ActivatePaneRight",
+      "cmd-shift-h": "vim::ResizePaneRight",
+      "cmd-shift-j": "vim::ResizePaneDown",
+      "cmd-shift-k": "vim::ResizePaneUp",
+      "cmd-shift-l": "vim::ResizePaneLeft"
+    }
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "space": [
+        "action::Sequence",
+        [
+          "project_panel::Open",
+          "project_panel::Toggle"
+        ]
+      ]
     }
   },
   {
@@ -104,19 +149,51 @@
       "cmd-p d": "pane::SplitDown",
       "cmd-t h": [
         "action::Sequence",
-        [["pane::SplitLeft", { "mode": "EmptyPane" }], "workspace::NewCenterTerminal"]
+        [
+          [
+            "pane::SplitLeft",
+            {
+              "mode": "EmptyPane"
+            }
+          ],
+          "workspace::NewCenterTerminal"
+        ]
       ],
       "cmd-t j": [
         "action::Sequence",
-        [["pane::SplitDown", { "mode": "EmptyPane" }], "workspace::NewCenterTerminal"]
+        [
+          [
+            "pane::SplitDown",
+            {
+              "mode": "EmptyPane"
+            }
+          ],
+          "workspace::NewCenterTerminal"
+        ]
       ],
       "cmd-t k": [
         "action::Sequence",
-        [["pane::SplitUp", { "mode": "EmptyPane" }], "workspace::NewCenterTerminal"]
+        [
+          [
+            "pane::SplitUp",
+            {
+              "mode": "EmptyPane"
+            }
+          ],
+          "workspace::NewCenterTerminal"
+        ]
       ],
       "cmd-t l": [
         "action::Sequence",
-        [["pane::SplitRight", { "mode": "EmptyPane" }], "workspace::NewCenterTerminal"]
+        [
+          [
+            "pane::SplitRight",
+            {
+              "mode": "EmptyPane"
+            }
+          ],
+          "workspace::NewCenterTerminal"
+        ]
       ]
     }
   },
@@ -202,25 +279,84 @@
     }
   },
   {
-    "context": "Editor && vim_mode == normal",
+    "context": "Editor && VimControl && vim_mode == normal",
     "bindings": {
+      "space": null,
       "alt-left": "workspace::ActivatePaneLeft",
       "alt-down": "workspace::ActivatePaneDown",
       "alt-up": "workspace::ActivatePaneUp",
-      "alt-right": "workspace::ActivatePaneRight"
+      "alt-right": "workspace::ActivatePaneRight",
+      "space c": [
+        "pane::CloseActiveItem",
+        {
+          "close_pinned": false
+        }
+      ],
+      "space e": "project_panel::Toggle",
+      "space g g": [
+        "task::Spawn",
+        {
+          "task_name": "lazygit",
+          "reveal_target": "center"
+        }
+      ],
+      "space f k": "zed::OpenKeymap",
+      "space f shift-c": "command_palette::Toggle",
+      "space f f": [
+        "task::Spawn",
+        {
+          "task_name": "Find Files (tv)",
+          "reveal_target": "center"
+        }
+      ],
+      "space f F": [
+        "task::Spawn",
+        {
+          "task_name": "Find Files — hidden (tv)",
+          "reveal_target": "center"
+        }
+      ],
+      "space f s": "task::Spawn",
+      "space f c": [
+        "task::Spawn",
+        {
+          "task_name": "Find Selection in Files (tv)",
+          "reveal_target": "center"
+        }
+      ],
+      "space f w": [
+        "task::Spawn",
+        {
+          "task_name": "Find in Files (tv)",
+          "reveal_target": "center"
+        }
+      ],
+      "space f d": "diagnostics::Deploy",
+      "space f .": [
+        "projects::OpenRecent",
+        {
+          "create_new_window": false
+        }
+      ],
+      "space f q": "project_search::ToggleFocus",
+      "space f space": "tab_switcher::Toggle",
+      "space l s": "outline_panel::ToggleFocus"
     }
   },
   {
-    "context": "Editor && vim_mode == insert",
+    "context": "Editor && VimControl && vim_mode == insert",
     "bindings": {
-      // "j k": "vim::NormalBefore"
+      "space e": "project_panel::Toggle"
     }
   },
   {
     "bindings": {
       "cmd-f": [
         "task::Spawn",
-        { "task_name": "Find in Files", "reveal_target": "center" }
+        {
+          "task_name": "Find in Files (tv)",
+          "reveal_target": "center"
+        }
       ]
     }
   }
