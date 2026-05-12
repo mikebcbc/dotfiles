@@ -64,21 +64,17 @@
     "use_new_terminal": true
   },
   {
-    "label": "lazygit",
-    "command": "PATH=$HOMEBREW_PREFIX/bin:$PATH; exec lazygit",
-    "cwd": "$ZED_WORKTREE_ROOT",
+    "label": "start lazygit",
+    "command": "PATH=\"${HOMEBREW_PREFIX:-/opt/homebrew}/bin:$PATH\" exec lazygit",
+    "cwd": "$ZED_DIRNAME",
     "reveal": "always",
-    "hide": "always",
+    "hide": "on_success",
     "allow_concurrent_runs": false,
     "use_new_terminal": true,
     "shell": {
       "with_arguments": {
-        "program": "/bin/bash",
-        "args": [
-          "--noprofile",
-          "--norc",
-          "-c"
-        ]
+        "program": "/bin/sh",
+        "args": ["-c"]
       }
     }
   }

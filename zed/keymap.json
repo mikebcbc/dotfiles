@@ -28,18 +28,6 @@
   {
     "context": "Terminal",
     "bindings": {
-      "escape": [
-        "pane::CloseActiveItem",
-        {
-          "close_pinned": false
-        }
-      ],
-      "space g g": [
-        "pane::CloseActiveItem",
-        {
-          "close_pinned": false
-        }
-      ],
       "ctrl-u": [
         "terminal::SendKeystroke",
         "pageup"
@@ -66,18 +54,6 @@
   {
     "context": "AgentPanel > Terminal",
     "bindings": {
-      "escape": [
-        "pane::CloseActiveItem",
-        {
-          "close_pinned": false
-        }
-      ],
-      "space g g": [
-        "pane::CloseActiveItem",
-        {
-          "close_pinned": false
-        }
-      ],
       "ctrl-u": [
         "terminal::SendKeystroke",
         "pageup"
@@ -296,7 +272,7 @@
       "space g g": [
         "task::Spawn",
         {
-          "task_name": "lazygit",
+          "task_name": "start lazygit",
           "reveal_target": "center"
         }
       ],

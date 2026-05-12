@@ -13,6 +13,14 @@
     - ~/projects
     - ~/.config
     - ~/.config/git
+    - '~/Library/Application Support/lazygit'
+- shell:
+    # lazygit may leave an empty regular config.yml here; dotbot cannot replace that with a symlink until it is removed
+    - [
+        sh,
+        -c,
+        'f="$HOME/Library/Application Support/lazygit/config.yml"; if [ -f "$f" ] && [ ! -L "$f" ] && [ ! -s "$f" ]; then rm -f "$f"; fi',
+      ]
 - clean:
     - '~'
 - shell:
@@ -25,6 +33,8 @@
     ~/.config/skhd: skhd
     ~/.config/starship.toml: starship.toml
     ~/.config/git/config: git/config
+    ~/.config/lazygit/config.yml: config/lazygit/config.yml
+    '~/Library/Application Support/lazygit/config.yml': config/lazygit/config.yml
     ~/.config/wezterm: wezterm
     ~/.config/yabai: yabai
     ~/.config/zellij: zellij

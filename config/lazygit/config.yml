@@ -1,0 +1,11 @@
+# Dotbot links this file to lazygit’s default paths:
+#   Linux: ~/.config/lazygit/config.yml
+#   macOS: ~/Library/Application Support/lazygit/config.yml
+# Lazygit loads config.yml from its config dir (`lazygit --print-config-dir`). No LG_CONFIG_FILE needed.
+
+quitOnTopLevelReturn: true
+promptToReturnFromSubprocess: false
+
+os:
+  edit: "zed {{filename}}"
+  editAtLine: "zed {{filename}}:{{line}}"
