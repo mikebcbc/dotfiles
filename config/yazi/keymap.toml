@@ -1,8 +1,14 @@
 "$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
-# Merged with the preset. Single <Esc> stays default (clear modes / cancel). Double <Esc>
-# quits like a “top-level exit” without stealing Esc from visual mode or filters.
+# Prepends apply to the [manager] (file list) layer only. Prompts, filters, confirm dialogs,
+# and the help overlay use their own [input] / [confirm] / [select] / [help] maps — single <Esc>
+# there still runs `escape` / `close` from the preset (unchanged).
+#
+# Double <Esc> in the file list quits Zed’s center task; it is a chord, so one <Esc> still runs
+# the default manager `escape` (leave visual, clear search, etc.).
 
 [manager]
 prepend_keymap = [
+	{ on = "o", run = "create", desc = "Create a file (ends with / for directories)" },
+	{ on = "a", run = "open", desc = "Open selected files" },
 	{ on = [ "<Esc>", "<Esc>" ], run = "quit", desc = "Quit (double Esc)" },
 ]
