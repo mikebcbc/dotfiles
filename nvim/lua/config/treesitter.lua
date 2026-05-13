@@ -7,6 +7,7 @@ vim.treesitter.language.register('markdown', { 'md', 'mdx' })
 
 -- If you add parsers under site/parser/, these map filetypes to parser names (:help treesitter-language-register).
 vim.treesitter.language.register('bash', { 'sh' })
+vim.treesitter.language.register('go', { 'golang' })
 vim.treesitter.language.register('javascript', { 'javascriptreact', 'ecma', 'ecmascript', 'jsx', 'js' })
 vim.treesitter.language.register('json', { 'jsonc' })
 vim.treesitter.language.register('tsx', { 'typescriptreact', 'typescript.tsx' })

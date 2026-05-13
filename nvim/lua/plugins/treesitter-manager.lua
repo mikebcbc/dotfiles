@@ -17,19 +17,24 @@ return {
         end
       end
 
+      local ensure_installed = {
+        'bash',
+        'go',
+        'gomod',
+        'javascript',
+        'json',
+        'tsx',
+        'typescript',
+      }
+
       require('tree-sitter-manager').setup {
         -- Default parser_dir / query_dir: stdpath('data')/site/parser and .../site/queries
         highlight = false,
-        ensure_installed = {
-          'bash',
-          'go',
-          'gomod',
-          'javascript',
-          'json',
-          'tsx',
-          'typescript',
-        },
-        auto_install = true,
+        -- Avoid auto-installing grammars for every FileType: that can pull `markdown` + `markdown_inline`
+        -- into site/parser, which prepends ahead of Neovim's bundled markdown and breaks TS highlights
+        -- in LSP hovers and blink.cmp documentation. Use `ensure_installed` + :TSManager when needed.
+        auto_install = false,
+        ensure_installed = ensure_installed,
       }
     end,
   },
