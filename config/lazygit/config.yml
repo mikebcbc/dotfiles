@@ -2,10 +2,54 @@
 #   Linux: ~/.config/lazygit/config.yml
 #   macOS: ~/Library/Application Support/lazygit/config.yml
 # Lazygit loads config.yml from its config dir (`lazygit --print-config-dir`). No LG_CONFIG_FILE needed.
+# Fully quit and reopen lazygit after edits — config is read only at startup.
 
 quitOnTopLevelReturn: true
 promptToReturnFromSubprocess: false
+disableStartupPopups: true
 
 os:
   edit: "zed {{filename}}"
   editAtLine: "zed {{filename}}:{{line}}"
+
+# Skip network on launch (Homebrew installs don't need this anyway).
+update:
+  method: never
+
+git:
+  autoFetch: false
+  fetchAll: false
+  autoRefresh: false
+  autoDetectExternalChanges: false
+  autoForwardBranches: none
+  log:
+    # 'default' is dramatically faster than topo-order on large histories.
+    # Can also be toggled in-app: commits panel → <ctrl-l> → Commit sort order.
+    order: default
+    # Graph rendering is expensive on huge histories; turn on via Ctrl-L when needed.
+    showGraph: never
+    showWholeGraph: false
+  # Drop --graph from branch log views (same cost as the commits graph).
+  branchLogCmd: "git log --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --"
+  allBranchesLogCmds:
+    - "git log --color=always --abbrev-commit --decorate --date=relative --pretty=medium --all"
+
+refresher:
+  refreshInterval: 30
+  fetchInterval: 3600
+
+gui:
+  animateExplosion: false
+  # Folder tree in the files panel (toggle in-app with backtick / ` if needed).
+  showFileTree: true
+  scrollHeight: 10
+  showDivergenceFromBaseBranch: none
+  statusPanelView: dashboard
+  # Omit `submodules` — `git submodule status` alone was 1–3s on every open in
+  # repos that have one (dotfiles → dotbot), even when the repo is otherwise tiny.
+  sidePanels:
+    - [status]
+    - [files, worktrees]
+    - [branches, remotes, tags]
+    - [commits, reflog]
+    - [stash]

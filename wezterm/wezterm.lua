@@ -21,9 +21,9 @@ config.default_cursor_style = "BlinkingBar"
 config.force_reverse_video_cursor = true
 config.max_fps = 120
 
--- Transparency
-config.window_background_opacity = 0.8
-config.macos_window_background_blur = 30
+-- Transparency (blur is expensive on macOS — keep it low or the UI feels laggy)
+config.window_background_opacity = 0.85
+config.macos_window_background_blur = 0
 
 -- Swap  Cmd <-> Alt on macOS
 if wezterm.target_triple:match("darwin$") then

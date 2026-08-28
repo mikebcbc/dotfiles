@@ -2,3 +2,10 @@
 # https://git-scm.com/docs/git-config#Documentation/git-config.txt-featuremanyFiles
 [feature]
 	manyFiles = true
+
+[core]
+	untrackedCache = true
+	preloadIndex = true
+	# fsmonitor left OFF: on small repos it added spawn/daemon overhead and we
+	# ended up with multiple fsmonitor--daemon processes. Re-enable per-repo in
+	# huge trees if status itself is the bottleneck: git config core.fsmonitor true

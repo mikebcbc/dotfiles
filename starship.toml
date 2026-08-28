@@ -1,157 +1,106 @@
+# Fast prompt profile. Measured in cthulhu (~364k commits): stock git_status alone
+# was ~270ms per prompt. Keep git_branch (cheap); drop status/docker/languages.
 palette = "catppuccin_macchiato"
-
-[custom.neovim]
-disabled = true # not needed
-command = 'bob ls | rg Used | awk "{print \$2}"'
-detect_folders = ["lua"]
-style = "green"
-format = "[ $output ]($style)"
-shell =["bash"]
-
-[git_status]
-# Empty `untracked`: skip scanning the working tree for untracked files (same idea as
-# `git status --untracked-files=no`). That walk dominates cost in large repos.
-untracked = ""
-ignore_submodules = true
-# Empty `renamed`: skip rename-tracking during the status pass (cheaper scan).
-renamed = ""
-staged = '[ $count](bold green) '
-stashed = "[ ](cyan) "
-deleted = '[ $count](bold maroon) '
-modified= '[ $count](bold blue) '
-behind = '[ ](bold mauve) '
-ahead = '[ ](bold mauve) '
-
-[[battery.display]]
-threshold = 50
-
-[lua]
-detect_folders = []
-symbol = " "
-
-[git_metrics]
-# Runs diff-based stats (+/- lines). Disabled for prompt speed; use `git diff --stat` when needed.
-disabled = true
-
-[git_commit]
-# Omit short SHA segment — avoids an extra git subprocess each prompt (`git_branch` still shows name).
-disabled = true
-
-[aws]
-symbol = "  "
-
-[buf]
-symbol = " "
-
-[c]
-symbol = " "
-
-[conda]
-symbol = " "
-
-[dart]
-symbol = " "
+command_timeout = 200
+scan_timeout = 10
 
 [directory]
+truncation_length = 3
+truncate_to_repo = true
+fish_style_pwd_dir_length = 1
 read_only = " 󰌾"
-
-[docker_context]
-symbol = " "
-
-[elixir]
-symbol = " "
-
-[elm]
-symbol = " "
-
-[fossil_branch]
-symbol = " "
 
 [git_branch]
 symbol = " "
 
-[golang]
-symbol = " "
+# Empty `untracked` / `renamed` still walks the index in huge repos — disable entirely.
+[git_status]
+disabled = true
 
-[guix_shell]
-symbol = " "
+[git_metrics]
+disabled = true
 
-[haskell]
-symbol = " "
+[git_commit]
+disabled = true
 
-[haxe]
-symbol = "⌘ "
-
-[hg_branch]
-symbol = " "
-
-[hostname]
-ssh_symbol = " "
-
-[java]
-symbol = " "
-
-[julia]
-symbol = " "
-
-[memory_usage]
-symbol = "󰍛 "
-
-[meson]
-symbol = "󰔷 "
-
-[nim]
-symbol = "󰆥 "
-
-[nix_shell]
-symbol = " "
-
-[nodejs]
-symbol = " "
-
-[os.symbols]
-Alpaquita = " "
-Alpine = " "
-Amazon = " "
-Android = " "
-Arch = " "
-Artix = " "
-CentOS = " "
-Debian = " "
-DragonFly = " "
-Emscripten = " "
-EndeavourOS = " "
-Fedora = " "
-FreeBSD = " "
-Garuda = "󰛓 "
-Gentoo = " "
-HardenedBSD = "󰞌 "
-Illumos = "󰈸 "
-Linux = " "
-Mabox = " "
-Macos = " "
-Manjaro = " "
-Mariner = " "
-MidnightBSD = " "
-Mint = " "
-NetBSD = " "
-NixOS = " "
-OpenBSD = "󰈺 "
-openSUSE = " "
-OracleLinux = "󰌷 "
-Pop = " "
-Raspbian = " "
-Redhat = " "
-RedHatEnterprise = " "
-Redox = "󰀘 "
-Solus = "󰠳 "
-SUSE = " "
-Ubuntu = " "
-Unknown = " "
-Windows = "󰍲 "
+[docker_context]
+disabled = true
 
 [package]
-symbol = "󰏗 "
+disabled = true
+
+[battery]
+disabled = true
+
+[memory_usage]
+disabled = true
+
+# Language / toolchain modules: each does filesystem probes. Off by default for speed.
+[aws]
+disabled = true
+[azure]
+disabled = true
+[buf]
+disabled = true
+[c]
+disabled = true
+[conda]
+disabled = true
+[dart]
+disabled = true
+[deno]
+disabled = true
+[dotnet]
+disabled = true
+[elixir]
+disabled = true
+[elm]
+disabled = true
+[golang]
+disabled = true
+[haskell]
+disabled = true
+[java]
+disabled = true
+[julia]
+disabled = true
+[kotlin]
+disabled = true
+[lua]
+disabled = true
+[nodejs]
+disabled = true
+[nim]
+disabled = true
+[nix_shell]
+disabled = true
+[ocaml]
+disabled = true
+[php]
+disabled = true
+[python]
+disabled = true
+[ruby]
+disabled = true
+[rust]
+disabled = true
+[scala]
+disabled = true
+[swift]
+disabled = true
+[terraform]
+disabled = true
+[vagrant]
+disabled = true
+[zig]
+disabled = true
+
+[custom.neovim]
+disabled = true
+
+[hostname]
+ssh_only = true
+ssh_symbol = " "
 
 [palettes.catppuccin_macchiato]
 rosewater = "#f4dbd6"
