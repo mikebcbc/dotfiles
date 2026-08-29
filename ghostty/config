@@ -1,8 +1,8 @@
 background-opacity = 0.8
 macos-titlebar-style = tabs
 background-blur-radius = 20
-font-size = 14
-font-family = "Inconsolata Nerd Font"
+font-size = 12
+font-family = "Inconsolata Nerd Font Mono"
 theme = "Catppuccin Macchiato"
 quick-terminal-position = "center"
 mouse-hide-while-typing = true
