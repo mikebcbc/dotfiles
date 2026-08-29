@@ -9,8 +9,8 @@ promptToReturnFromSubprocess: false
 disableStartupPopups: true
 
 os:
-  edit: "zed {{filename}}"
-  editAtLine: "zed {{filename}}:{{line}}"
+  edit: "nvim {{filename}}"
+  editAtLine: "nvim {{filename}}:{{line}}"
 
 # Skip network on launch (Homebrew installs don't need this anyway).
 update:
