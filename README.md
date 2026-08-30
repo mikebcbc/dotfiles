@@ -1,23 +1,55 @@
-# My Dotfiles
+# MCO's dotfiles
 
-This repository contains my personal configuration files for everything in my dot configs.
+Cross-platform dotfiles for Linux (CachyOS w/ Hyprland) and Mac (macOS w/ HyprMac). Uses [dotbot](https://github.com/anishathalye/dotbot) for symlinks and package installation.
 
-## Included Configurations
+## What's in here
 
-- **Fish Shell**: My preferred shell configuration with custom functions, aliases, and keybindings.
-- **Neovim**: i use neovim btw.
-- **Zellij**: Terminal workspace manager configuration.
-- **Wezterm**: My terminal emulator configuration.
-- **borders, yabai, skhd**: All so I don't have to take my hands off the keyboard.
+| Directory | Contents | Platform |
+|-----------|----------|----------|
+| `nvim/` | Neovim (i use neovim btw) config | both |
+| `ghostty/` | Ghostty terminal config | both |
+| `fish/` | Fish shell config + fisher plugins | both |
+| `git/` | Git config | both |
+| `lazygit/` | Lazygit config | both |
+| `fastfetch/` | Fastfetch config with ASCII art that I spent too much time on | both |
+| `hypr/` | Hyprland config | Linux |
+| `Raycast.rayconfig` | Raycast launcher config | macOS |
 
-## Installation
-
-If I were you, I wouldn't run this unless you're me. However, if you really want to, you can clone the repository and run the install script to symlink the files to their appropriate locations. Here’s how:
+## Install
 
 ```bash
-git clone https://github.com/mikebcbc/dotfiles.git ~/dotfiles
-cd ~/dotfiles
-./install.sh
+./install
 ```
 
-This script will create symlinks for the various dotfiles to their expected locations.
+That's it. The `install` script runs dotbot which:
+
+1. **Symlinks** shared configs (`install.conf.yaml`): fish, nvim, ghostty, git, fastfetch
+3. **Symlinks** OS-specific configs (`install-linux.conf.yaml` or `install-macos.conf.yaml`)
+2. **Runs** `scripts/install-packages.sh` to install OS-appropriate packages
+
+### Packages installed
+
+**Linux (pacman + AUR):**
+neovim, fish, ghostty, brave-browser, fastfetch, fisher, fish-pure-prompt, fish-autopair, bat, eza, fd, ripgrep, fzf, lazygit, git, tealdeer, btop, filezilla, satty, yay (pacman) + autojump (AUR via yay)
+
+**macOS (brew formulae + casks):**
+autojump, bat, btop, direnv, eza, fastfetch, fd, fish, fisher, fzf, git, lazygit, ripgrep, tealdeer (formulae) + brave-browser, filezilla, ghostty, hyprmac (casks)
+
+### Fisher plugins
+
+Plugins are listed in `fish/fish_plugins` and managed by fisher:
+`jorgebucaran/fisher`, `edc/bass`, `fisherman/done`, `fabioantunes/fish-nvm`, `patrickf1/fzf.fish`, `pure-fish/pure`
+
+On Linux, `done` and `pure` come from CachyOS packages. On macOS, fisher installs them.
+
+## Cherry-picking CachyOS upstream config changes
+
+Some CachyOS packages like `cachyos-hypr-noctalia` and fish install its config to `/etc/skel/.config/` - the skeleton directory used when creating new user accounts. It never touches an existing `~/.config/` after a package update.
+
+Therefore, package updates are completely decoupled from the active config. To compare upstream changes against the repo copy after a package update:
+
+```bash
+diff /etc/skel/.config/hypr/config/binds.lua ~/dotfiles/hypr/config/binds.lua
+```
+
+From there, we can manually merge any desired upstream changes into this repo if they're useful.
