@@ -1,0 +1,11 @@
+---
+- defaults:
+    link:
+      create: true
+      force: true
+      relink: true
+- create:
+  - ~/.config/lazygit
+- link:
+    ~/.config/hypr: hypr
+    ~/.config/lazygit/config.yml: lazygit/config.yml

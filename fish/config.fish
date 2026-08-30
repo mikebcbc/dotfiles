@@ -115,8 +115,6 @@ if status is-interactive
     if test (uname) = Linux
         # Full system update (sync + upgrade all packages)
         alias update='sudo pacman -Syu'
-        # FZF-select an installed package, then list its files
-        alias grab='sudo pacman -Ql (sudo pacman -Qq | fzf)'
         # Re-rank pacman mirrors by speed
         alias mirror='sudo cachyos-rate-mirrors'
         # Show this boot's critical/error logs

@@ -1,0 +1,17 @@
+---
+- defaults:
+    link:
+      create: true
+      force: true
+      relink: true
+- create:
+  - '~/Library/Application Support/lazygit'
+- shell:
+  # lazygit may leave an empty regular config.yml here; dotbot cannot replace that with a symlink until it is removed
+  - [
+    sh,
+    -c,
+    'f="$HOME/Library/Application Support/lazygit/config.yml"; if [ -f "$f" ] && [ ! -L "$f" ] && [ ! -s "$f" ]; then rm -f "$f"; fi',
+  ]
+- link:
+    '~/Library/Application Support/lazygit/config.yml': lazygit/config.yml
