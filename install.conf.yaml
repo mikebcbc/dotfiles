@@ -22,4 +22,4 @@
     ~/.config/git/config: git/config
     ~/.config/fastfetch: fastfetch
 - shell:
-  - [git submodule update --init --recursive, Installing submodules]
+  - [scripts/install-packages.sh, Installing OS-specific packages]
