@@ -36,7 +36,7 @@ vim.opt.undofile = true
 vim.opt.ignorecase = true
 
 -- Keep case-insensitive searching even if a capital letter is used
-vim.opt.smartcase = false
+vim.opt.smartcase = true
 
 -- Decrease update time
 vim.opt.updatetime = 100

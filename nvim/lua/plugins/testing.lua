@@ -29,13 +29,7 @@ return {
       vim.g['test#javascript#jest#executable'] = 'yarn test --'
       vim.g['test#go#richgo#options'] = '-v'
       vim.g['test#echo_command'] = 0
-      vim.cmd [[
-        function! ZellijStrategy(cmd)
-          call system('zellij run --floating --width "80%" --height "80%" --x "10%" --y "10%" -- ' . a:cmd)
-        endfunction
-        let g:test#custom_strategies = {'zellij': function('ZellijStrategy')}
-      ]]
-      vim.g['test#strategy'] = 'zellij'
+      vim.g['test#strategy'] = 'neovim'
     end,
   },
 }

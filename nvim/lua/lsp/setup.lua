@@ -12,7 +12,6 @@ vim.lsp.config('*', {
 
 -- Find all files in lua/lsp/servers and require them
 -- We use them to ensure that the servers are installed and configured
-local errors = {}
 local dir_path = 'lsp/servers'
 local file_names = utils.get_file_names_in_dir(dir_path, '*.lua', true)
 
@@ -27,8 +26,4 @@ for _, server_name in pairs(file_names) do
 
   vim.lsp.config(server_name, conf)
   vim.lsp.enable(server_name)
-end
-
-if #errors > 0 then
-  error(table.concat(errors, '\n'))
 end

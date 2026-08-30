@@ -21,7 +21,7 @@ Cross-platform dotfiles for Linux (CachyOS w/ Hyprland) and Mac (macOS w/ HyprMa
 ./install
 ```
 
-That's it. The `install` script runs dotbot which:
+The `install` script runs dotbot which:
 
 1. **Symlinks** shared configs (`install.conf.yaml`): fish, nvim, ghostty, git, fastfetch
 3. **Symlinks** OS-specific configs (`install-linux.conf.yaml` or `install-macos.conf.yaml`)

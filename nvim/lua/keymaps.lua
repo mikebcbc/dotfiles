@@ -22,7 +22,6 @@ vim.keymap.set('n', 'N', 'Nzzzv')
 
 -- Extra leader keybinds
 vim.keymap.set('n', '<leader>fr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'Replace word under cursor' })
--- vim.keymap.set('n', '<leader>aa', '<cmd>lua require("copilot.suggestion").toggle_auto_trigger()<CR>', { desc = 'Toggle Copilot Auto' })
 
 -- Bind the navigation keys
 vim.keymap.set('n', '<M-Left>', '<C-w>h')
