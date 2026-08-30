@@ -63,7 +63,7 @@ if [[ "$OS" == "Linux" ]]; then
     # Install fisher plugins from fish_plugins
     if command -v fish &>/dev/null; then
         echo "Installing fisher plugins..."
-        fish -c 'fisher update'
+        fish "$(dirname "$0")/fisher-install.fish"
     fi
 
     echo "Done."
@@ -124,7 +124,7 @@ if [[ "$OS" == "Darwin" ]]; then
     # Install fisher plugins from fish_plugins, plus pure-fish/pure on macOS (since we don't want this one in the file because CachyOS ships a version)
     if command -v fish &>/dev/null; then
         echo "Installing fisher plugins..."
-        fish -c 'fisher update && fisher install pure-fish/pure'
+        fish "$(dirname "$0")/fisher-install.fish" pure-fish/pure
     fi
 
     echo "Done."
