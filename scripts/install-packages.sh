@@ -16,6 +16,7 @@ if [[ "$OS" == "Linux" ]]; then
 
     PACMAN_PKGS=(
         neovim
+        bob
         fish
         ghostty
         brave-browser
@@ -54,6 +55,11 @@ if [[ "$OS" == "Linux" ]]; then
         fi
     fi
 
+    if command -v bob &>/dev/null; then
+        echo "Setting Neovim to nightly via bob..."
+        bob use nightly
+    fi
+
     echo "Done."
 fi
 
@@ -72,6 +78,8 @@ if [[ "$OS" == "Darwin" ]]; then
 
     # Formulae (CLI tools)
     BREW_PKGS=(
+        neovim
+        bob
         autojump
         bat
         btop
@@ -101,6 +109,11 @@ if [[ "$OS" == "Darwin" ]]; then
 
     echo "Installing casks: ${CASK_PKGS[*]}"
     brew install --cask "${CASK_PKGS[@]}"
+
+    if command -v bob &>/dev/null; then
+        echo "Setting Neovim to nightly via bob..."
+        bob use nightly
+    fi
 
     echo "Done."
 fi
