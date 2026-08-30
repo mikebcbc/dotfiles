@@ -4,6 +4,20 @@
 # On macOS: inlines the equivalent behavior locally
 # ==============================================================================
 
+# Isolate fisher-managed plugins to ~/.config/fish/fisher so they don't
+# leak into the dotfiles repo (this file's dir is symlinked from dotfiles)
+if not set -q fisher_path
+    set -U fisher_path $__fish_config_dir/fisher
+end
+set -l fp $__fish_config_dir/fisher
+if test -d $fp
+    set fish_function_path $fish_function_path[1] $fp/functions $fish_function_path[2..-1]
+    set fish_complete_path $fish_complete_path[1] $fp/completions $fish_complete_path[2..-1]
+    for file in $fp/conf.d/*.fish
+        source $file
+    end
+end
+
 if status is-interactive
     # -------------------------------------------------------------------------
     # CachyOS (Linux) - source the system fish config

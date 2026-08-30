@@ -43,29 +43,10 @@ fish_history
 fish_variables
 config.local.fish
 
-# Fisher-installed plugins (managed by fisher, not committed)
-fish/conf.d/done.fish
-fish/conf.d/fzf.fish
-fish/conf.d/fish_frozen_key_bindings.fish
-fish/conf.d/fish_frozen_theme.fish
-fish/completions/fisher.fish
-fish/completions/fzf_configure_bindings.fish
-fish/completions/nvm.fish
-fish/completions/docker.fish
-fish/completions/kubectl.fish
-fish/completions/orbctl.fish
-fish/functions/bass.fish
-fish/functions/__bass.py
-fish/functions/fisher.fish
-fish/functions/fzf_configure_bindings.fish
-fish/functions/_fzf_*.fish
-fish/functions/node.fish
-fish/functions/npm.fish
-fish/functions/npx.fish
-fish/functions/nvm.fish
-fish/functions/nvm_*.fish
-fish/functions/__nvm_run.fish
-fish/functions/yarn.fish
+# Fisher-managed plugins (installed to isolated dir, not committed)
+fish/fisher/
+# Auto-generated fish completions
+fish/completions/
 
 ### Vim ###
 # Swap
