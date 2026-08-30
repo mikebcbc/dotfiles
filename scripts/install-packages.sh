@@ -30,16 +30,17 @@ if [[ "$OS" == "Linux" ]]; then
         fzf
         lazygit
         git
-        tldr
+        tealdeer
         btop
         filezilla
-        autojump
         satty
         yay
     )
 
-    # Optional AUR packages
-    AUR_PKGS=()
+    # AUR packages (installed via yay)
+    AUR_PKGS=(
+        autojump
+    )
 
     echo "Installing: ${PACMAN_PKGS[*]}"
     sudo pacman -S --needed --noconfirm "${PACMAN_PKGS[@]}"
@@ -84,7 +85,7 @@ if [[ "$OS" == "Darwin" ]]; then
         git
         lazygit
         ripgrep
-        tldr
+        tealdeer
     )
 
     echo "Installing formulae: ${BREW_PKGS[*]}"
