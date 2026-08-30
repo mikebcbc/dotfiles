@@ -30,17 +30,17 @@ The `install` script runs dotbot which:
 ### Packages installed
 
 **Linux (pacman + AUR):**
-neovim, fish, ghostty, brave-browser, fastfetch, fisher, fish-pure-prompt, fish-autopair, bat, eza, fd, ripgrep, fzf, lazygit, git, tealdeer, btop, filezilla, satty, yay (pacman) + autojump (AUR via yay)
+neovim, bob, fish, ghostty, brave-browser, fastfetch, fisher, fish-pure-prompt, fish-autopair, bat, eza, fd, ripgrep, fzf, lazygit, git, tealdeer, btop, filezilla, satty, yay + autojump (AUR via yay)
 
 **macOS (brew formulae + casks):**
-autojump, bat, btop, direnv, eza, fastfetch, fd, fish, fisher, fzf, git, lazygit, ripgrep, tealdeer (formulae) + brave-browser, filezilla, ghostty, hyprmac (casks)
+neovim, bob, autojump, bat, btop, direnv, eza, fastfetch, fd, fish, fisher, fzf, git, lazygit, ripgrep, tealdeer (formulae) + brave-browser, filezilla, ghostty, hyprmac (casks)
 
 ### Fisher plugins
 
 Plugins are listed in `fish/fish_plugins` and managed by fisher:
-`jorgebucaran/fisher`, `edc/bass`, `fisherman/done`, `fabioantunes/fish-nvm`, `patrickf1/fzf.fish`, `pure-fish/pure`
+`jorgebucaran/fisher`, `edc/bass`, `fisherman/done`, `fabioantunes/fish-nvm`, `patrickf1/fzf.fish`
 
-On Linux, `done` and `pure` come from CachyOS packages. On macOS, fisher installs them.
+On Linux, `done` and `pure` come from CachyOS packages (`fish-done` and `fish-pure-prompt`). On macOS, fisher installs `done`, `pure-fish/pure`.
 
 ## Cherry-picking CachyOS upstream config changes
 
