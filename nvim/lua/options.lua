@@ -82,7 +82,7 @@ vim.opt.pumblend = 10
 vim.opt.pumheight = 10
 
 -- Disable annoying messages
-vim.opt.shortmess:append 'Ac'
+vim.opt.shortmess:append { A = true, I = true }
 
 -- make completion menu pretty
 vim.opt.completeopt = 'menuone,noselect,noinsert,popup'

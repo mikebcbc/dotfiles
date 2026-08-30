@@ -2,9 +2,12 @@ return {
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     dependencies = {
-      { 'rubiin/fortune.nvim', config = {
-        max_width = 999,
-      } },
+      {
+        'rubiin/fortune.nvim',
+        config = {
+          max_width = 999,
+        }
+      },
     },
     event = 'BufEnter',
     config = function()
@@ -147,38 +150,38 @@ return {
           require('mini.clue').gen_clues.registers(),
           require('mini.clue').gen_clues.windows(),
           require('mini.clue').gen_clues.z(),
-          { mode = 'n', keys = '<leader>g', desc = '+Git Actions' },
-          { mode = 'n', keys = '<leader>f', desc = '+Find' },
-          { mode = 'n', keys = '<leader>l', desc = '+LSP Actions' },
-          { mode = 'n', keys = '<leader>d', desc = '+Diagnostic Actions' },
-          { mode = 'n', keys = '<leader>t', desc = '+Terminal' },
-          { mode = 'n', keys = '<leader>s', desc = '+Sessions' },
-          { mode = 'n', keys = '<leader>;', desc = '+Testing' },
-          { mode = 'n', keys = '<leader>a', desc = '+Copilot' },
-          { mode = 'x', keys = '<leader>a', desc = '+Copilot' },
+          { mode = 'n', keys = '<leader>g',        desc = '+Git Actions' },
+          { mode = 'n', keys = '<leader>f',        desc = '+Find' },
+          { mode = 'n', keys = '<leader>l',        desc = '+LSP Actions' },
+          { mode = 'n', keys = '<leader>d',        desc = '+Diagnostic Actions' },
+          { mode = 'n', keys = '<leader>t',        desc = '+Terminal' },
+          { mode = 'n', keys = '<leader>s',        desc = '+Sessions' },
+          { mode = 'n', keys = '<leader>;',        desc = '+Testing' },
+          { mode = 'n', keys = '<leader>a',        desc = '+Copilot' },
+          { mode = 'x', keys = '<leader>a',        desc = '+Copilot' },
           { mode = 'n', keys = '<leader><leader>', desc = 'Arrow Files' },
-          { mode = 'n', keys = '<leader>b', desc = 'Arrow Buffer' },
+          { mode = 'n', keys = '<leader>b',        desc = 'Arrow Buffer' },
           -- all the vim abolish mappings
-          { mode = 'n', keys = 'cr', desc = '+Abolish' },
-          { mode = 'v', keys = 'cr', desc = '+Abolish' },
-          { mode = 'n', keys = 'crs', desc = 'Snake Case' },
-          { mode = 'v', keys = 'crs', desc = 'Snake Case' },
-          { mode = 'n', keys = 'crc', desc = 'Camel Case' },
-          { mode = 'v', keys = 'crc', desc = 'Camel Case' },
-          { mode = 'n', keys = 'crm', desc = 'Mixed Case' },
-          { mode = 'v', keys = 'crm', desc = 'Mixed Case' },
-          { mode = 'n', keys = 'crk', desc = 'Kebab Case' },
-          { mode = 'v', keys = 'crk', desc = 'Kebab Case' },
-          { mode = 'n', keys = 'cru', desc = 'Upper Case' },
-          { mode = 'v', keys = 'cru', desc = 'Upper Case' },
-          { mode = 'n', keys = 'cr-', desc = 'Dash Case' },
-          { mode = 'v', keys = 'cr-', desc = 'Dash Case' },
-          { mode = 'n', keys = 'cr.', desc = 'Dot Case' },
-          { mode = 'v', keys = 'cr.', desc = 'Dot Case' },
-          { mode = 'n', keys = 'cr_', desc = 'Underscore Case' },
-          { mode = 'v', keys = 'cr_', desc = 'Underscore Case' },
-          { mode = 'n', keys = 'cr<space>', desc = 'Space Case' },
-          { mode = 'v', keys = 'cr<space>', desc = 'Space Case' },
+          { mode = 'n', keys = 'cr',               desc = '+Abolish' },
+          { mode = 'v', keys = 'cr',               desc = '+Abolish' },
+          { mode = 'n', keys = 'crs',              desc = 'Snake Case' },
+          { mode = 'v', keys = 'crs',              desc = 'Snake Case' },
+          { mode = 'n', keys = 'crc',              desc = 'Camel Case' },
+          { mode = 'v', keys = 'crc',              desc = 'Camel Case' },
+          { mode = 'n', keys = 'crm',              desc = 'Mixed Case' },
+          { mode = 'v', keys = 'crm',              desc = 'Mixed Case' },
+          { mode = 'n', keys = 'crk',              desc = 'Kebab Case' },
+          { mode = 'v', keys = 'crk',              desc = 'Kebab Case' },
+          { mode = 'n', keys = 'cru',              desc = 'Upper Case' },
+          { mode = 'v', keys = 'cru',              desc = 'Upper Case' },
+          { mode = 'n', keys = 'cr-',              desc = 'Dash Case' },
+          { mode = 'v', keys = 'cr-',              desc = 'Dash Case' },
+          { mode = 'n', keys = 'cr.',              desc = 'Dot Case' },
+          { mode = 'v', keys = 'cr.',              desc = 'Dot Case' },
+          { mode = 'n', keys = 'cr_',              desc = 'Underscore Case' },
+          { mode = 'v', keys = 'cr_',              desc = 'Underscore Case' },
+          { mode = 'n', keys = 'cr<space>',        desc = 'Space Case' },
+          { mode = 'v', keys = 'cr<space>',        desc = 'Space Case' },
         },
         window = {
           delay = 200,
@@ -254,19 +257,18 @@ return {
           { name = 'Lazy', action = 'Lazy', section = 'Lazy' },
         },
         header = [[
-             __n__n__
-      .------`-\00/-'
-     /  ##  ## (oo)
-    / \## __   ./
-       |//YY \|/
-       |||   |||
-       ███╗   ███╗██╗██╗  ██╗███████╗   ███╗   ██╗██╗   ██╗██╗███╗   ███╗
-       ████╗ ████║██║██║ ██╔╝██╔════╝   ████╗  ██║██║   ██║██║████╗ ████║
-       ██╔████╔██║██║█████╔╝ █████╗     ██╔██╗ ██║██║   ██║██║██╔████╔██║
-       ██║╚██╔╝██║██║██╔═██╗ ██╔══╝     ██║╚██╗██║╚██╗ ██╔╝██║██║╚██╔╝██║
-       ██║ ╚═╝ ██║██║██║  ██╗███████╗██╗██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║
-       ╚═╝     ╚═╝╚═╝╚═╝  ╚═╝╚══════╝╚═╝╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝
-
+                    __n__n__
+             .------`-|00|-`
+            /  ##  ## (oo)
+           / \## __   ./
+              |//YY \|/
+              |||   |||      🐈🪴
+       ███╗   ███╗ ██████╗ ██████╗    ███╗   ██╗██╗   ██╗██╗███╗   ███╗
+       ████╗ ████║██╔════╝██╔═══██╗   ████╗  ██║██║   ██║██║████╗ ████║
+       ██╔████╔██║██║     ██║   ██║   ██╔██╗ ██║██║   ██║██║██╔████╔██║
+       ██║╚██╔╝██║██║     ██║   ██║   ██║╚██╗██║╚██╗ ██╔╝██║██║╚██╔╝██║
+       ██║ ╚═╝ ██║╚██████╗╚██████╔╝██╗██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║
+       ╚═╝     ╚═╝ ╚═════╝ ╚═════╝ ╚═╝╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝
        ¯`·.¸¸.·´¯`·.¸¸.·´¯`·.¸¸.·´¯`·.¸¸.·´¯`·.¸¸.·´¯`·.¸¸.·´¯`·.¸¸.·´¯`·.
         ]],
         footer = function()
@@ -293,9 +295,9 @@ return {
         end,
         desc = 'Close buffer',
       },
-      { '<leader>so', '<cmd>:lua MiniSessions.select("read")<CR>', desc = 'Open a session' },
+      { '<leader>so', '<cmd>:lua MiniSessions.select("read")<CR>',   desc = 'Open a session' },
       { '<leader>sd', '<cmd>:lua MiniSessions.select("delete")<CR>', desc = 'Delete a session' },
-      { '<leader>sa', '<cmd>:lua MiniSessions.select("write")<CR>', desc = 'Save a session' },
+      { '<leader>sa', '<cmd>:lua MiniSessions.select("write")<CR>',  desc = 'Save a session' },
     },
   },
 }
