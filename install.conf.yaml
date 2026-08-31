@@ -15,10 +15,13 @@
   - ~/.config/git
 - clean:
   - '~'
+- shell:
+  - ['[ -L "$HOME/.config/ghostty" ] && rm "$HOME/.config/ghostty" || true', Migrate ghostty dir link]
 - link:
     ~/.config/fish: fish
     ~/.config/nvim: nvim
-    ~/.config/ghostty: ghostty
+    ~/.config/ghostty/themes: ghostty/themes
+    ~/.config/ghostty/config: ghostty/config
     ~/.config/git/config: git/config
     ~/.config/fastfetch: fastfetch
 - shell:

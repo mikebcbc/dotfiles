@@ -102,19 +102,27 @@ if [[ "$OS" == "Darwin" ]]; then
         tealdeer
     )
 
+    # Fix Homebrew permissions if some directories are owned by root
+    # (e.g. from a previous sudo brew or formula that created dirs as root)
+    if find /opt/homebrew/lib -maxdepth 1 -user root -print -quit 2>/dev/null | grep -q .; then
+        echo "Fixing Homebrew permissions (some directories owned by root)..."
+        sudo chown -R "$(whoami):admin" /opt/homebrew
+    fi
+
     echo "Installing formulae: ${BREW_PKGS[*]}"
     brew install "${BREW_PKGS[@]}"
 
-    # Casks (GUI apps)
+    # Casks (GUI apps) - install individually so one failure doesn't block others
     CASK_PKGS=(
         brave-browser
         filezilla
         ghostty
-        zacharytgray/hyprmac/hyprmac
     )
 
-    echo "Installing casks: ${CASK_PKGS[*]}"
-    brew install --cask "${CASK_PKGS[@]}"
+    for cask in "${CASK_PKGS[@]}"; do
+        echo "Installing cask: $cask"
+        brew install --cask "$cask" || echo "Warning: failed to install cask '$cask' — continuing"
+    done
 
     if command -v bob &>/dev/null; then
         echo "Setting Neovim to nightly via bob..."

@@ -8,10 +8,7 @@
   - '~/Library/Application Support/lazygit'
 - shell:
   # lazygit may leave an empty regular config.yml here; dotbot cannot replace that with a symlink until it is removed
-  - [
-    sh,
-    -c,
-    'f="$HOME/Library/Application Support/lazygit/config.yml"; if [ -f "$f" ] && [ ! -L "$f" ] && [ ! -s "$f" ]; then rm -f "$f"; fi',
-  ]
+  - ['[ -f "$HOME/Library/Application Support/lazygit/config.yml" ] && [ ! -L "$HOME/Library/Application Support/lazygit/config.yml" ] && [ ! -s "$HOME/Library/Application Support/lazygit/config.yml" ] && rm -f "$HOME/Library/Application Support/lazygit/config.yml" || true']
 - link:
+    '~/.config/ghostty/config': ghostty/config-macos
     '~/Library/Application Support/lazygit/config.yml': lazygit/config.yml
