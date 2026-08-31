@@ -9,7 +9,10 @@
         }
     },
     "display": {
-        "separator": " "
+        "separator": " ",
+        "color": {
+          "keys": "red",
+        },
     },
    "modules": [
      "title",
