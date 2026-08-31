@@ -1,7 +1,7 @@
 return {
   {
     'nvim-lualine/lualine.nvim',
-    dependencies = { 'catppuccin/nvim' },
+    dependencies = { 'LucFerrei/vespera.nvim' },
     event = 'VeryLazy',
     config = function()
       require('lualine').setup {

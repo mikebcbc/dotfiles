@@ -1,65 +1,137 @@
 return {
   {
-    'catppuccin/nvim',
-    name = 'catppuccin',
+    -- 'gshahbazian/vesper.nvim',
+    'LucFerrei/vespera.nvim',
+    name = 'vesper',
     lazy = false,
     priority = 1000,
     init = function()
-      vim.cmd.colorscheme 'catppuccin-macchiato'
-
-      vim.cmd.hi 'Comment gui=none'
+      vim.cmd.colorscheme 'vespera'
     end,
     opts = {
-      transparent_background = true,
-      default_integrations = false,
-      term_colors = true,
-      integrations = {
-        lualine = {},
-        blink_cmp = true,
-        fidget = true,
-        indent_blankline = {
-          enabled = true,
-        },
-        mason = true,
-        mini = {
-          enabled = true,
-        },
-        native_lsp = {
-          enabled = true,
-          virtual_text = {
-            errors = { 'italic' },
-            hints = { 'italic' },
-            warnings = { 'italic' },
-            information = { 'italic' },
-          },
-          underlines = {
-            errors = { 'underline' },
-            hints = { 'underline' },
-            warnings = { 'underline' },
-            information = { 'underline' },
-          },
-          inlay_hints = {
-            background = true,
-          },
-        },
-        semantic_tokens = true,
-        telescope = {
-          enabled = true,
-        },
-        treesitter = true,
-        ufo = true,
-      },
-      highlight_overrides = {
-        all = function(colors)
-          return {
-            BlinkCmpDoc = { bg = colors.base },
-            BlinkCmpDocBorder = { fg = colors.blue },
-          }
-        end,
+      transparent = true,
+      overrides = {
+        Normal = { bg = "None" },
+        NormalFloat = { bg = "none" },
+        ColorColumn = { bg = "None" },
+        SignColumn = { bg = "None" },
+        Folded = { bg = "None" },
+        FoldColumn = { bg = "None" },
+        CursorLine = { bg = "None" },
+        CursorColumn = { bg = "None" },
+        VertSplit = { bg = "None" },
       },
     },
   },
 }
+
+-- return {
+--   {
+--     'Shatur/neovim-ayu',
+--     name = 'ayu',
+--     lazy = false,
+--     priority = 1000,
+--     init = function()
+--       vim.cmd.colorscheme 'ayu'
+--     end,
+--     opts = {
+--       mirage = false,
+--       overrides = {
+--         Normal = { bg = "None" },
+--         NormalFloat = { bg = "none" },
+--         ColorColumn = { bg = "None" },
+--         SignColumn = { bg = "None" },
+--         Folded = { bg = "None" },
+--         FoldColumn = { bg = "None" },
+--         CursorLine = { bg = "None" },
+--         CursorColumn = { bg = "None" },
+--         VertSplit = { bg = "None" },
+--       },
+--     },
+--   },
+-- }
+
+--[[
+return {
+  {
+    'rebelot/kanagawa.nvim',
+    name = 'kanagawa',
+    lazy = false,
+    priority = 1000,
+    init = function()
+      vim.cmd.colorscheme 'kanagawa-dragon'
+    end,
+    opts = {
+      theme = 'dragon',
+      transparent = true,
+    },
+  },
+}
+--]]
+
+
+-- return {
+--   {
+--     'catppuccin/nvim',
+--     name = 'catppuccin',
+--     lazy = false,
+--     priority = 1000,
+--     init = function()
+--       vim.cmd.colorscheme 'catppuccin-macchiato'
+--
+--       vim.cmd.hi 'Comment gui=none'
+--     end,
+--     opts = {
+--       transparent_background = true,
+--       default_integrations = false,
+--       term_colors = true,
+--       integrations = {
+--         lualine = {},
+--         blink_cmp = true,
+--         fidget = true,
+--         indent_blankline = {
+--           enabled = true,
+--         },
+--         mason = true,
+--         mini = {
+--           enabled = true,
+--         },
+--         native_lsp = {
+--           enabled = true,
+--           virtual_text = {
+--             errors = { 'italic' },
+--             hints = { 'italic' },
+--             warnings = { 'italic' },
+--             information = { 'italic' },
+--           },
+--           underlines = {
+--             errors = { 'underline' },
+--             hints = { 'underline' },
+--             warnings = { 'underline' },
+--             information = { 'underline' },
+--           },
+--           inlay_hints = {
+--             background = true,
+--           },
+--         },
+--         semantic_tokens = true,
+--         telescope = {
+--           enabled = true,
+--         },
+--         treesitter = true,
+--         ufo = true,
+--       },
+--       highlight_overrides = {
+--         all = function(colors)
+--           return {
+--             BlinkCmpDoc = { bg = colors.base },
+--             BlinkCmpDocBorder = { fg = colors.blue },
+--           }
+--         end,
+--       },
+--     },
+--   },
+-- }
 
 -- macchiato {
 -- 	rosewater = "#f4dbd6",
