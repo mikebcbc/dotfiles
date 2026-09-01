@@ -16,25 +16,39 @@ clipboard-paste-protection = false
 unfocused-split-opacity = 0.7
 unfocused-split-fill = #2d2d2d
 
-## Keybinds for tabs
-keybind = cmd+t>n=new_tab
-keybind = cmd+t>l=next_tab
-keybind = cmd+t>h=previous_tab
-keybind = cmd+t>f=toggle_quick_terminal
-keybind = cmd+t>r=prompt_surface_title
+macos-option-as-alt = true
 
-## Keybinds for splits
-keybind = cmd+p>n=new_split:auto
-keybind = cmd+p>d=new_split:down
-keybind = cmd+p>f=toggle_split_zoom
-keybind = cmd+l=goto_split:right
-keybind = cmd+j=goto_split:down
-keybind = cmd+k=goto_split:up
-keybind = cmd+h=goto_split:left
-keybind = cmd+shift+k=resize_split:up,10
-keybind = cmd+shift+j=resize_split:down,10
-keybind = cmd+shift+h=resize_split:left,10
-keybind = cmd+shift+l=resize_split:right,10
+## Tabs
+keybind = alt+t>n=new_tab
+keybind = alt+t>l=next_tab
+keybind = alt+t>h=previous_tab
+keybind = alt+t>f=toggle_quick_terminal
+keybind = alt+t>r=prompt_surface_title
+
+## Splits
+keybind = alt+p>n=new_split:auto
+keybind = alt+p>d=new_split:down
+keybind = alt+p>f=toggle_split_zoom
+keybind = alt+l=goto_split:right
+keybind = alt+j=goto_split:down
+keybind = alt+k=goto_split:up
+keybind = alt+h=goto_split:left
+keybind = alt+shift+k=resize_split:up,10
+keybind = alt+shift+j=resize_split:down,10
+keybind = alt+shift+h=resize_split:left,10
+keybind = alt+shift+l=resize_split:right,10
+
+# Unbind so that cmd is used by OmniWM
+keybind = cmd+h=unbind
+keybind = cmd+j=unbind
+keybind = cmd+k=unbind
+keybind = cmd+l=unbind
+keybind = cmd+shift+h=unbind
+keybind = cmd+shift+j=unbind
+keybind = cmd+shift+k=unbind
+keybind = cmd+shift+l=unbind
+keybind = cmd+t=unbind
+keybind = cmd+w=unbind
 
 ## Keybinds for scrolling
 keybind = cmd+shift+,=scroll_page_up

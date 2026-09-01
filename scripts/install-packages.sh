@@ -117,6 +117,8 @@ if [[ "$OS" == "Darwin" ]]; then
         brave-browser
         filezilla
         ghostty
+        karabiner-elements
+        BarutSRB/tap/omniwm
     )
 
     for cask in "${CASK_PKGS[@]}"; do

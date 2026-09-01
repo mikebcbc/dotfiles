@@ -6,9 +6,15 @@
       relink: true
 - create:
   - '~/Library/Application Support/lazygit'
+  - '~/.config/karabiner/assets/complex_modifications'
+  - '~/.config/omniwm'
 - shell:
   # lazygit may leave an empty regular config.yml here; dotbot cannot replace that with a symlink until it is removed
   - ['[ -f "$HOME/Library/Application Support/lazygit/config.yml" ] && [ ! -L "$HOME/Library/Application Support/lazygit/config.yml" ] && [ ! -s "$HOME/Library/Application Support/lazygit/config.yml" ] && rm -f "$HOME/Library/Application Support/lazygit/config.yml" || true']
+  # OmniWM writes a regular settings.toml on first launch; remove it so it can be symlinked
+  - ['[ -f "$HOME/.config/omniwm/settings.toml" ] && [ ! -L "$HOME/.config/omniwm/settings.toml" ] && rm -f "$HOME/.config/omniwm/settings.toml" || true']
 - link:
     '~/.config/ghostty/config': ghostty/config-macos
     '~/Library/Application Support/lazygit/config.yml': lazygit/config.yml
+    '~/.config/omniwm/settings.toml': omniwm/settings.toml
+    '~/.config/karabiner/assets/complex_modifications/linux-ctrl-on-macos.json': karabiner/linux-ctrl-on-macos.json
