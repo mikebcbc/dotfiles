@@ -1,0 +1,37 @@
+{
+  "title": "Middle mouse hold to scroll",
+  "rules": [
+    {
+      "description": "Change button4 + mouse movement to scroll",
+      "manipulators": [
+        {
+          "from": {
+            "modifiers": { "optional": ["any"] },
+            "pointing_button": "button3"
+          },
+          "to": [
+            {
+              "set_variable": {
+                "key_up_value": false,
+                "name": "enable_mouse_motion_to_scroll",
+                "value": true
+              }
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "conditions": [
+            {
+              "name": "enable_mouse_motion_to_scroll",
+              "type": "variable_if",
+              "value": true
+            }
+          ],
+          "from": { "modifiers": { "optional": ["any"] } },
+          "type": "mouse_motion_to_scroll"
+        }
+      ]
+    }
+  ]
+}

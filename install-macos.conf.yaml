@@ -18,3 +18,4 @@
     '~/Library/Application Support/lazygit/config.yml': lazygit/config.yml
     '~/.config/omniwm/settings.toml': omniwm/settings.toml
     '~/.config/karabiner/assets/complex_modifications/linux-ctrl-on-macos.json': karabiner/linux-ctrl-on-macos.json
+    '~/.config/karabiner/assets/complex_modifications/middle-click-scroll.json': karabiner/middle-click-scroll.json
