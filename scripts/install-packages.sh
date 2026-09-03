@@ -68,7 +68,6 @@ if [[ "$OS" == "Linux" ]]; then
         fi
 
         install_font
-        install_noctalia_extras
 
         echo "Done."
     else
@@ -132,8 +131,6 @@ if [[ "$OS" == "Linux" ]]; then
             echo "Setting fish as default shell..."
             chsh -s "$(command -v fish)"
         fi
-
-        install_noctalia_extras
 
         echo "Done."
     fi

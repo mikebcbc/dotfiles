@@ -226,14 +226,6 @@ if ! command -v uwsm >/dev/null; then
     echo "Warning: uwsm is not on PATH — Super+T/E binds and the uwsm-managed session will fail."
 fi
 
-echo "=== Workaround: strip Noctalia runtime state (can contain stale/invalid TOML) ==="
-# Noctalia v5.0.0-beta.10 writes its runtime state to
-# ~/.local/state/noctalia/settings.toml. Deleting it on install ensures a
-# clean start (Noctalia regenerates defaults on next launch).
-if [[ -f "$HOME/.local/state/noctalia/settings.toml" ]]; then
-    rm -f "$HOME/.local/state/noctalia/settings.toml"
-fi
-
 echo
 echo "Ubuntu Hyprland pieces are installed."
 echo "Reboot and pick Hyprland (uwsm-managed) on the Noctalia greeter."
