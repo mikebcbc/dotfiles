@@ -109,7 +109,7 @@ wallpaper_scheme = "m3-tonal-spot"
     builtin_ids = [ "alacritty", "btop", "gtk3", "gtk4", "kcolorscheme", "qt" ]
 
 [wallpaper.default]
-path = "/home/mikec/Pictures/Wallpapers/Dueling Planets.jpg"
+path = "~/Pictures/Wallpapers/Dueling Planets.jpg"
 
 [widget.clock]
 color = "secondary"

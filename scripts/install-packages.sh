@@ -101,7 +101,6 @@ if [[ "$OS" == "Linux" ]]; then
 
         set_default_shell
         install_font
-        install_noctalia_extras
 
         echo "Done."
     else
@@ -165,7 +164,6 @@ if [[ "$OS" == "Linux" ]]; then
         fi
 
         set_default_shell
-        install_noctalia_extras
 
         echo "Done."
     fi
