@@ -4,8 +4,13 @@
       create: true
       force: true
       relink: true
+    shell:
+      stderr: true
+      stdout: true
 - create:
   - ~/.config/lazygit
+- shell:
+  - ['[ -L "$HOME/.config/hypr" ] || rm -rf "$HOME/.config/hypr"', Replace Hyprbuntu hypr dir so the repo symlink can take over]
 - link:
     ~/.config/hypr: hypr
     ~/.config/lazygit/config.yml: lazygit/config.yml

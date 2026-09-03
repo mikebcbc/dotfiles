@@ -61,6 +61,9 @@ APT_PKGS=(
     gnome-calculator
     libgtk-4-1
     libadwaita-1-0
+    # binds.lua uses `uwsm app --`; greeter default is Hyprland (uwsm-managed).
+    # Hyprbuntu only builds uwsm when TUIGREET_SETUP=true, which we skip.
+    uwsm
 )
 
 sudo apt-get install -y "${APT_PKGS[@]}"
@@ -109,26 +112,51 @@ if ! command -v satty >/dev/null; then
     fi
 fi
 
-echo "=== Hyprbuntu (Hyprland + ecosystem from source) ==="
-# Noctalia owns the bar, notifications, lock, wallpaper, and OSDs.
-HYPRBUNTU_SETUP_PATH="$HOME/.local/bin"
-mkdir -p "$HYPRBUNTU_SETUP_PATH"
-curl -fsSL -o "$HYPRBUNTU_SETUP_PATH/setup-hyprbuntu.sh" \
-    "https://gitlab.com/kralos/hyprbuntu/-/raw/main/setup-hyprbuntu.sh"
-chmod +x "$HYPRBUNTU_SETUP_PATH/setup-hyprbuntu.sh"
+# Hyprbuntu writes a real ~/.config/hypr directory. Replace it with this repo
+# so hyprland.lua + config/autostart.lua (noctalia) are what Hyprland loads.
+link_hypr_config() {
+    local src dest
+    src="$(cd "$(dirname "$0")/.." && pwd)/hypr"
+    dest="$HOME/.config/hypr"
+    if [[ ! -d "$src" ]]; then
+        echo "Warning: $src not found — cannot link Hyprland config."
+        return 1
+    fi
+    mkdir -p "$HOME/.config"
+    if [[ -e "$dest" && ! -L "$dest" ]]; then
+        echo "Replacing $dest with symlink to $src"
+        rm -rf "$dest"
+    fi
+    ln -sfn "$src" "$dest"
+    echo "Hyprland config: $dest -> $(readlink "$dest")"
+}
 
-THEME_PREF=dark \
-    NOTIFICATION_DAEMON_PREF=none \
-    HYPRPAPER_SETUP=false \
-    HYPRLOCK_SETUP=false \
-    HYPRIDLE_SETUP=false \
-    HYPRSHOT_SETUP=false \
-    SWAYOSD_SETUP=false \
-    THUNAR_SETUP=true \
-    WAYBAR_SETUP=false \
-    TUIGREET_SETUP=false \
-    DISABLE_CONFIRM=true \
-    "$HYPRBUNTU_SETUP_PATH/setup-hyprbuntu.sh"
+if [[ "${FORCE_HYPRBUNTU:-}" != "1" ]] && command -v Hyprland >/dev/null; then
+    echo "=== Hyprland already installed — skipping Hyprbuntu compile ==="
+    Hyprland --version 2>/dev/null || true
+    echo "Set FORCE_HYPRBUNTU=1 to rebuild from source."
+else
+    echo "=== Hyprbuntu (Hyprland + ecosystem from source) ==="
+    # Noctalia owns the bar, notifications, lock, wallpaper, and OSDs.
+    HYPRBUNTU_SETUP_PATH="$HOME/.local/bin"
+    mkdir -p "$HYPRBUNTU_SETUP_PATH"
+    curl -fsSL -o "$HYPRBUNTU_SETUP_PATH/setup-hyprbuntu.sh" \
+        "https://gitlab.com/kralos/hyprbuntu/-/raw/main/setup-hyprbuntu.sh"
+    chmod +x "$HYPRBUNTU_SETUP_PATH/setup-hyprbuntu.sh"
+
+    THEME_PREF=dark \
+        NOTIFICATION_DAEMON_PREF=none \
+        HYPRPAPER_SETUP=false \
+        HYPRLOCK_SETUP=false \
+        HYPRIDLE_SETUP=false \
+        HYPRSHOT_SETUP=false \
+        SWAYOSD_SETUP=false \
+        THUNAR_SETUP=true \
+        WAYBAR_SETUP=false \
+        TUIGREET_SETUP=false \
+        DISABLE_CONFIRM=true \
+        "$HYPRBUNTU_SETUP_PATH/setup-hyprbuntu.sh"
+fi
 
 echo "=== Noctalia + Noctalia Greeter (official APT repo) ==="
 # https://docs.noctalia.dev/noctalia/getting-started/installation/ — Ubuntu 26.04
@@ -182,6 +210,20 @@ sudo systemctl enable greetd.service
 sudo systemctl set-default graphical.target
 sudo systemctl enable accounts-daemon.service 2>/dev/null || true
 sudo systemctl restart greetd.service || true
+
+echo "=== Hyprland config symlink + Noctalia autostart ==="
+link_hypr_config
+if [[ -f "$HOME/.config/hypr/hyprland.lua" && -f "$HOME/.config/hypr/config/autostart.lua" ]]; then
+    echo "Noctalia autostart: hypr/config/autostart.lua (hl.on hyprland.start → noctalia)"
+else
+    echo "Warning: Hyprland lua config missing after link — Noctalia will not autostart."
+fi
+if ! command -v noctalia >/dev/null; then
+    echo "Warning: noctalia is not on PATH."
+fi
+if ! command -v uwsm >/dev/null; then
+    echo "Warning: uwsm is not on PATH — Super+T/E binds and the uwsm-managed session will fail."
+fi
 
 echo
 echo "Ubuntu Hyprland pieces are installed."

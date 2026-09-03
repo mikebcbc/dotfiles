@@ -1,5 +1,6 @@
 -- Auto-start config
--- if you dont use UWSM add your auto start programs here, otherwise use XDG autostart https://wiki.archlinux.org/title/XDG_Autostart
+-- Official Noctalia launch: compositor autostart (not XDG), so only one instance runs.
+-- https://docs.noctalia.dev/noctalia/getting-started/running-the-shell/
 
 hl.on("hyprland.start", function()
     hl.exec_cmd("dbus-update-activation-environment --systemd --all")

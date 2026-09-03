@@ -26,10 +26,10 @@ Cross-platform dotfiles for Linux (CachyOS or Ubuntu + Hyprland) and macOS (Omni
 The `install` script runs dotbot which:
 
 1. **Symlinks** shared configs (`install.conf.yaml`): fish, nvim, ghostty, git, fastfetch
-1. **Symlinks** OS-specific configs (`install-linux.conf.yaml` or `install-macos.conf.yaml`)
 1. **Runs** `scripts/install-packages.sh` to install OS-appropriate packages
+1. **Symlinks** OS-specific configs (`install-linux.conf.yaml` or `install-macos.conf.yaml`)
 
-On **Ubuntu 26.04 Server** (preferred) or Desktop, `./install` also runs [Hyprbuntu](https://gitlab.com/kralos/hyprbuntu) (Hyprland from source) and installs [Noctalia](https://docs.noctalia.dev/noctalia/getting-started/installation/) + [Noctalia Greeter](https://docs.noctalia.dev/greeter/) from the official APT repo. Waybar, tuigreet, hyprlock, and hyprpaper are skipped because Noctalia owns those. After first login: Noctalia Settings → Security → Noctalia Greeter → **Sync Now**. Confirm the greeter session name with `noctalia-greeter sessions` if the picker is empty.
+On **Ubuntu 26.04 Server** (preferred) or Desktop, `./install` also runs [Hyprbuntu](https://gitlab.com/kralos/hyprbuntu) (Hyprland from source) unless `Hyprland` is already on PATH (set `FORCE_HYPRBUNTU=1` to rebuild). It installs [UWSM](https://wiki.hypr.land/Useful-Utilities/Systemd-start/) from apt (same `uwsm app --` launches as Cachy), [Noctalia](https://docs.noctalia.dev/noctalia/getting-started/installation/) + [Noctalia Greeter](https://docs.noctalia.dev/greeter/) from the official APT repo, then points `~/.config/hypr` at this repo so `hypr/config/autostart.lua` starts Noctalia. Waybar, tuigreet, hyprlock, and hyprpaper are skipped because Noctalia owns those. After first login: Noctalia Settings → Security → Noctalia Greeter → **Sync Now**. Confirm the greeter session name with `noctalia-greeter sessions` if the picker is empty.
 
 On macOS, after install:
 
