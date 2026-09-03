@@ -3,8 +3,13 @@
 # Accepts extra plugins as args (e.g. pure-fish/pure for macOS).
 
 if not type -q fisher
-    echo "fisher not found - skipping"
-    exit 0
+    echo "fisher not found - bootstrapping"
+    if curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source
+        fisher install jorgebucaran/fisher
+    else
+        echo "fisher: bootstrap failed - skipping"
+        exit 0
+    end
 end
 
 set -l plugin_file "$HOME/.config/fish/fish_plugins"

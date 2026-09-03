@@ -1,6 +1,6 @@
 # MCO's dotfiles
 
-Cross-platform dotfiles for Linux (CachyOS w/ Hyprland) and macOS (OmniWM). Uses [dotbot](https://github.com/anishathalye/dotbot) for symlinks and package installation.
+Cross-platform dotfiles for Linux (CachyOS or Ubuntu + Hyprland) and macOS (OmniWM). Uses [dotbot](https://github.com/anishathalye/dotbot) for symlinks and package installation.
 
 ## What's in here
 
@@ -12,7 +12,7 @@ Cross-platform dotfiles for Linux (CachyOS w/ Hyprland) and macOS (OmniWM). Uses
 | `git/` | Git config | both |
 | `lazygit/` | Lazygit config | both |
 | `fastfetch/` | Fastfetch config | both |
-| `hypr/` | Hyprland config | Linux |
+| `hypr/` | Hyprland Lua config (0.55+) | Linux |
 | `karabiner/` | Karabiner config | macOS |
 | `omniwm/` | OmniWM (Hypr dwindle mock on macOS) | macOS |
 | `Raycast.rayconfig` | Raycast launcher config | macOS |
@@ -29,6 +29,8 @@ The `install` script runs dotbot which:
 1. **Symlinks** OS-specific configs (`install-linux.conf.yaml` or `install-macos.conf.yaml`)
 1. **Runs** `scripts/install-packages.sh` to install OS-appropriate packages
 
+On **Ubuntu 26.04 Server** (preferred) or Desktop, `./install` also runs [Hyprbuntu](https://gitlab.com/kralos/hyprbuntu) (Hyprland from source) and installs [Noctalia](https://docs.noctalia.dev/noctalia/getting-started/installation/) + [Noctalia Greeter](https://docs.noctalia.dev/greeter/) from the official APT repo. Waybar, tuigreet, hyprlock, and hyprpaper are skipped because Noctalia owns those. After first login: Noctalia Settings → Security → Noctalia Greeter → **Sync Now**. Confirm the greeter session name with `noctalia-greeter sessions` if the picker is empty.
+
 On macOS, after install:
 
 1. Karabiner-Elements → Complex Modifications → Add rule → enable **Linux Ctrl app shortcuts on macOS**.
@@ -36,8 +38,11 @@ On macOS, after install:
 
 ### Packages installed
 
-**Linux (pacman + AUR):**
+**Linux CachyOS/Arch (pacman + AUR):**
 neovim, bob, fish, ghostty, brave-browser, fastfetch, fisher, fish-pure-prompt, fish-autopair, bat, eza, fd, ripgrep, fzf, lazygit, git, tealdeer, btop, filezilla, satty, yay + autojump (AUR via yay)
+
+**Linux Ubuntu 26.04:**
+Hyprland via Hyprbuntu; Noctalia + noctalia-greeter from pkg.noctalia.dev; same CLI/apps as CachyOS (neovim, bob + nightly, fish, ghostty, brave, fastfetch, fisher + pure/autopair, bat, eza, fd, ripgrep, fzf, lazygit, git, tealdeer, btop, filezilla, satty, autojump) plus dolphin and gnome-calculator for Hyprland binds. `yay` is Arch-only.
 
 **macOS (brew formulae + casks):**
 neovim, bob, autojump, bat, btop, direnv, eza, fastfetch, fd, fish, fisher, fzf, git, lazygit, ripgrep, tealdeer + brave-browser, filezilla, ghostty, karabiner-elements, omniwm
@@ -47,7 +52,7 @@ neovim, bob, autojump, bat, btop, direnv, eza, fastfetch, fd, fish, fisher, fzf,
 Plugins are listed in `fish/fish_plugins` and managed by fisher:
 `jorgebucaran/fisher`, `edc/bass`, `fisherman/done`, `fabioantunes/fish-nvm`, `patrickf1/fzf.fish`
 
-On Linux, `done` and `pure` come from CachyOS packages (`fish-done` and `fish-pure-prompt`). On macOS, fisher installs `done`, `pure-fish/pure`.
+On CachyOS, `done` and `pure` come from distro packages (`fish-done` and `fish-pure-prompt`). On Ubuntu and macOS, fisher installs `done` and `pure-fish/pure`.
 
 ## Cherry-picking CachyOS upstream config changes
 
