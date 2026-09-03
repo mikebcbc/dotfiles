@@ -8,6 +8,42 @@
 set -euo pipefail
 
 OS="$(uname)"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+# -------------------------------------------------------------------
+# Install Inconsolata Nerd Font Mono (used by Noctalia bar/shell)
+# -------------------------------------------------------------------
+install_font() {
+    case "$OS" in
+        Linux)
+            if [[ "${ID:-}" == "ubuntu" || "${ID_LIKE:-}" == *ubuntu* ]]; then
+                FONT_DIR="$HOME/.local/share/fonts"
+                mkdir -p "$FONT_DIR"
+                if ! fc-list | grep -q "Inconsolata Nerd Font Mono"; then
+                    echo "Installing Inconsolata Nerd Font (Ubuntu)..."
+                    tmp="$(mktemp -d)"
+                    if curl -fsSL -o "$tmp/Inconsolata.zip" \
+                        "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Inconsolata.zip"; then
+                        unzip -oq "$tmp/Inconsolata.zip" -d "$FONT_DIR"
+                        fc-cache -f "$FONT_DIR"
+                    fi
+                    rm -rf "$tmp"
+                fi
+            fi
+            ;;
+        Darwin)
+            brew install --cask font-inconsolata-nerd-font 2>/dev/null || \
+                echo "Warning: font-inconsolata-nerd-font cask failed — install manually."
+            ;;
+    esac
+}
+
+# -------------------------------------------------------------------
+# Install wallpaper + Noctalia portable settings (Linux only)
+# -------------------------------------------------------------------
+install_noctalia_extras() {
+    python3 "$SCRIPT_DIR/noctalia-setup.py"
+}
 
 # -------------------------------------------------------------------
 # Linux — CachyOS/Arch (pacman) or Ubuntu (Hyprbuntu + Noctalia)
@@ -33,6 +69,9 @@ if [[ "$OS" == "Linux" ]]; then
             fish "$SCRIPT_DIR/fisher-install.fish" pure-fish/pure jorgebucaran/autopair.fish
         fi
 
+        install_font
+        install_noctalia_extras
+
         echo "Done."
     else
         echo "Detected Linux - using pacman"
@@ -47,6 +86,7 @@ if [[ "$OS" == "Linux" ]]; then
             fisher
             fish-pure-prompt
             fish-autopair
+            ttf-inconsolata-nerd
             bat
             eza
             fd
@@ -88,6 +128,8 @@ if [[ "$OS" == "Linux" ]]; then
             echo "Installing fisher plugins..."
             fish "$(dirname "$0")/fisher-install.fish"
         fi
+
+        install_noctalia_extras
 
         echo "Done."
     fi
@@ -160,6 +202,8 @@ if [[ "$OS" == "Darwin" ]]; then
         echo "Installing fisher plugins..."
         fish "$(dirname "$0")/fisher-install.fish" pure-fish/pure
     fi
+
+    install_font
 
     echo "Done."
 fi
