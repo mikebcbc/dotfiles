@@ -3,12 +3,34 @@
 # Cross-platform package installer for mikec's dotfiles.
 # Detects OS and installs required packages via pacman (CachyOS/Arch),
 # apt + Hyprbuntu/Noctalia (Ubuntu), or brew (macOS).
-# Skips already-installed packages where possible
+# Skips already-installed packages where possible.
+# Collects all errors and prints them in red at the end.
 
-set -euo pipefail
+set -uo pipefail
 
 OS="$(uname)"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+ERRORS=()
+
+add_error() {
+    ERRORS+=("$1")
+}
+
+RED='\033[0;31m'
+NC='\033[0m'
+
+print_errors() {
+    if [[ ${#ERRORS[@]} -gt 0 ]]; then
+        echo ""
+        echo -e "${RED}=== Errors (${#ERRORS[@]}) ===${NC}"
+        for err in "${ERRORS[@]}"; do
+            echo -e "${RED}  - ${err}${NC}"
+        done
+        echo ""
+    fi
+}
+
+trap print_errors EXIT
 
 # -------------------------------------------------------------------
 # Install Inconsolata Nerd Font Mono (used by Noctalia bar/shell)
@@ -26,6 +48,8 @@ install_font() {
                         "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Inconsolata.zip"; then
                         unzip -oq "$tmp/Inconsolata.zip" -d "$FONT_DIR"
                         fc-cache -f "$FONT_DIR"
+                    else
+                        add_error "Failed to download Inconsolata Nerd Font — install manually from https://www.nerdfonts.com/font-downloads"
                     fi
                     rm -rf "$tmp"
                 fi
@@ -33,9 +57,22 @@ install_font() {
             ;;
         Darwin)
             brew install --cask font-inconsolata-nerd-font 2>/dev/null || \
-                echo "Warning: font-inconsolata-nerd-font cask failed — install manually."
+                add_error "Failed to install font-inconsolata-nerd-font cask — run 'brew install --cask font-inconsolata-nerd-font' manually."
             ;;
     esac
+}
+
+# -------------------------------------------------------------------
+# Set fish as default shell (non-fatal)
+# -------------------------------------------------------------------
+set_default_shell() {
+    local fish_path
+    fish_path="$(command -v fish 2>/dev/null)" || return 0
+    if [[ "$SHELL" != "$fish_path" ]]; then
+        echo "Setting fish as default shell..."
+        chsh -s "$fish_path" 2>/dev/null || \
+            add_error "chsh failed — run 'sudo chsh -s $fish_path \$USER' manually."
+    fi
 }
 
 # -------------------------------------------------------------------
@@ -47,27 +84,24 @@ if [[ "$OS" == "Linux" ]]; then
 
     if [[ "${ID:-}" == "ubuntu" || "${ID_LIKE:-}" == *ubuntu* ]]; then
         echo "Detected Ubuntu — Hyprbuntu + Noctalia"
-        SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-        "$SCRIPT_DIR/install-ubuntu-desktop.sh"
+        "$SCRIPT_DIR/install-ubuntu-desktop.sh" || add_error "install-ubuntu-desktop.sh failed — check output above."
 
         export PATH="$HOME/.local/bin:${PATH}"
 
         if command -v bob &>/dev/null; then
             echo "Setting Neovim to nightly via bob..."
-            bob use nightly
+            bob use nightly || add_error "bob use nightly failed."
         fi
 
         if command -v fish &>/dev/null; then
             echo "Installing fisher plugins..."
-            fish "$SCRIPT_DIR/fisher-install.fish" pure-fish/pure jorgebucaran/autopair.fish
+            fish "$SCRIPT_DIR/fisher-install.fish" pure-fish/pure jorgebucaran/autopair.fish || \
+                add_error "fisher plugin installation failed."
         fi
 
-        if [[ "$(command -v fish >/dev/null && echo "$SHELL")" != "$(command -v fish)" ]]; then
-            echo "Setting fish as default shell..."
-            chsh -s "$(command -v fish)"
-        fi
-
+        set_default_shell
         install_font
+        install_noctalia_extras
 
         echo "Done."
     else
@@ -105,32 +139,33 @@ if [[ "$OS" == "Linux" ]]; then
         )
 
         echo "Installing: ${PACMAN_PKGS[*]}"
-        sudo pacman -S --needed --noconfirm "${PACMAN_PKGS[@]}"
+        sudo pacman -S --needed --noconfirm "${PACMAN_PKGS[@]}" || \
+            add_error "pacman install failed — some packages may not be installed."
 
         if [[ ${#AUR_PKGS[@]} -gt 0 ]]; then
             echo "Installing AUR: ${AUR_PKGS[*]}"
             if command -v yay &>/dev/null; then
-                yay -S --needed --noconfirm "${AUR_PKGS[@]}"
+                yay -S --needed --noconfirm "${AUR_PKGS[@]}" || \
+                    add_error "yay install failed — some AUR packages may not be installed."
             else
-                echo "yay not found — skipping AUR packages"
+                add_error "yay not found — AUR packages (${AUR_PKGS[*]}) not installed."
             fi
         fi
 
         if command -v bob &>/dev/null; then
             echo "Setting Neovim to nightly via bob..."
-            bob use nightly
+            bob use nightly || add_error "bob use nightly failed."
         fi
 
         # Install fisher plugins from fish_plugins
         if command -v fish &>/dev/null; then
             echo "Installing fisher plugins..."
-            fish "$(dirname "$0")/fisher-install.fish"
+            fish "$SCRIPT_DIR/fisher-install.fish" || \
+                add_error "fisher plugin installation failed."
         fi
 
-        if [[ "$(command -v fish >/dev/null && echo "$SHELL")" != "$(command -v fish)" ]]; then
-            echo "Setting fish as default shell..."
-            chsh -s "$(command -v fish)"
-        fi
+        set_default_shell
+        install_noctalia_extras
 
         echo "Done."
     fi
@@ -145,7 +180,8 @@ if [[ "$OS" == "Darwin" ]]; then
     # Install Homebrew if not present
     if ! command -v brew &>/dev/null; then
         echo "Installing Homebrew..."
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || \
+            { add_error "Homebrew installation failed."; exit 1; }
         eval "$(/opt/homebrew/bin/brew shellenv)"
     fi
 
@@ -173,11 +209,13 @@ if [[ "$OS" == "Darwin" ]]; then
     # (e.g. from a previous sudo brew or formula that created dirs as root)
     if find /opt/homebrew/lib -maxdepth 1 -user root -print -quit 2>/dev/null | grep -q .; then
         echo "Fixing Homebrew permissions (some directories owned by root)..."
-        sudo chown -R "$(whoami):admin" /opt/homebrew
+        sudo chown -R "$(whoami):admin" /opt/homebrew || \
+            add_error "Failed to fix Homebrew permissions — run 'sudo chown -R \$(whoami):admin /opt/homebrew' manually."
     fi
 
     echo "Installing formulae: ${BREW_PKGS[*]}"
-    brew install "${BREW_PKGS[@]}"
+    brew install "${BREW_PKGS[@]}" || \
+        add_error "brew install failed for some formulae — check output above."
 
     # Casks (GUI apps) - install individually so one failure doesn't block others
     CASK_PKGS=(
@@ -190,18 +228,20 @@ if [[ "$OS" == "Darwin" ]]; then
 
     for cask in "${CASK_PKGS[@]}"; do
         echo "Installing cask: $cask"
-        brew install --cask "$cask" || echo "Warning: failed to install cask '$cask' — continuing"
+        brew install --cask "$cask" 2>/dev/null || \
+            add_error "Failed to install cask '$cask' — run 'brew install --cask $cask' manually."
     done
 
     if command -v bob &>/dev/null; then
         echo "Setting Neovim to nightly via bob..."
-        bob use nightly
+        bob use nightly || add_error "bob use nightly failed."
     fi
 
     # Install fisher plugins from fish_plugins, plus pure-fish/pure on macOS (since we don't want this one in the file because CachyOS ships a version)
     if command -v fish &>/dev/null; then
         echo "Installing fisher plugins..."
-        fish "$(dirname "$0")/fisher-install.fish" pure-fish/pure
+        fish "$SCRIPT_DIR/fisher-install.fish" pure-fish/pure || \
+            add_error "fisher plugin installation failed."
     fi
 
     install_font
