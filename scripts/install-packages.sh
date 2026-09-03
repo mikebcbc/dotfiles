@@ -39,13 +39,6 @@ install_font() {
 }
 
 # -------------------------------------------------------------------
-# Install wallpaper + Noctalia portable settings (Linux only)
-# -------------------------------------------------------------------
-install_noctalia_extras() {
-    python3 "$SCRIPT_DIR/noctalia-setup.py"
-}
-
-# -------------------------------------------------------------------
 # Linux — CachyOS/Arch (pacman) or Ubuntu (Hyprbuntu + Noctalia)
 # -------------------------------------------------------------------
 if [[ "$OS" == "Linux" ]]; then
@@ -67,6 +60,11 @@ if [[ "$OS" == "Linux" ]]; then
         if command -v fish &>/dev/null; then
             echo "Installing fisher plugins..."
             fish "$SCRIPT_DIR/fisher-install.fish" pure-fish/pure jorgebucaran/autopair.fish
+        fi
+
+        if [[ "$(command -v fish >/dev/null && echo "$SHELL")" != "$(command -v fish)" ]]; then
+            echo "Setting fish as default shell..."
+            chsh -s "$(command -v fish)"
         fi
 
         install_font
@@ -99,6 +97,7 @@ if [[ "$OS" == "Linux" ]]; then
             filezilla
             satty
             yay
+            tree-sitter-cli
         )
 
         # AUR packages (installed via yay)
@@ -127,6 +126,11 @@ if [[ "$OS" == "Linux" ]]; then
         if command -v fish &>/dev/null; then
             echo "Installing fisher plugins..."
             fish "$(dirname "$0")/fisher-install.fish"
+        fi
+
+        if [[ "$(command -v fish >/dev/null && echo "$SHELL")" != "$(command -v fish)" ]]; then
+            echo "Setting fish as default shell..."
+            chsh -s "$(command -v fish)"
         fi
 
         install_noctalia_extras

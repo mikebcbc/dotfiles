@@ -64,6 +64,7 @@ APT_PKGS=(
     # binds.lua uses `uwsm app --`; greeter default is Hyprland (uwsm-managed).
     # Hyprbuntu only builds uwsm when TUIGREET_SETUP=true, which we skip.
     uwsm
+    tree-sitter-cli
 )
 
 sudo apt-get install -y "${APT_PKGS[@]}"
@@ -174,8 +175,8 @@ sudo apt install -y noctalia noctalia-greeter accountsservice polkitd || \
 
 if systemctl list-unit-files gdm.service >/dev/null 2>&1 || systemctl list-unit-files gdm3.service >/dev/null 2>&1; then
     echo "=== Switching login from GDM to greetd + Noctalia Greeter ==="
-    sudo systemctl disable --now gdm.service 2>/dev/null || true
-    sudo systemctl disable --now gdm3.service 2>/dev/null || true
+    sudo systemctl disable gdm.service 2>/dev/null || true
+    sudo systemctl disable gdm3.service 2>/dev/null || true
 fi
 
 SESSION_WRAPPER="$(command -v noctalia-greeter-session || true)"
@@ -209,7 +210,7 @@ fi
 sudo systemctl enable greetd.service
 sudo systemctl set-default graphical.target
 sudo systemctl enable accounts-daemon.service 2>/dev/null || true
-sudo systemctl restart greetd.service || true
+echo "greetd configured — reboot to activate"
 
 echo "=== Hyprland config symlink + Noctalia autostart ==="
 link_hypr_config
@@ -223,6 +224,14 @@ if ! command -v noctalia >/dev/null; then
 fi
 if ! command -v uwsm >/dev/null; then
     echo "Warning: uwsm is not on PATH — Super+T/E binds and the uwsm-managed session will fail."
+fi
+
+echo "=== Workaround: strip Noctalia runtime state (can contain stale/invalid TOML) ==="
+# Noctalia v5.0.0-beta.10 writes its runtime state to
+# ~/.local/state/noctalia/settings.toml. Deleting it on install ensures a
+# clean start (Noctalia regenerates defaults on next launch).
+if [[ -f "$HOME/.local/state/noctalia/settings.toml" ]]; then
+    rm -f "$HOME/.local/state/noctalia/settings.toml"
 fi
 
 echo
