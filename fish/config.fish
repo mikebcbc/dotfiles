@@ -1,7 +1,7 @@
 # ==============================================================================
 # fish config
 # On Linux with CachyOS: sources cachyos-config.fish first then overwrites
-# On macOS: inlines the equivalent behavior locally
+# On macOS / Ubuntu: inlines the equivalent features locally
 # ==============================================================================
 
 if status is-interactive
@@ -10,10 +10,11 @@ if status is-interactive
     # -------------------------------------------------------------------------
     if test -f /usr/share/cachyos-fish-config/cachyos-config.fish
         source /usr/share/cachyos-fish-config/cachyos-config.fish
+
     # -------------------------------------------------------------------------
-    # macOS - inline CachyOS-equivalent features
+    # All other OSes - inline CachyOS-equivalent features
     # -------------------------------------------------------------------------
-    else if test (uname) = Darwin
+    else
         # Greeting: fastfetch with custom cow logo from ~/.config/fastfetch/
         function fish_greeting
             if test -x (command -s fastfetch)
@@ -76,19 +77,26 @@ if status is-interactive
         alias hw='hwinfo --short'
         alias tb='nc termbin.com 9999'
 
-        # Autojump
-        test -f /opt/homebrew/share/autojump/autojump.fish
-        and source /opt/homebrew/share/autojump/autojump.fish
+        # OS-specific extras
+        if test (uname) = Darwin
+            # Autojump (Homebrew)
+            test -f /opt/homebrew/share/autojump/autojump.fish
+            and source /opt/homebrew/share/autojump/autojump.fish
 
-        # Homebrew path (Apple Silicon)
-        fish_add_path -m /opt/homebrew/bin
+            # Homebrew path (Apple Silicon)
+            fish_add_path -m /opt/homebrew/bin
 
-        # OrbStack
-        source ~/.orbstack/shell/init2.fish 2>/dev/null || :
+            # OrbStack
+            source ~/.orbstack/shell/init2.fish 2>/dev/null || :
+        else
+            # Autojump (Ubuntu / Debian)
+            test -f /usr/share/autojump/autojump.fish
+            and source /usr/share/autojump/autojump.fish
+        end
     end
 
     # =========================================================================
-    # User overrides (apply on both OS)
+    # User overrides (apply on all OSes)
     # =========================================================================
 
     # Environment
@@ -110,24 +118,23 @@ if status is-interactive
     bind --mode default q 'exit'
 
     # =========================================================================
-    # Linux-only aliases (pacman, systemd, etc.)
+    # Linux-only package-manager aliases
     # =========================================================================
     if test (uname) = Linux
-        # Full system update (sync + upgrade all packages)
-        alias update='sudo pacman -Syu'
-        # Re-rank pacman mirrors by speed
-        alias mirror='sudo cachyos-rate-mirrors'
-        # Show this boot's critical/error logs
-        alias jctl='journalctl -p 3 -xb'
-        # Count installed -git packages
-        alias gitpkg='pacman -Q | grep -i "\-git" | wc -l'
-        # List installed packages sorted by size (biggest last)
-        alias big='expac -H M "%m\t%n" | sort -h | nl'
-        # Last 200 packages sorted by install date
-        alias rip='expac --timefmt="%Y-%m-%d %T" "%l\t%n %v" | sort | tail -200 | nl'
-        # Remove a stale pacman lock file
-        alias fixpacman='sudo rm /var/lib/pacman/db.lck'
-        # Remove orphaned packages and their configs
-        alias cleanup='sudo pacman -Rns (pacman -Qtdq)'
+        if test -f /usr/share/cachyos-fish-config/cachyos-config.fish
+            # CachyOS / Arch (pacman)
+            alias update='sudo pacman -Syu'
+            alias mirror='sudo cachyos-rate-mirrors'
+            alias jctl='journalctl -p 3 -xb'
+            alias gitpkg='pacman -Q | grep -i "\-git" | wc -l'
+            alias big='expac -H M "%m\t%n" | sort -h | nl'
+            alias rip='expac --timefmt="%Y-%m-%d %T" "%l\t%n %v" | sort | tail -200 | nl'
+            alias fixpacman='sudo rm /var/lib/pacman/db.lck'
+            alias cleanup='sudo pacman -Rns (pacman -Qtdq)'
+        else
+            # Ubuntu / Debian (apt)
+            alias update='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y'
+            alias jctl='journalctl -p 3 -xb'
+        end
     end
 end

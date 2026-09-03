@@ -1,3 +1,1 @@
-if test (uname) = Linux
-    source "$HOME/.local/share/bob/env/env.fish"
-end
+set -gx PATH "$HOME/.local/share/bob/nvim-bin" "$HOME/.local/bin" $PATH
