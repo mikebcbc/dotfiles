@@ -1,0 +1,10 @@
+[appearance]
+scheme = "Synced"
+password_style = "random"
+hide_logo = true
+
+[auth]
+allow_empty_password = true
+
+[session]
+default = "Hyprland (uwsm-managed)"

@@ -2,6 +2,8 @@ local mainMod = "SUPER"
 local noctCall = "noctalia msg "
 local launchPrefix = "uwsm app -- " -- if you are not using UWSM, make this empty (e.g. "")
 
+NAMED_WSPACES = { "Primary", "Coding", "Research" }
+
 ---------------------------
 ---- WINDOW MANAGEMENT ----
 ---------------------------
@@ -41,9 +43,9 @@ hl.bind(mainMod .. " + ALT + L", hl.dsp.window.move({ workspace = "m+1" }))
 hl.bind(mainMod .. " + ALT + H", hl.dsp.window.move({ workspace = "m-1" }))
 hl.bind(mainMod .. " + SHIFT + mouse_up", hl.dsp.window.move({ workspace = "m-1" }))
 hl.bind(mainMod .. " + ALT + mouse_down", hl.dsp.window.move({ workspace = "m+1" }))
-for i = 1, NUM_WPM do
+for i, ws in ipairs(NAMED_WSPACES) do
     local key = i % 10
-    hl.bind(mainMod .. " + SHIFT + CONTROL + " .. key, hl.dsp.window.move({ workspace = "m~" .. i }))
+    hl.bind(mainMod .. " + SHIFT + CONTROL + " .. key, hl.dsp.window.move({ workspace = "name:" .. ws }))
 end
 
 -- Move & Resize with mouse
@@ -134,16 +136,10 @@ hl.bind(mainMod .. " + A", hl.dsp.exec_cmd(noctCall .. "panel-toggle control-cen
 -- hl.bind(mainMod .. " + 2", hl.dsp.focus({ monitor = MONITOR2 }))
 -- hl.bind(mainMod .. " + 3", hl.dsp.focus({ monitor = MONITOR3 }))
 
--- Focus on workspace number
--- Absolute
-for i = 1, NUM_WPM do
+-- SUPER+ALT+1 → Primary, SUPER+ALT+2 → Coding, SUPER+ALT+3 → Research
+for i, ws in ipairs(NAMED_WSPACES) do
     local key = i % 10
-    hl.bind(mainMod .. " + ALT + " .. key, hl.dsp.focus({ workspace = i }))
-end
--- Relative
-for i = 1, NUM_WPM do
-    local key = i % 10
-    hl.bind(mainMod .. " + CONTROL + " .. key, hl.dsp.focus({ workspace = "m~" .. i }))
+    hl.bind(mainMod .. " + ALT + " .. key, hl.dsp.focus({ workspace = "name:" .. ws }))
 end
 
 -- Move to adjacent workspaces and next empty on a given monitor

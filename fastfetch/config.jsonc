@@ -11,7 +11,7 @@
     "display": {
         "separator": " ",
         "color": {
-          "keys": "red",
+          "keys": "red"
         },
     },
    "modules": [

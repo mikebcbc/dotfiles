@@ -1,10 +1,10 @@
 -- Hyprland default apps
 
-TERMINAL     = "ghostty"
-FILE_MANAGER = "dolphin"
-BROWSER      = "brave"
-EDITOR       = "nvim"
-CALCULATOR   = "gnome-calculator"
+TERMINAL = "ghostty"
+FILE_MANAGER = "thunar"
+BROWSER = "brave"
+EDITOR = "nvim"
+CALCULATOR = "gnome-calculator"
 
 -- Monitors
 MONITOR1 = ""
@@ -13,4 +13,4 @@ MONITOR3 = ""
 PRIMARY_MONITOR = MONITOR1
 
 -- Workspaces
-NUM_WPM = 3 -- Number of workspaces per monitor (Max 10)
+NUM_WPM = 4 -- Number of workspaces per monitor (Max 10)
