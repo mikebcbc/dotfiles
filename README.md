@@ -13,6 +13,8 @@ Cross-platform dotfiles for Linux (CachyOS or Ubuntu + Hyprland) and macOS (Omni
 | `lazygit/` | Lazygit config | both |
 | `fastfetch/` | Fastfetch config | both |
 | `hypr/` | Hyprland Lua config (0.55+) | Linux |
+| `noctalia/` | Noctalia shell + greeter | Linux |
+| `wallpapers/` | Wallpaper copied to `~/Pictures/Wallpapers` | Linux |
 | `karabiner/` | Karabiner config | macOS |
 | `omniwm/` | OmniWM (Hypr dwindle mock on macOS) | macOS |
 | `Raycast.rayconfig` | Raycast launcher config | macOS |
@@ -42,7 +44,7 @@ On macOS, after install:
 neovim, bob, fish, ghostty, brave-browser, fastfetch, fisher, fish-pure-prompt, fish-autopair, bat, eza, fd, ripgrep, fzf, lazygit, git, tealdeer, btop, filezilla, satty, yay + autojump (AUR via yay)
 
 **Linux Ubuntu 26.04:**
-Hyprland via Hyprbuntu; Noctalia + noctalia-greeter from pkg.noctalia.dev; same CLI/apps as CachyOS (neovim, bob + nightly, fish, ghostty, brave, fastfetch, fisher + pure/autopair, bat, eza, fd, ripgrep, fzf, lazygit, git, tealdeer, btop, filezilla, satty, autojump) plus dolphin and gnome-calculator for Hyprland binds. `yay` is Arch-only.
+Hyprland via Hyprbuntu; UWSM + Noctalia + noctalia-greeter from apt; same CLI/apps as CachyOS (neovim, bob + nightly, fish, ghostty, brave, fastfetch, fisher, bat, eza, fd, ripgrep, fzf, lazygit, git, tealdeer, btop, filezilla, satty, autojump, tree-sitter-cli) plus thunar and gnome-calculator for Hyprland binds. `yay` is Arch-only.
 
 **macOS (brew formulae + casks):**
 neovim, bob, autojump, bat, btop, direnv, eza, fastfetch, fd, fish, fisher, fzf, git, lazygit, ripgrep, tealdeer + brave-browser, filezilla, ghostty, karabiner-elements, omniwm

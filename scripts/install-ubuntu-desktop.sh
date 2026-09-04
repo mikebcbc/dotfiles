@@ -36,7 +36,7 @@ sudo apt-get update
 
 echo "=== CLI packages (apt, matching CachyOS) ==="
 # Same set as the Arch path in install-packages.sh (yay is Arch-only).
-# dolphin + gnome-calculator are what hypr/config/variables.lua launches.
+# thunar + gnome-calculator are what hypr/config/variables.lua launches.
 APT_PKGS=(
     git
     curl
@@ -57,7 +57,7 @@ APT_PKGS=(
     autojump
     direnv
     ghostty
-    dolphin
+    thunar
     gnome-calculator
     libgtk-4-1
     libadwaita-1-0
@@ -112,25 +112,6 @@ if ! command -v satty >/dev/null; then
         echo "No satty binary for $(uname -m) — install later."
     fi
 fi
-
-# Hyprbuntu writes a real ~/.config/hypr directory. Replace it with this repo
-# so hyprland.lua + config/autostart.lua (noctalia) are what Hyprland loads.
-link_hypr_config() {
-    local src dest
-    src="$(cd "$(dirname "$0")/.." && pwd)/hypr"
-    dest="$HOME/.config/hypr"
-    if [[ ! -d "$src" ]]; then
-        echo "Warning: $src not found — cannot link Hyprland config."
-        return 1
-    fi
-    mkdir -p "$HOME/.config"
-    if [[ -e "$dest" && ! -L "$dest" ]]; then
-        echo "Replacing $dest with symlink to $src"
-        rm -rf "$dest"
-    fi
-    ln -sfn "$src" "$dest"
-    echo "Hyprland config: $dest -> $(readlink "$dest")"
-}
 
 if [[ "${FORCE_HYPRBUNTU:-}" != "1" ]] && command -v Hyprland >/dev/null; then
     echo "=== Hyprland already installed — skipping Hyprbuntu compile ==="
@@ -197,14 +178,8 @@ EOF
 fi
 
 sudo mkdir -p /var/lib/noctalia-greeter
-if [[ ! -f /var/lib/noctalia-greeter/greeter.toml ]]; then
-    sudo tee /var/lib/noctalia-greeter/greeter.toml >/dev/null <<'EOF'
-[session]
-default = "Hyprland (uwsm-managed)"
-EOF
-    if id greeter >/dev/null 2>&1; then
-        sudo chown -R greeter:greeter /var/lib/noctalia-greeter
-    fi
+if id greeter >/dev/null 2>&1; then
+    sudo chown greeter:greeter /var/lib/noctalia-greeter
 fi
 
 sudo systemctl enable greetd.service
@@ -212,13 +187,6 @@ sudo systemctl set-default graphical.target
 sudo systemctl enable accounts-daemon.service 2>/dev/null || true
 echo "greetd configured — reboot to activate"
 
-echo "=== Hyprland config symlink + Noctalia autostart ==="
-link_hypr_config
-if [[ -f "$HOME/.config/hypr/hyprland.lua" && -f "$HOME/.config/hypr/config/autostart.lua" ]]; then
-    echo "Noctalia autostart: hypr/config/autostart.lua (hl.on hyprland.start → noctalia)"
-else
-    echo "Warning: Hyprland lua config missing after link — Noctalia will not autostart."
-fi
 if ! command -v noctalia >/dev/null; then
     echo "Warning: noctalia is not on PATH."
 fi

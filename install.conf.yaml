@@ -9,7 +9,7 @@
       stdout: true
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
-  - ['mkdir -p "$HOME/Pictures/Wallpapers" && cp "wallpapers/Dueling Planets.jpg" "$HOME/Pictures/Wallpapers/"', Install wallpaper]
+  - ['mkdir -p "$HOME/Pictures/Wallpapers" && cp -n "wallpapers/Dueling Planets.jpg" "$HOME/Pictures/Wallpapers/"', Install wallpaper]
 - create:
   - ~/projects
   - ~/.config
@@ -27,5 +27,5 @@
     ~/.config/fastfetch: fastfetch
     ~/.config/noctalia/config.toml: noctalia/config.toml
 - shell:
-  - ['[ -d /var/lib/noctalia-greeter ] && sudo ln -sf "$(realpath noctalia/greeter.toml)" /var/lib/noctalia-greeter/greeter.toml || true', Symlink Noctalia greeter config]
+  - ['[ -d /var/lib/noctalia-greeter ] && sudo ln -sfn "$(realpath noctalia/greeter.toml)" /var/lib/noctalia-greeter/greeter.toml || true', Symlink Noctalia greeter config]
   - [scripts/install-packages.sh, Installing OS-specific packages]
