@@ -1,15 +1,22 @@
--- Monitor wiki https://wiki.hypr.land/Configuring/Basics/Monitors/
--- Example: output can be found with hyprctl monitors. Edit variables.lua for the monitor outputs instead of here directly
--- hl.monitor({
---     output    = "MONITOR1",
---     mode      = "1920x1080@60",
---     position  = "0x0",
---     scale     = "1",
--- })
-
+-- Home Ultrawide on HDMI or USB-C)
 hl.monitor({
 	output = MONITOR1,
 	mode = "5120x1440@240",
+	position = "auto",
+	scale = "auto",
+})
+
+hl.monitor({
+	output = MONITOR2,
+	mode = "5120x1440@240",
+	position = "auto",
+	scale = "auto",
+})
+
+-- Fallback: laptop panel and any other monitor
+hl.monitor({
+	output = "",
+	mode = "preferred",
 	position = "auto",
 	scale = "auto",
 })

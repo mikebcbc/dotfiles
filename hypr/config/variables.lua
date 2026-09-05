@@ -6,9 +6,8 @@ BROWSER = "brave"
 EDITOR = "nvim"
 CALCULATOR = "gnome-calculator"
 
--- Monitors
-MONITOR1 = ""
-MONITOR2 = ""
+MONITOR1 = "HDMI-A-2" -- desktop external via HDMI
+MONITOR2 = "DP-1" -- laptop external via USB-C (Alt-DP)
 MONITOR3 = ""
 PRIMARY_MONITOR = MONITOR1
 
