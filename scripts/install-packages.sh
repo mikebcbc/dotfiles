@@ -64,7 +64,7 @@ install_font() {
 }
 
 # -------------------------------------------------------------------
-# Set fish as default shell (non-fatal, Linux only)
+# Set fish as default shell (non-fatal)
 # -------------------------------------------------------------------
 set_default_shell() {
     local fish_path
@@ -183,7 +183,7 @@ if [[ "$OS" == "Darwin" ]]; then
     fi
 
     # Install all formulae + casks from Brewfile
-    BREWFILE="${BASE_DIR:-$(cd "$(dirname "$0")/.." && pwd)}/Brewfile"
+    BREWFILE="${SCRIPT_DIR}/../Brewfile"
     echo "Installing from Brewfile..."
     brew bundle --file "$BREWFILE" || \
         add_error "brew bundle failed — some packages may not be installed. Run 'brew bundle --file $BREWFILE' manually."
