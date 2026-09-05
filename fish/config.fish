@@ -116,6 +116,8 @@ if status is-interactive
     set fish_vi_force_cursor 1
     fish_vi_key_bindings
     bind --mode default q 'exit'
+    bind -M insert ! __history_previous_command
+    bind -M insert '$' __history_previous_command_arguments
 
     # =========================================================================
     # Linux-only package-manager aliases

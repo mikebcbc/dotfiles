@@ -11,6 +11,7 @@ set -uo pipefail
 OS="$(uname)"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 ERRORS=()
+FISHER_EXTRA=()
 
 add_error() {
     ERRORS+=("$1")
@@ -63,7 +64,7 @@ install_font() {
 }
 
 # -------------------------------------------------------------------
-# Set fish as default shell (non-fatal)
+# Set fish as default shell (non-fatal, Linux only)
 # -------------------------------------------------------------------
 set_default_shell() {
     local fish_path
@@ -76,6 +77,26 @@ set_default_shell() {
 }
 
 # -------------------------------------------------------------------
+# Shared post-install: bob, fisher, shell, font
+# -------------------------------------------------------------------
+post_install() {
+    if command -v bob &>/dev/null; then
+        echo "Setting Neovim to nightly via bob..."
+        bob use nightly || add_error "bob use nightly failed."
+    fi
+
+    if command -v fish &>/dev/null; then
+        echo "Installing fisher plugins..."
+        fish "$SCRIPT_DIR/fisher-install.fish" "${FISHER_EXTRA[@]}" || \
+            add_error "fisher plugin installation failed."
+    fi
+
+    set_default_shell
+    install_font
+    echo "Done."
+}
+
+# -------------------------------------------------------------------
 # Linux — CachyOS/Arch (pacman) or Ubuntu (Hyprbuntu + Noctalia)
 # -------------------------------------------------------------------
 if [[ "$OS" == "Linux" ]]; then
@@ -85,24 +106,8 @@ if [[ "$OS" == "Linux" ]]; then
     if [[ "${ID:-}" == "ubuntu" || "${ID_LIKE:-}" == *ubuntu* ]]; then
         echo "Detected Ubuntu — Hyprbuntu + Noctalia"
         "$SCRIPT_DIR/install-ubuntu-desktop.sh" || add_error "install-ubuntu-desktop.sh failed — check output above."
-
         export PATH="$HOME/.local/bin:${PATH}"
-
-        if command -v bob &>/dev/null; then
-            echo "Setting Neovim to nightly via bob..."
-            bob use nightly || add_error "bob use nightly failed."
-        fi
-
-        if command -v fish &>/dev/null; then
-            echo "Installing fisher plugins..."
-            fish "$SCRIPT_DIR/fisher-install.fish" pure-fish/pure jorgebucaran/autopair.fish || \
-                add_error "fisher plugin installation failed."
-        fi
-
-        set_default_shell
-        install_font
-
-        echo "Done."
+        FISHER_EXTRA=("pure-fish/pure" "jorgebucaran/autopair.fish")
     else
         echo "Detected Linux - using pacman"
 
@@ -150,23 +155,9 @@ if [[ "$OS" == "Linux" ]]; then
                 add_error "yay not found — AUR packages (${AUR_PKGS[*]}) not installed."
             fi
         fi
-
-        if command -v bob &>/dev/null; then
-            echo "Setting Neovim to nightly via bob..."
-            bob use nightly || add_error "bob use nightly failed."
-        fi
-
-        # Install fisher plugins from fish_plugins
-        if command -v fish &>/dev/null; then
-            echo "Installing fisher plugins..."
-            fish "$SCRIPT_DIR/fisher-install.fish" || \
-                add_error "fisher plugin installation failed."
-        fi
-
-        set_default_shell
-
-        echo "Done."
     fi
+
+    post_install
 fi
 
 # -------------------------------------------------------------------
@@ -230,19 +221,6 @@ if [[ "$OS" == "Darwin" ]]; then
             add_error "Failed to install cask '$cask' — run 'brew install --cask $cask' manually."
     done
 
-    if command -v bob &>/dev/null; then
-        echo "Setting Neovim to nightly via bob..."
-        bob use nightly || add_error "bob use nightly failed."
-    fi
-
-    # Install fisher plugins from fish_plugins, plus pure-fish/pure on macOS (since we don't want this one in the file because CachyOS ships a version)
-    if command -v fish &>/dev/null; then
-        echo "Installing fisher plugins..."
-        fish "$SCRIPT_DIR/fisher-install.fish" pure-fish/pure || \
-            add_error "fisher plugin installation failed."
-    fi
-
-    install_font
-
-    echo "Done."
+    FISHER_EXTRA=("pure-fish/pure")
+    post_install
 fi
