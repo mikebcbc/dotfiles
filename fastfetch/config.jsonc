@@ -6,12 +6,16 @@
         "padding": {
             "top": 1,
             "left": 2
+        },
+        "color": {
+          "1": "green"
         }
     },
     "display": {
         "separator": " ",
         "color": {
-          "keys": "red"
+          "keys": "red",
+          "title": "green"
         },
     },
    "modules": [
