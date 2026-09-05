@@ -1,23 +1,6 @@
 # MCO's dotfiles
 
-Cross-platform dotfiles for Linux (CachyOS or Ubuntu + Hyprland) and macOS (OmniWM). Uses [dotbot](https://github.com/anishathalye/dotbot) for symlinks and package installation.
-
-## What's in here
-
-| Directory | Contents | Platform |
-|-----------|----------|----------|
-| `nvim/` | Neovim (i use neovim btw) config | both |
-| `ghostty/` | Ghostty terminal config | both |
-| `fish/` | Fish shell config + fisher plugins | both |
-| `git/` | Git config | both |
-| `lazygit/` | Lazygit config | both |
-| `fastfetch/` | Fastfetch config | both |
-| `hypr/` | Hyprland Lua config (0.55+) | Linux |
-| `noctalia/` | Noctalia shell + greeter | Linux |
-| `wallpapers/` | Wallpaper copied to `~/Pictures/Wallpapers` | Linux |
-| `karabiner/` | Karabiner config | macOS |
-| `omniwm/` | OmniWM (Hypr dwindle mock on macOS) | macOS |
-| `Raycast.rayconfig` | Raycast launcher config | macOS |
+Cross-platform dotfiles for Linux (CachyOS or Ubuntu + Hyprland) and macOS (OmniWM).
 
 ## Install
 
@@ -25,45 +8,56 @@ Cross-platform dotfiles for Linux (CachyOS or Ubuntu + Hyprland) and macOS (Omni
 ./install
 ```
 
-The `install` script runs dotbot which:
+`./install` does:
 
-1. **Symlinks** shared configs (`install.conf.yaml`): fish, nvim, ghostty, git, fastfetch
-1. **Runs** `scripts/install-packages.sh` to install OS-appropriate packages
-1. **Symlinks** OS-specific configs (`install-linux.conf.yaml` or `install-macos.conf.yaml`)
+1. Updates git submodules (dotbot)
+1. Runs **dotbot** with `install.conf.yaml` - symlinks shared configs and sets up directories
+1. Runs **dotbot** with `install-linux.conf.yaml` or `install-macos.conf.yaml` depending on OS
+1. Runs **`scripts/install-packages.sh`**
+1. sudo-symlinks the Noctalia greeter config on linux since ownership of this file is iffy.
 
-On **Ubuntu 26.04 Server** (preferred) or Desktop, `./install` also runs [Hyprbuntu](https://gitlab.com/kralos/hyprbuntu) (Hyprland from source) unless `Hyprland` is already on PATH (set `FORCE_HYPRBUNTU=1` to rebuild). It installs [UWSM](https://wiki.hypr.land/Useful-Utilities/Systemd-start/) from apt (same `uwsm app --` launches as Cachy), [Noctalia](https://docs.noctalia.dev/noctalia/getting-started/installation/) + [Noctalia Greeter](https://docs.noctalia.dev/greeter/) from the official APT repo, then points `~/.config/hypr` at this repo so `hypr/config/autostart.lua` starts Noctalia. Waybar, tuigreet, hyprlock, and hyprpaper are skipped because Noctalia owns those. After first login: Noctalia Settings → Security → Noctalia Greeter → **Sync Now**. Confirm the greeter session name with `noctalia-greeter sessions` if the picker is empty.
+## What's in here
 
-On macOS, after install:
+| Directory | Contents | Platform |
+|-----------|----------|----------|
+| `nvim/` | Neovim config (i use neovim btw) | both |
+| `ghostty/` | Ghostty terminal config + Vesper theme | both |
+| `fish/` | Fish shell config + fisher plugins | both |
+| `git/` | Git config | both |
+| `lazygit/` | Lazygit config | both |
+| `fastfetch/` | Fastfetch config + custom logo | both |
+| `hypr/` | Hyprland Lua config (0.55+) | Linux |
+| `noctalia/` | Noctalia shell + greeter config | Linux |
+| `wallpapers/` | Wallpaper copied to `~/Pictures/Wallpapers` | Linux |
+| `karabiner/` | Karabiner complex modifications | macOS |
+| `omniwm/` | OmniWM settings | macOS |
+| `Brewfile` | Homebrew bundle (formulae + casks) | macOS |
+| `Raycast.rayconfig` | Raycast launcher config | macOS |
+
+## Ubuntu 26.04
+
+On **Ubuntu 26.04 Server**, `install-packages.sh` runs [Hyprbuntu](https://gitlab.com/kralos/hyprbuntu) (Hyprland from source) unless `Hyprland` is already on PATH (set `FORCE_HYPRBUNTU=1` to rebuild). It installs [UWSM](https://wiki.hypr.land/Useful-Utilities/Systemd-start/) from apt, [Noctalia](https://docs.noctalia.dev/noctalia/getting-started/installation/) + [Noctalia Greeter](https://docs.noctalia.dev/greeter/) from the official APT repo, then `./install` symlinks `noctalia/greeter.toml` to `/var/lib/noctalia-greeter/greeter.toml`. We need to sync the greeter manually after logging in.
+
+## macOS
+
+After install:
 
 1. Karabiner-Elements → Complex Modifications → Add rule → enable **Linux Ctrl app shortcuts on macOS**.
 1. System Settings → Keyboard → Keyboard Shortcuts → Mission Control → turn off **Move left a space** and **Move right a space** (Ctrl+Left / Ctrl+Right).
 
-### Packages installed
-
-**Linux CachyOS/Arch (pacman + AUR):**
-neovim, bob, fish, ghostty, brave-browser, fastfetch, fisher, fish-pure-prompt, fish-autopair, bat, eza, fd, ripgrep, fzf, lazygit, git, tealdeer, btop, filezilla, satty, yay + autojump (AUR via yay)
-
-**Linux Ubuntu 26.04:**
-Hyprland via Hyprbuntu; UWSM + Noctalia + noctalia-greeter from apt; same CLI/apps as CachyOS (neovim, bob + nightly, fish, ghostty, brave, fastfetch, fisher, bat, eza, fd, ripgrep, fzf, lazygit, git, tealdeer, btop, filezilla, satty, autojump, tree-sitter-cli) plus thunar and gnome-calculator for Hyprland binds. `yay` is Arch-only.
-
-**macOS (brew formulae + casks):**
-neovim, bob, autojump, bat, btop, direnv, eza, fastfetch, fd, fish, fisher, fzf, git, lazygit, ripgrep, tealdeer + brave-browser, filezilla, ghostty, karabiner-elements, omniwm
-
-### Fisher plugins
+## Fisher plugins
 
 Plugins are listed in `fish/fish_plugins` and managed by fisher:
 `jorgebucaran/fisher`, `edc/bass`, `fisherman/done`, `fabioantunes/fish-nvm`, `patrickf1/fzf.fish`
 
-On CachyOS, `done` and `pure` come from distro packages (`fish-done` and `fish-pure-prompt`). On Ubuntu and macOS, fisher installs `done` and `pure-fish/pure`.
+On CachyOS, `done` and `pure` come from distro packages (`fish-done` and `fish-pure-prompt`). On Ubuntu and macOS, fisher installs `pure-fish/pure` and `jorgebucaran/autopair.fish`.
 
 ## Cherry-picking CachyOS upstream config changes
 
-Some CachyOS packages like `cachyos-hypr-noctalia` and fish install its config to `/etc/skel/.config/` - the skeleton directory used when creating new user accounts. It never touches an existing `~/.config/` after a package update.
+Some CachyOS packages like `cachyos-hypr-noctalia` install their config to `/etc/skel/.config/` — the skeleton directory used when creating new user accounts. It never touches an existing `~/.config/` after a package update.
 
-Therefore, package updates are completely decoupled from the active config. To compare upstream changes against the repo copy after a package update:
+To compare upstream changes against the repo copy after a package update:
 
 ```bash
 diff /etc/skel/.config/hypr/config/binds.lua ~/dotfiles/hypr/config/binds.lua
 ```
-
-From there, we can manually merge any desired upstream changes into this repo if they're useful.

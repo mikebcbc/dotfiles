@@ -46,14 +46,6 @@ if status is-interactive
             end
         end
 
-        if test "$fish_key_bindings" = fish_vi_key_bindings
-            bind -Minsert ! __history_previous_command
-            bind -Minsert '$' __history_previous_command_arguments
-        else
-            bind ! __history_previous_command
-            bind '$' __history_previous_command_arguments
-        end
-
         # Enhanced history
         function history
             builtin history --show-time='%F %T ' $argv

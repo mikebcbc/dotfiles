@@ -8,8 +8,8 @@
 -- })
 
 hl.monitor({
-    output    = MONITOR1,
-    mode      = "5120x1440@240",
-    position  = "auto",
-    scale     = "auto",
+	output = MONITOR1,
+	mode = "5120x1440@240",
+	position = "auto",
+	scale = "auto",
 })

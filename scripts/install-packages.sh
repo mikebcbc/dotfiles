@@ -174,26 +174,6 @@ if [[ "$OS" == "Darwin" ]]; then
         eval "$(/opt/homebrew/bin/brew shellenv)"
     fi
 
-    # Formulae (CLI tools)
-    BREW_PKGS=(
-        neovim
-        bob
-        autojump
-        bat
-        btop
-        direnv
-        eza
-        fastfetch
-        fd
-        fish
-        fisher
-        fzf
-        git
-        lazygit
-        ripgrep
-        tealdeer
-    )
-
     # Fix Homebrew permissions if some directories are owned by root
     # (e.g. from a previous sudo brew or formula that created dirs as root)
     if find /opt/homebrew/lib -maxdepth 1 -user root -print -quit 2>/dev/null | grep -q .; then
@@ -202,24 +182,11 @@ if [[ "$OS" == "Darwin" ]]; then
             add_error "Failed to fix Homebrew permissions — run 'sudo chown -R \$(whoami):admin /opt/homebrew' manually."
     fi
 
-    echo "Installing formulae: ${BREW_PKGS[*]}"
-    brew install "${BREW_PKGS[@]}" || \
-        add_error "brew install failed for some formulae — check output above."
-
-    # Casks (GUI apps) - install individually so one failure doesn't block others
-    CASK_PKGS=(
-        brave-browser
-        filezilla
-        ghostty
-        karabiner-elements
-        BarutSRB/tap/omniwm
-    )
-
-    for cask in "${CASK_PKGS[@]}"; do
-        echo "Installing cask: $cask"
-        brew install --cask "$cask" 2>/dev/null || \
-            add_error "Failed to install cask '$cask' — run 'brew install --cask $cask' manually."
-    done
+    # Install all formulae + casks from Brewfile
+    BREWFILE="${BASE_DIR:-$(cd "$(dirname "$0")/.." && pwd)}/Brewfile"
+    echo "Installing from Brewfile..."
+    brew bundle --file "$BREWFILE" || \
+        add_error "brew bundle failed — some packages may not be installed. Run 'brew bundle --file $BREWFILE' manually."
 
     FISHER_EXTRA=("pure-fish/pure")
     post_install
