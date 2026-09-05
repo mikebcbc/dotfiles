@@ -19,3 +19,11 @@ if [[ "$(uname)" == "Linux" ]]; then
 elif [[ "$(uname)" == "Darwin" ]]; then
     "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "install-macos.conf.yaml" "${@}"
 fi
+
+# Package installation
+"${BASEDIR}/scripts/install-packages.sh"
+
+# Linux: sudo symlink Noctalia greeter config
+if [[ "$(uname)" == "Linux" ]]; then
+    [ -d /var/lib/noctalia-greeter ] && sudo ln -sfn "$(realpath "${BASEDIR}/noctalia/greeter.toml")" /var/lib/noctalia-greeter/greeter.toml || true
+fi
