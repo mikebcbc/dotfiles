@@ -33,6 +33,22 @@ smart_auto_hide = true
 [plugins]
 enabled = [ "noctalia/bitwarden" ]
 
+[idle]
+behavior_order = [ "lock", "screen_off", "suspend" ]
+pre_action_fade_seconds = 2.0
+
+    [idle.behavior.lock]
+    timeout = 300
+    action = "lock"
+
+    [idle.behavior.screen_off]
+    timeout = 600
+    action = "screen_off"
+
+    [idle.behavior.suspend]
+    timeout = 1800
+    action = "lock_and_suspend"
+
 [shell]
 clipboard_image_action_command = "satty -f -"
 font_family = "Inconsolata Nerd Font Mono"
