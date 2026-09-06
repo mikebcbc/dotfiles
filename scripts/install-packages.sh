@@ -77,6 +77,29 @@ set_default_shell() {
 }
 
 # -------------------------------------------------------------------
+# Install Hyprland plugins via hyprpm if hyprland exists 
+# -------------------------------------------------------------------
+HYPR_PLUGINS=(
+    "https://github.com/estebanhiram/hypr-autoscroll"
+)
+
+install_hypr_plugins() {
+    if ! command -v hyprpm &>/dev/null; then
+        add_error "hyprpm not found - skipping Hyprland plugins."
+        return 0
+    fi
+    for url in "${HYPR_PLUGINS[@]}"; do
+        local name="${url##*/}"
+        echo "Adding Hyprland plugin: $name"
+        hyprpm add "$url" 2>/dev/null || true
+        hyprpm enable "$name" 2>/dev/null || \
+            add_error "hyprpm enable '$name' failed — run 'hyprpm enable $name' manually."
+    done
+    echo "Updating Hyprland plugins (rebuilds against current headers)..."
+    hyprpm update 2>/dev/null || true
+}
+
+# -------------------------------------------------------------------
 # Shared post-install: bob, fisher, shell, font
 # -------------------------------------------------------------------
 post_install() {
@@ -157,6 +180,7 @@ if [[ "$OS" == "Linux" ]]; then
         fi
     fi
 
+    install_hypr_plugins
     post_install
 fi
 
