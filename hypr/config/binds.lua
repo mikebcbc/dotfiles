@@ -37,13 +37,11 @@ hl.bind("CONTROL + SHIFT + J", hl.dsp.window.move({ direction = "d" }))
 -- hl.bind(mainMod .. " + SHIFT + 3",                    hl.dsp.window.move({ monitor = MONITOR3 }))
 -- hl.bind(mainMod .. " + SHIFT + mouse_up",             hl.dsp.window.move({ monitor   = "-1" }))
 -- hl.bind(mainMod .. " + SHIFT + mouse_down",           hl.dsp.window.move({ monitor   = "+1" }))
-hl.bind(mainMod .. " + ALT + L", hl.dsp.window.move({ workspace = "m+1" }))
-hl.bind(mainMod .. " + ALT + H", hl.dsp.window.move({ workspace = "m-1" }))
-hl.bind(mainMod .. " + SHIFT + mouse_up", hl.dsp.window.move({ workspace = "m-1" }))
-hl.bind(mainMod .. " + ALT + mouse_down", hl.dsp.window.move({ workspace = "m+1" }))
+hl.bind(mainMod .. " + CONTROL + L", hl.dsp.window.move({ workspace = "m+1" }))
+hl.bind(mainMod .. " + CONTROL + H", hl.dsp.window.move({ workspace = "m-1" }))
 for i, ws in ipairs(NAMED_WSPACES) do
-    local key = i % 10
-    hl.bind(mainMod .. " + SHIFT + CONTROL + " .. key, hl.dsp.window.move({ workspace = "name:" .. ws }))
+	local key = i % 10
+	hl.bind(mainMod .. " + SHIFT + CONTROL + " .. key, hl.dsp.window.move({ workspace = "name:" .. ws }))
 end
 
 -- Move & Resize with mouse
@@ -52,22 +50,29 @@ hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize())
 
 -- Zoom
 local function zoomfunction(value)
-    local zoomvalue = hl.get_config("cursor:zoom_factor")
-    if (zoomvalue + value) > 3.0 then
-        hl.config({ cursor = { zoom_factor = 3.0 } })
-    elseif (zoomvalue + value) < 1.0 then
-        hl.config({ cursor = { zoom_factor = 1.0 } })
-    else
-        hl.config({ cursor = { zoom_factor = zoomvalue + value } })
-    end
+	local zoomvalue = hl.get_config("cursor:zoom_factor")
+	if (zoomvalue + value) > 3.0 then
+		hl.config({ cursor = { zoom_factor = 3.0 } })
+	elseif (zoomvalue + value) < 1.0 then
+		hl.config({ cursor = { zoom_factor = 1.0 } })
+	else
+		hl.config({ cursor = { zoom_factor = zoomvalue + value } })
+	end
 end
-hl.bind(mainMod .. " + Minus", function() zoomfunction(-0.3) end, { repeating = true })
-hl.bind(mainMod .. " + Plus", function() zoomfunction(0.3) end, { repeating = true })
+hl.bind(mainMod .. " + Minus", function()
+	zoomfunction(-0.3)
+end, { repeating = true })
+hl.bind(mainMod .. " + Plus", function()
+	zoomfunction(0.3)
+end, { repeating = true })
 
 --# Zoom with keypad
-hl.bind(mainMod .. " + code:82", function() zoomfunction(-0.3) end, { repeating = true })
-hl.bind(mainMod .. " + code:86", function() zoomfunction(0.3) end, { repeating = true })
-
+hl.bind(mainMod .. " + code:82", function()
+	zoomfunction(-0.3)
+end, { repeating = true })
+hl.bind(mainMod .. " + code:86", function()
+	zoomfunction(0.3)
+end, { repeating = true })
 
 ------------------
 ---- LAUNCHER ----
@@ -136,14 +141,14 @@ hl.bind(mainMod .. " + A", hl.dsp.exec_cmd(noctCall .. "panel-toggle control-cen
 
 -- SUPER+ALT+1 → Primary, SUPER+ALT+2 → Coding, SUPER+ALT+3 → Research
 for i, ws in ipairs(NAMED_WSPACES) do
-    local key = i % 10
-    hl.bind(mainMod .. " + ALT + " .. key, hl.dsp.focus({ workspace = "name:" .. ws }))
+	local key = i % 10
+	hl.bind(mainMod .. " + ALT + " .. key, hl.dsp.focus({ workspace = "name:" .. ws }))
 end
 
 -- Move to adjacent workspaces and next empty on a given monitor
-hl.bind(mainMod .. " + CONTROL + L", hl.dsp.focus({ workspace = "m+1" }))
-hl.bind(mainMod .. " + CONTROL + H", hl.dsp.focus({ workspace = "m-1" }))
-hl.bind(mainMod .. " + CONTROL + Down", hl.dsp.focus({ workspace = "emptym" }))
+hl.bind(mainMod .. " + ALT + L", hl.dsp.focus({ workspace = "m+1" }))
+hl.bind(mainMod .. " + ALT + H", hl.dsp.focus({ workspace = "m-1" }))
+hl.bind(mainMod .. " + ALT + Down", hl.dsp.focus({ workspace = "emptym" }))
 
 -- Scroll through existing workspaces & monitors
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "m-1" }))
