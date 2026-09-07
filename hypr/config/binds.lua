@@ -12,6 +12,20 @@ hl.bind(mainMod .. " + W", hl.dsp.window.close())
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.float({ action = "toggle" }))
 -- hl.bind(mainMod .. " + D",           hl.dsp.window.fullscreen({ mode = 1 }))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = 1 }))
+
+-- Group operations (submap, so super + g gets you in and out of submap)
+hl.bind(mainMod .. " + G", hl.dsp.submap("group"))
+hl.define_submap("group", function()
+	hl.bind("G", hl.dsp.group.toggle())
+	hl.bind("H", hl.dsp.group.prev())
+	hl.bind("L", hl.dsp.group.next())
+	hl.bind("J", hl.dsp.window.move({ into_or_create_group = "l" }))
+	hl.bind("K", hl.dsp.window.move({ out_of_group = true }))
+	hl.bind(mainMod .. " + G", hl.dsp.submap("reset"))
+	hl.bind("escape", hl.dsp.submap("reset"))
+end)
+
+-- Toggle split direction
 hl.bind(mainMod .. " + SHIFT + Return", hl.dsp.layout("togglesplit"))
 
 -- Change focus
