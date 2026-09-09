@@ -29,7 +29,7 @@ current=$(hyprctl monitors -j | jq -r --arg m "$MONITOR" '.[] | select(.name == 
 
 case "$current" in
 hdr | hdredid)
-	toggle_cm="srgb"
+	toggle_cm="dp3"
 	state_label="SDR"
 	;;
 *)
