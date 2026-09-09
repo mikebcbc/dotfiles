@@ -50,7 +50,7 @@ After install:
 Plugins are listed in `fish/fish_plugins` and managed by fisher:
 `jorgebucaran/fisher`, `edc/bass`, `fisherman/done`, `fabioantunes/fish-nvm`, `patrickf1/fzf.fish`
 
-On CachyOS, `done` and `pure` come from distro packages (`fish-done` and `fish-pure-prompt`). On Ubuntu and macOS, fisher installs `pure-fish/pure` and `jorgebucaran/autopair.fish`.
+On CachyOS, `done` and `pure` come from distro packages (`fish-done` and `fish-pure-prompt`). On Ubuntu, fisher also installs `pure-fish/pure` and `jorgebucaran/autopair.fish`. On macOS, fisher installs `pure-fish/pure`.
 
 ## Cherry-picking CachyOS upstream config changes
 

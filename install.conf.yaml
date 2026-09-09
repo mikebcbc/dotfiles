@@ -15,8 +15,6 @@
   - ~/.config/git
 - clean:
   - '~'
-- shell:
-  - ['[ -L "$HOME/.config/ghostty" ] && rm "$HOME/.config/ghostty" || true', Migrate ghostty dir link]
 - link:
     ~/.config/fish: fish
     ~/.config/nvim: nvim

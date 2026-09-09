@@ -87,7 +87,7 @@ hl.window_rule({
 })
 hl.window_rule({
 	match = {
-		class = "^(org\\.kde\\.dolphin)$",
+		class = "^(org\\.kde\\.dolphin|[Tt]hunar)$",
 		title = "negative:^(Moving.*|Create New.*|Extract.*|Compress.*|Copying.*|Progress.*|Configure.*|Properties.*|Choose\\sApplication.*)$",
 	},
 	float = true,

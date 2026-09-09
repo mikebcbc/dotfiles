@@ -1,4 +1,4 @@
--- CachyOS Hyprland Configuration
+-- Hyprland Config
 
 require("config.animations")
 require("config.autostart")
