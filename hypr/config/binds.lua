@@ -126,6 +126,9 @@ hl.bind("XF86AudioPrev", hl.dsp.exec_cmd(noctCall .. "media previous"), { locked
 hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd(noctCall .. "brightness-up"), { locked = true, repeating = true })
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd(noctCall .. "brightness-down"), { locked = true, repeating = true })
 
+-- HDR toggle
+hl.bind(mainMod .. " + ALT + B", hl.dsp.exec_cmd("bash ~/dotfiles/scripts/hdr-toggle.sh"), { locked = true })
+
 -------------------
 ---- UTILITIES ----
 -------------------
