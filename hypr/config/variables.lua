@@ -2,7 +2,7 @@
 
 TERMINAL = "ghostty"
 FILE_MANAGER = "thunar"
-BROWSER = "brave"
+BROWSER = "brave-origin"
 EDITOR = "nvim"
 CALCULATOR = "gnome-calculator"
 

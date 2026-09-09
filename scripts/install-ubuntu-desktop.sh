@@ -75,7 +75,7 @@ if command -v fdfind >/dev/null && ! command -v fd >/dev/null; then
 fi
 export PATH="$HOME/.local/bin:${PATH}"
 
-if ! command -v brave-browser >/dev/null; then
+if ! command -v brave-origin >/dev/null; then
     echo "=== Brave ==="
     curl -fsS https://dl.brave.com/install.sh | sh || echo "Brave install failed — install later."
 fi

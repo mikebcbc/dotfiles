@@ -139,7 +139,7 @@ if [[ "$OS" == "Linux" ]]; then
             bob
             fish
             ghostty
-            brave-browser
+            brave-origin
             fastfetch
             fisher
             fish-pure-prompt
