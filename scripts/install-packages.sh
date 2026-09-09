@@ -12,9 +12,22 @@ OS="$(uname)"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 ERRORS=()
 FISHER_EXTRA=()
+DOTFILES_INSTALL_ERRORS="$(mktemp)"
+export DOTFILES_INSTALL_ERRORS
 
 add_error() {
     ERRORS+=("$1")
+}
+
+# Child scripts (e.g. install-ubuntu-desktop.sh) append one error per line.
+collect_child_errors() {
+    if [[ -f "$DOTFILES_INSTALL_ERRORS" ]]; then
+        while IFS= read -r line || [[ -n "$line" ]]; do
+            [[ -z "$line" ]] && continue
+            add_error "$line"
+        done < "$DOTFILES_INSTALL_ERRORS"
+        : > "$DOTFILES_INSTALL_ERRORS"
+    fi
 }
 
 RED='\033[0;31m'
@@ -31,7 +44,7 @@ print_errors() {
     fi
 }
 
-trap print_errors EXIT
+trap 'print_errors; rm -f "$DOTFILES_INSTALL_ERRORS"' EXIT
 
 # -------------------------------------------------------------------
 # Install Inconsolata Nerd Font Mono (used by Noctalia bar/shell)
@@ -129,6 +142,7 @@ if [[ "$OS" == "Linux" ]]; then
     if [[ "${ID:-}" == "ubuntu" || "${ID_LIKE:-}" == *ubuntu* ]]; then
         echo "Detected Ubuntu — Hyprbuntu + Noctalia"
         "$SCRIPT_DIR/install-ubuntu-desktop.sh" || add_error "install-ubuntu-desktop.sh failed — check output above."
+        collect_child_errors
         export PATH="$HOME/.local/bin:${PATH}"
         FISHER_EXTRA=("pure-fish/pure" "jorgebucaran/autopair.fish")
     else

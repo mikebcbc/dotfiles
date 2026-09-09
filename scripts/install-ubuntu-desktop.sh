@@ -9,6 +9,13 @@
 
 set -euo pipefail
 
+report_error() {
+    echo "$1"
+    if [[ -n "${DOTFILES_INSTALL_ERRORS:-}" ]]; then
+        printf '%s\n' "$1" >> "$DOTFILES_INSTALL_ERRORS"
+    fi
+}
+
 if [[ "$(uname)" != "Linux" ]]; then
     echo "install-ubuntu-desktop.sh is Linux-only."
     exit 1
@@ -77,7 +84,8 @@ export PATH="$HOME/.local/bin:${PATH}"
 
 if ! command -v brave-origin >/dev/null; then
     echo "=== Brave ==="
-    curl -fsS https://dl.brave.com/install.sh | sh || echo "Brave install failed — install later."
+    curl -fsS https://dl.brave.com/install.sh | sh || \
+        report_error "Brave install failed — run 'curl -fsS https://dl.brave.com/install.sh | sh' manually."
 fi
 
 if ! command -v bob >/dev/null; then
@@ -102,14 +110,14 @@ if ! command -v satty >/dev/null; then
             if [[ -n "$satty_bin" ]]; then
                 install -m 0755 "$satty_bin" "$HOME/.local/bin/satty"
             else
-                echo "satty binary not found in archive — install later."
+                report_error "satty binary not found in archive — install from https://github.com/Satty-org/Satty/releases"
             fi
         else
-            echo "satty download failed — install later."
+            report_error "satty download failed — install from https://github.com/Satty-org/Satty/releases"
         fi
         rm -rf "$satty_tmp"
     else
-        echo "No satty binary for $(uname -m) — install later."
+        report_error "No satty binary for $(uname -m) — install from https://github.com/Satty-org/Satty/releases"
     fi
 fi
 
