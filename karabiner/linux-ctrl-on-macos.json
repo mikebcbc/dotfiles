@@ -1,8 +1,8 @@
 {
-  "title": "Linux Ctrl app shortcuts on macOS (inverse of omarchy#175 keyd)",
+  "title": "Linux Ctrl app shortcuts on macOS",
   "rules": [
     {
-      "description": "Omarchy-style: Ctrl+key \u2192 Cmd+key in apps (Find, tab, copy\u2026). Terminals excluded so Ctrl+C stays SIGINT. Emits right_command so left-Cmd Super binds in OmniWM are not stolen.",
+      "description": "Ctrl+key → Cmd+key in apps (Find, tab, copy…). Terminals excluded so Ctrl+C stays SIGINT. Emits right_command so left-Cmd Super binds in OmniWM are not stolen.",
       "manipulators": [
         {
           "type": "basic",
@@ -451,7 +451,7 @@
       ]
     },
     {
-      "description": "Omarchy-style: left Cmd+F is Super fullscreen (OmniWM). Ctrl+F stays Find via right-command remap.",
+      "description": "Left Cmd+F is Super fullscreen (OmniWM). Ctrl+F stays Find via right-command remap.",
       "manipulators": [
         {
           "type": "basic",
