@@ -108,15 +108,20 @@ install_greeter_config() {
 }
 
 # -------------------------------------------------------------------
-# Install Hyprland plugins via hyprpm if hyprland exists
+# Install Hyprland plugins via hyprpm (needs a live Hyprland session)
 # -------------------------------------------------------------------
 HYPR_PLUGINS=(
     "https://github.com/estebanhiram/hypr-autoscroll"
 )
 
 install_hypr_plugins() {
-    if ! command -v hyprpm &>/dev/null; then
-        add_error "hyprpm not found - skipping Hyprland plugins."
+    if ! command -v Hyprland &>/dev/null || ! command -v hyprpm &>/dev/null; then
+        echo "Hyprland/hyprpm not installed — skipping plugins."
+        return 0
+    fi
+    if [[ -z "${HYPRLAND_INSTANCE_SIGNATURE:-}" ]] && ! hyprctl version &>/dev/null; then
+        echo "Hyprland is not running — skipping plugins."
+        add_error "Hyprland plugins skipped (no running session). Reboot into Hyprland, then run ./install again."
         return 0
     fi
     for url in "${HYPR_PLUGINS[@]}"; do
@@ -159,8 +164,12 @@ if [[ "$OS" == "Linux" ]]; then
 
     if [[ "${ID:-}" == "ubuntu" || "${ID_LIKE:-}" == *ubuntu* ]]; then
         echo "Detected Ubuntu — Hyprbuntu + Noctalia"
-        "$SCRIPT_DIR/install-ubuntu-desktop.sh" || add_error "install-ubuntu-desktop.sh failed — check output above."
-        collect_child_errors
+        if ! "$SCRIPT_DIR/install-ubuntu-desktop.sh"; then
+            collect_child_errors
+            add_error "install-ubuntu-desktop.sh failed — Hyprbuntu/cmake errors (if any) were reprinted above."
+        else
+            collect_child_errors
+        fi
         export PATH="$HOME/.local/bin:${PATH}"
         FISHER_EXTRA=("pure-fish/pure" "jorgebucaran/autopair.fish")
     else

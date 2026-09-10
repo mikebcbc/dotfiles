@@ -72,6 +72,10 @@ APT_PKGS=(
     # Hyprbuntu only builds uwsm when TUIGREET_SETUP=true, which we skip.
     uwsm
     tree-sitter-cli
+    # Hyprland cmake requires sdbus-c++>=2; Hyprbuntu does not install this for the
+    # Hyprland package itself (only for hyprlock, which we disable).
+    libsdbus-c++-dev
+    libsdbus-c++2
 )
 
 sudo apt-get install -y "${APT_PKGS[@]}"
@@ -134,7 +138,9 @@ else
         "https://gitlab.com/kralos/hyprbuntu/-/raw/main/setup-hyprbuntu.sh"
     chmod +x "$HYPRBUNTU_SETUP_PATH/setup-hyprbuntu.sh"
 
-    THEME_PREF=dark \
+    hyprbuntu_log="$(mktemp "${TMPDIR:-/tmp}/hyprbuntu.XXXXXX.log")"
+    echo "Hyprbuntu log: $hyprbuntu_log"
+    if ! THEME_PREF=dark \
         NOTIFICATION_DAEMON_PREF=none \
         HYPRPAPER_SETUP=false \
         HYPRLOCK_SETUP=false \
@@ -145,7 +151,25 @@ else
         WAYBAR_SETUP=false \
         TUIGREET_SETUP=false \
         DISABLE_CONFIRM=true \
-        "$HYPRBUNTU_SETUP_PATH/setup-hyprbuntu.sh"
+        "$HYPRBUNTU_SETUP_PATH/setup-hyprbuntu.sh" 2>&1 | tee "$hyprbuntu_log"; then
+        echo
+        echo "=== Hyprbuntu FAILED (last 60 lines) ==="
+        tail -n 60 "$hyprbuntu_log" || true
+        echo "=== end Hyprbuntu failure (full log: $hyprbuntu_log) ==="
+        report_error "Hyprbuntu failed — last cmake/build errors reprinted above. Full log: $hyprbuntu_log"
+        exit 1
+    fi
+
+    if ! command -v Hyprland >/dev/null; then
+        echo
+        echo "=== Hyprbuntu finished without Hyprland on PATH (last 60 lines) ==="
+        tail -n 60 "$hyprbuntu_log" || true
+        echo "=== end (full log: $hyprbuntu_log) ==="
+        report_error "Hyprbuntu exited OK but Hyprland is missing — build/install likely failed. Log: $hyprbuntu_log"
+        exit 1
+    fi
+    echo "Hyprland installed: $(command -v Hyprland)"
+    Hyprland --version 2>/dev/null || true
 fi
 
 echo "=== Noctalia + Noctalia Greeter (official APT repo) ==="
