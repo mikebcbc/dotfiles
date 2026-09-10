@@ -90,7 +90,25 @@ set_default_shell() {
 }
 
 # -------------------------------------------------------------------
-# Install Hyprland plugins via hyprpm if hyprland exists 
+# Install Noctalia greeter config to system path
+# -------------------------------------------------------------------
+install_greeter_config() {
+    local greeter_src="$(cd "$SCRIPT_DIR/../noctalia" && pwd)/greeter.toml"
+    local greeter_dest="/var/lib/noctalia-greeter/greeter.toml"
+    if [[ ! -f "$greeter_src" ]]; then
+        return 0
+    fi
+    if [[ "$OS" != "Linux" ]]; then
+        return 0
+    fi
+    echo "Installing Noctalia greeter config..."
+    sudo mkdir -p /var/lib/noctalia-greeter 2>/dev/null && \
+        sudo ln -sf "$greeter_src" "$greeter_dest" 2>/dev/null || \
+            add_error "Failed to install greeter config — run: sudo mkdir -p /var/lib/noctalia-greeter && sudo ln -sf $greeter_src $greeter_dest"
+}
+
+# -------------------------------------------------------------------
+# Install Hyprland plugins via hyprpm if hyprland exists
 # -------------------------------------------------------------------
 HYPR_PLUGINS=(
     "https://github.com/estebanhiram/hypr-autoscroll"
@@ -194,6 +212,7 @@ if [[ "$OS" == "Linux" ]]; then
         fi
     fi
 
+    install_greeter_config
     install_hypr_plugins
     post_install
 fi
