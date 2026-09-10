@@ -87,9 +87,9 @@ fi
 export PATH="$HOME/.local/bin:${PATH}"
 
 if ! command -v brave-origin >/dev/null; then
-    echo "=== Brave ==="
-    curl -fsS https://dl.brave.com/install.sh | sh || \
-        report_error "Brave install failed — run 'curl -fsS https://dl.brave.com/install.sh | sh' manually."
+    echo "=== Brave Origin ==="
+    curl -fsS https://dl.brave.com/install.sh | FLAVOR=origin sh || \
+        report_error "Brave Origin install failed — run 'curl -fsS https://dl.brave.com/install.sh | FLAVOR=origin sh' manually."
 fi
 
 if ! command -v bob >/dev/null; then
