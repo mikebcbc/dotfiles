@@ -25,6 +25,18 @@ hl.define_submap("group", function()
 	hl.bind("escape", hl.dsp.submap("reset"))
 end)
 
+-- Resize mode (submap, so super + r gets you in and out of submap)
+hl.bind(mainMod .. " + R", hl.dsp.submap("resize"))
+hl.define_submap("resize", function()
+	local step = 40
+	hl.bind("H", hl.dsp.window.resize({ x = -step, y = 0, relative = true }), { repeating = true })
+	hl.bind("L", hl.dsp.window.resize({ x = step, y = 0, relative = true }), { repeating = true })
+	hl.bind("K", hl.dsp.window.resize({ x = 0, y = -step, relative = true }), { repeating = true })
+	hl.bind("J", hl.dsp.window.resize({ x = 0, y = step, relative = true }), { repeating = true })
+	hl.bind(mainMod .. " + R", hl.dsp.submap("reset"))
+	hl.bind("escape", hl.dsp.submap("reset"))
+end)
+
 -- Toggle split direction
 hl.bind(mainMod .. " + SHIFT + Return", hl.dsp.layout("togglesplit"))
 
