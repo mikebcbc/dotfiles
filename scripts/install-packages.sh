@@ -11,7 +11,6 @@ set -uo pipefail
 OS="$(uname)"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 ERRORS=()
-FISHER_EXTRA=()
 DOTFILES_INSTALL_ERRORS="$(mktemp)"
 export DOTFILES_INSTALL_ERRORS
 
@@ -144,7 +143,7 @@ post_install() {
 
     if command -v fish &>/dev/null; then
         echo "Installing fisher plugins..."
-        fish "$SCRIPT_DIR/fisher-install.fish" "${FISHER_EXTRA[@]}" || \
+        fish "$SCRIPT_DIR/fisher-install.fish" || \
             add_error "fisher plugin installation failed."
     fi
 
@@ -169,7 +168,6 @@ if [[ "$OS" == "Linux" ]]; then
             collect_child_errors
         fi
         export PATH="$HOME/.local/bin:${PATH}"
-        FISHER_EXTRA=("pure-fish/pure" "jorgebucaran/autopair.fish")
     else
         echo "Detected Linux - using pacman"
 
@@ -252,6 +250,5 @@ if [[ "$OS" == "Darwin" ]]; then
     brew bundle --file "$BREWFILE" || \
         add_error "brew bundle failed — some packages may not be installed. Run 'brew bundle --file $BREWFILE' manually."
 
-    FISHER_EXTRA=("pure-fish/pure")
     post_install
 fi
