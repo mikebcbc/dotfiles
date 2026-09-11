@@ -32,7 +32,7 @@ position = "top_center"
 
 [audio]
 enable_sounds = true
-sound_volume = 0.9
+sound_volume = 0.55
 
 [dock]
 enabled = true
