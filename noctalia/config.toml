@@ -24,6 +24,16 @@ thickness = 35
     opacity = 1.0
     padding = 6.0
 
+[brightness]
+enable_ddcutil = true
+
+[notification]
+position = "top_center"
+
+[audio]
+enable_sounds = true
+sound_volume = 0.9
+
 [dock]
 enabled = true
 reserve_space = false
