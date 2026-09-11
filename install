@@ -23,7 +23,4 @@ fi
 # Package installation
 "${BASEDIR}/scripts/install-packages.sh"
 
-# Linux: sudo symlink Noctalia greeter config
-if [[ "$(uname)" == "Linux" ]]; then
-    [ -d /var/lib/noctalia-greeter ] && sudo ln -sfn "$(realpath "${BASEDIR}/noctalia/greeter.toml")" /var/lib/noctalia-greeter/greeter.toml || true
-fi
+

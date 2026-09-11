@@ -14,7 +14,7 @@ Cross-platform dotfiles for Linux (CachyOS or Ubuntu + Hyprland) and macOS (Omni
 1. Runs **dotbot** with `install.conf.yaml` - symlinks shared configs and sets up directories
 1. Runs **dotbot** with `install-linux.conf.yaml` or `install-macos.conf.yaml` depending on OS
 1. Runs **`scripts/install-packages.sh`**
-1. sudo-symlinks the Noctalia greeter config on linux since ownership of this file is iffy.
+1. Syncs the Noctalia greeter config to `/var/lib/noctalia-greeter/greeter.toml` on Linux (copies, not symlinks — run `sudo ./scripts/sync-greeter.sh` to re-sync after changes).
 
 ## What's in here
 
@@ -36,7 +36,7 @@ Cross-platform dotfiles for Linux (CachyOS or Ubuntu + Hyprland) and macOS (Omni
 
 ## Ubuntu 26.04
 
-On **Ubuntu 26.04 Server**, `install-packages.sh` runs [Hyprbuntu](https://gitlab.com/kralos/hyprbuntu) (Hyprland from source) unless `Hyprland` is already on PATH (set `FORCE_HYPRBUNTU=1` to rebuild). It installs [UWSM](https://wiki.hypr.land/Useful-Utilities/Systemd-start/) from apt, [Noctalia](https://docs.noctalia.dev/noctalia/getting-started/installation/) + [Noctalia Greeter](https://docs.noctalia.dev/greeter/) from the official APT repo, then `./install` symlinks `noctalia/greeter.toml` to `/var/lib/noctalia-greeter/greeter.toml`. We need to sync the greeter manually after logging in.
+On **Ubuntu 26.04 Server**, `install-packages.sh` runs [Hyprbuntu](https://gitlab.com/kralos/hyprbuntu) (Hyprland from source) unless `Hyprland` is already on PATH (set `FORCE_HYPRBUNTU=1` to rebuild). It installs [UWSM](https://wiki.hypr.land/Useful-Utilities/Systemd-start/) from apt, [Noctalia](https://docs.noctalia.dev/noctalia/getting-started/installation/) + [Noctalia Greeter](https://docs.noctalia.dev/greeter/) from the official APT repo, then `./install` copies `noctalia/greeter.toml` to `/var/lib/noctalia-greeter/greeter.toml` via `scripts/sync-greeter.sh`. Re-run `sudo ./scripts/sync-greeter.sh` after editing the greeter config.
 
 ## macOS
 
