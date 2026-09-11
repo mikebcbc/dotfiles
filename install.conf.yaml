@@ -7,8 +7,6 @@
     shell:
       stderr: true
       stdout: true
-- shell:
-  - ['mkdir -p "$HOME/Pictures/Wallpapers" && cp -n "wallpapers/Dueling Planets.jpg" "$HOME/Pictures/Wallpapers/"', Install wallpaper]
 - create:
   - ~/projects
   - ~/.config
@@ -22,4 +20,3 @@
     ~/.config/ghostty/config: ghostty/config
     ~/.config/git/config: git/config
     ~/.config/fastfetch: fastfetch
-    ~/.config/noctalia/config.toml: noctalia/config.toml

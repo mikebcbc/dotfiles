@@ -48,6 +48,9 @@ fish/fisher/
 # Auto-generated fish completions
 fish/completions/
 
+### Hyprland ###
+hypr/shaders/
+
 ### Vim ###
 # Swap
 [._]*.s[a-v][a-z]

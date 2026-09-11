@@ -9,8 +9,15 @@
       stdout: true
 - create:
   - ~/.config/lazygit
+  - ~/.config/uwsm
+  - ~/.config/xdg-desktop-portal
+  - ~/.config/noctalia
 - shell:
   - ['[ -L "$HOME/.config/hypr" ] || rm -rf "$HOME/.config/hypr"', Replace Hyprbuntu hypr dir so the repo symlink can take over]
+  - ['mkdir -p "$HOME/Pictures/Wallpapers" && src="wallpapers/Dueling Planets.jpg" && dest="$HOME/Pictures/Wallpapers/Dueling Planets.jpg" && [ -f "$dest" ] || cp "$src" "$dest"', Install wallpaper]
 - link:
     ~/.config/hypr: hypr
     ~/.config/lazygit/config.yml: lazygit/config.yml
+    ~/.config/noctalia/config.toml: noctalia/config.toml
+    ~/.config/uwsm/env: uwsm/env
+    ~/.config/xdg-desktop-portal/portals.conf: xdg-desktop-portal/portals.conf
