@@ -8,3 +8,6 @@ allow_empty_password = true
 
 [session]
 default = "Hyprland (uwsm-managed)"
+
+[output]
+name = "DP-2"
