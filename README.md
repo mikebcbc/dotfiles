@@ -28,6 +28,7 @@ Cross-platform dotfiles for Linux (CachyOS or Ubuntu + Hyprland) and macOS (Omni
 | `fastfetch/` | Fastfetch config + custom logo | both |
 | `hypr/` | Hyprland Lua config (0.55+) | Linux |
 | `noctalia/` | Noctalia shell + greeter config | Linux |
+| `thunar/` | Thunar custom actions + prefs | Linux |
 | `wallpapers/` | Wallpaper copied to `~/Pictures/Wallpapers` | Linux |
 | `karabiner/` | Karabiner complex modifications | macOS |
 | `omniwm/` | OmniWM settings | macOS |

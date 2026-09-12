@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+<action>
+	<icon>utilities-terminal</icon>
+	<name>Open Terminal Here</name>
+	<submenu></submenu>
+	<unique-id>1789133789533093-1</unique-id>
+	<command>uwsm app -- ghostty --working-directory=%f</command>
+	<description>Open Ghostty in this folder</description>
+	<range></range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+<action>
+	<icon>folder-copy</icon>
+	<name>Copy Path</name>
+	<submenu></submenu>
+	<unique-id>1789133789533093-2</unique-id>
+	<command>wl-copy -n %f</command>
+	<description>Copy full path to clipboard</description>
+	<range></range>
+	<patterns>*</patterns>
+	<directories/>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+</actions>

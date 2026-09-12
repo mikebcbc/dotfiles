@@ -12,12 +12,18 @@
   - ~/.config/uwsm
   - ~/.config/xdg-desktop-portal
   - ~/.config/noctalia
+  - ~/.config/Thunar
+  - ~/.config/xfce4/xfconf/xfce-perchannel-xml
 - shell:
   - ['[ -L "$HOME/.config/hypr" ] || rm -rf "$HOME/.config/hypr"', Replace Hyprbuntu hypr dir so the repo symlink can take over]
-  - ['mkdir -p "$HOME/Pictures/Wallpapers" && src="wallpapers/Dueling Planets.jpg" && dest="$HOME/Pictures/Wallpapers/Dueling Planets.jpg" && [ -f "$dest" ] || cp "$src" "$dest"', Install wallpaper]
+  - ['mkdir -p "$HOME/Pictures/Wallpapers"; src="wallpapers/Dueling Planets.jpg"; dest="$HOME/Pictures/Wallpapers/Dueling Planets.jpg"; [ -f "$dest" ] || cp "$src" "$dest"', Install wallpaper]
+  - ['[ -L "$HOME/.config/Thunar/uca.xml" ] || rm -f "$HOME/.config/Thunar/uca.xml"', Replace Thunar uca.xml so the repo symlink can take over]
+  - ['[ -L "$HOME/.config/xfce4/xfconf/xfce-perchannel-xml/thunar.xml" ] || rm -f "$HOME/.config/xfce4/xfconf/xfce-perchannel-xml/thunar.xml"', Replace Thunar prefs so the repo symlink can take over]
 - link:
     ~/.config/hypr: hypr
     ~/.config/lazygit/config.yml: lazygit/config.yml
     ~/.config/noctalia/config.toml: noctalia/config.toml
     ~/.config/uwsm/env: uwsm/env
     ~/.config/xdg-desktop-portal/portals.conf: xdg-desktop-portal/portals.conf
+    ~/.config/Thunar/uca.xml: thunar/uca.xml
+    ~/.config/xfce4/xfconf/xfce-perchannel-xml/thunar.xml: thunar/thunar.xml

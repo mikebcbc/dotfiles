@@ -71,9 +71,13 @@ hl.window_rule({
 	size = { "max(monitor_w, monitor_h)*0.17", "min(monitor_w, monitor_h)*0.43" },
 })
 hl.window_rule({ match = { class = "^(org\\.kde\\.keditfiletype)$" }, float = true })
+
+-- Archive UIs
 hl.window_rule({
-	match = { class = "^(org\\.kde\\.ark)$" },
-	size = { "max(monitor_w, monitor_h)*0.40", "min(monitor_w, monitor_h)*0.40" },
+	match = { class = "^(org\\.gnome\\.FileRoller|file-roller|org\\.kde\\.ark)$" },
+	float = true,
+	center = true,
+	size = { "max(monitor_w, monitor_h)*0.28", "min(monitor_w, monitor_h)*0.35" },
 })
 hl.window_rule({
 	match = { class = "^(.*satty.*)$", title = "^(Satty)$" },
@@ -85,13 +89,25 @@ hl.window_rule({
 	float = true,
 	size = { "monitor_w*0.70", "monitor_h*0.70" },
 })
+
+-- Thunar/Dolphin windows
+local fileManagerDialogs =
+	"^(Moving.*|Create New.*|Extract.*|Compress.*|Copying.*|Progress.*|Configure.*|Properties.*|Choose\\sApplication.*|Rename.*|Delete.*)$"
 hl.window_rule({
 	match = {
 		class = "^(org\\.kde\\.dolphin|[Tt]hunar)$",
-		title = "negative:^(Moving.*|Create New.*|Extract.*|Compress.*|Copying.*|Progress.*|Configure.*|Properties.*|Choose\\sApplication.*)$",
+		title = "negative:" .. fileManagerDialogs,
 	},
 	float = true,
 	size = { "max(monitor_w, monitor_h)*0.25", "min(monitor_w, monitor_h)*0.45" },
+})
+hl.window_rule({
+	match = {
+		class = "^(org\\.kde\\.dolphin|[Tt]hunar)$",
+		title = fileManagerDialogs,
+	},
+	float = true,
+	center = true,
 })
 
 -- Opacity Overrides
