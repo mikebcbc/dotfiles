@@ -190,8 +190,6 @@ hl.bind(mainMod .. " + CONTROL + mouse_down", hl.dsp.focus({ workspace = "m+1" }
 -- hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special())
 
 -- Lid Switch Handling
--- Closed + external monitor → disable eDP-1 (clamshell mode)
--- Closed + no external monitor → suspend
 hl.bind("switch:on:Lid Switch", function()
 	local has_external = false
 	for _, m in ipairs(hl.get_monitors()) do
@@ -202,8 +200,6 @@ hl.bind("switch:on:Lid Switch", function()
 	end
 	if has_external then
 		hl.monitor({ output = "eDP-1", disabled = true })
-	else
-		os.execute("noctalia msg session lock-and-suspend")
 	end
 end, { locked = true })
 
