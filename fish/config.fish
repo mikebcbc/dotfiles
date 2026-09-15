@@ -94,11 +94,11 @@ if status is-interactive
     # Environment
     set -gx EDITOR nvim
 
-    # FZF Catppuccin colors
+    # FZF Vesper colors
     set -gx FZF_DEFAULT_OPTS "\
-      --color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \
-      --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
-      --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796"
+      --color=bg+:#1c1c1c,bg:#0c0c0c,spinner:#99ffe4,hl:#ff8080 \
+      --color=fg:#ffffff,header:#ff8080,info:#ffc799,pointer:#99ffe4 \
+      --color=marker:#99ffe4,fg+:#ffffff,prompt:#ffc799,hl+:#ff8080"
 
     # Vi mode
     set fish_cursor_default block

@@ -44,29 +44,20 @@ smart_auto_hide = true
 enabled = [ "noctalia/bitwarden" ]
 
 [idle]
-behavior_order = [ "dim", "lock", "screen_off", "suspend" ]
-pre_action_fade_seconds = 2.0
-
-    [idle.behavior.dim]
-    timeout = 240
-    action = "command"
-    command = "noctalia msg brightness-set 20"
-    resume_command = "noctalia msg brightness-set 90"
+behavior_order = [ "lock", "screen-off", "suspend" ]
+pre_action_fade_seconds = 15.0
 
     [idle.behavior.lock]
-    timeout = 300
-    action = "lock"
-    resume_command = "noctalia msg brightness-set 90"
-
-    [idle.behavior.screen_off]
     timeout = 600
+    action = "lock"
+
+    [idle.behavior.screen-off]
+    timeout = 660
     action = "screen_off"
-    resume_command = "noctalia msg brightness-set 90"
 
     [idle.behavior.suspend]
     timeout = 1800
     action = "lock_and_suspend"
-    resume_command = "noctalia msg dpms-on; noctalia msg brightness-set 90"
 
 [shell]
 clipboard_image_action_command = "satty -f -"
