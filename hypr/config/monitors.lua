@@ -17,9 +17,6 @@ hl.monitor({
 	bitdepth = 10,
 })
 
--- Figure out what to do with the laptop display (closed vs opened)
-apply_laptop_lid_at_boot()
-
 -- Fallback: any other monitor
 hl.monitor({
 	output = "",
@@ -27,3 +24,6 @@ hl.monitor({
 	position = "auto",
 	scale = "1",
 })
+
+-- Figure out what to do with laptop monitor (closed/opened)
+sync_laptop_monitor()

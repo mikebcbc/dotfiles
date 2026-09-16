@@ -189,13 +189,9 @@ hl.bind(mainMod .. " + CONTROL + mouse_down", hl.dsp.focus({ workspace = "m+1" }
 -- hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special" }))
 -- hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special())
 
--- Lid Switch Handling (same eDP path as monitors.lua via set_laptop_monitor)
-hl.bind("switch:on:Lid Switch", function()
-	if #hl.get_monitors() > 1 then
-		set_laptop_monitor(false)
-	end
-end, { locked = true })
-
-hl.bind("switch:off:Lid Switch", function()
-	set_laptop_monitor(true)
-end, { locked = true })
+-- Lid / dock clamshell
+hl.bind("switch:on:Lid Switch", sync_laptop_monitor, { locked = true })
+hl.bind("switch:off:Lid Switch", sync_laptop_monitor, { locked = true })
+hl.on("monitor.added", function()
+	sync_laptop_monitor()
+end)
