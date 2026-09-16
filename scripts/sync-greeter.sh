@@ -13,12 +13,19 @@ if [ ! -f "$SRC" ]; then
     exit 1
 fi
 
+mkdir -p "$(dirname "$DST")"
+
 if [ -L "$DST" ]; then
     echo "Removing existing symlink at $DST"
     rm "$DST"
 fi
 
 cp "$SRC" "$DST"
-chown _greetd:_greetd "$DST"
+
+GREETER_USER="$(getent passwd | grep -i 'greet.*greeter' | head -1 | cut -d: -f1)"
+if [ -z "$GREETER_USER" ]; then
+    GREETER_USER="greeter"
+fi
+chown "$GREETER_USER:$GREETER_USER" "$DST"
 chmod 644 "$DST"
-echo "Synced $SRC -> $DST"
+echo "Synced $SRC -> $DST (owner: $GREETER_USER)"
