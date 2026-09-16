@@ -17,22 +17,8 @@ hl.monitor({
 	bitdepth = 10,
 })
 
--- Laptop panel: disable if lid is closed at boot (clamshell mode)
-local lid = io.open("/proc/acpi/button/lid/LID/state")
-local lid_closed = false
-if lid then
-	local state = lid:read("*l")
-	lid:close()
-	if state and state:match("closed") then
-		lid_closed = true
-	end
-end
-
-if lid_closed then
-	hl.monitor({ output = "eDP-1", disabled = true })
-else
-	hl.monitor({ output = "eDP-1", mode = "preferred", position = "auto", scale = "1" })
-end
+-- Figure out what to do with the laptop display (closed vs opened)
+apply_laptop_lid_at_boot()
 
 -- Fallback: any other monitor
 hl.monitor({

@@ -189,20 +189,13 @@ hl.bind(mainMod .. " + CONTROL + mouse_down", hl.dsp.focus({ workspace = "m+1" }
 -- hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special" }))
 -- hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special())
 
--- Lid Switch Handling
+-- Lid Switch Handling (same eDP path as monitors.lua via set_laptop_monitor)
 hl.bind("switch:on:Lid Switch", function()
-	local has_external = false
-	for _, m in ipairs(hl.get_monitors()) do
-		if m.name ~= "eDP-1" then
-			has_external = true
-			break
-		end
-	end
-	if has_external then
-		hl.monitor({ output = "eDP-1", disabled = true })
+	if #hl.get_monitors() > 1 then
+		set_laptop_monitor(false)
 	end
 end, { locked = true })
 
 hl.bind("switch:off:Lid Switch", function()
-	hl.monitor({ output = "eDP-1", disabled = false })
+	set_laptop_monitor(true)
 end, { locked = true })
