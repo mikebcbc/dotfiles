@@ -11,7 +11,7 @@ return {
       require('mason-tool-installer').setup {
         ensure_installed = {
           'lua-language-server',
-          'vtsls',
+          'tsc',
           'gopls',
           'stylua',
           'markdownlint',

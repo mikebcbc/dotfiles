@@ -5,6 +5,8 @@ local utils = require 'utils'
 local global_capabilities = require('blink.cmp').get_lsp_capabilities(nil, true)
 global_capabilities.offsetEncoding = { 'utf-16' }
 
+vim.env.PATH = vim.fn.stdpath 'data' .. '/mason/bin:' .. vim.env.PATH
+
 vim.lsp.config('*', {
   capabilities = global_capabilities,
   root_markers = { '.git' },
@@ -16,8 +18,7 @@ local dir_path = 'lsp/servers'
 local file_names = utils.get_file_names_in_dir(dir_path, '*.lua', true)
 
 for _, server_name in pairs(file_names) do
-  local server_path = dir_path .. '/' .. server_name
-  local conf = require(server_path)
+  local conf = require(dir_path .. '/' .. server_name)
 
   if type(conf) ~= 'table' or vim.tbl_isempty(conf) or conf.cmd == nil then
     error('Invalid configuration for ' .. server_name)

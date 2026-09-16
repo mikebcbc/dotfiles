@@ -18,6 +18,15 @@ return {
           lualine_x = {
             {
               function()
+                local names = {}
+                for _, client in ipairs(vim.lsp.get_clients { bufnr = 0 }) do
+                  names[#names + 1] = client.name
+                end
+                return table.concat(names, ',')
+              end,
+            },
+            {
+              function()
                 local arrow = require 'arrow.statusline'
                 return arrow.text_for_statusline_with_icons()
               end,
