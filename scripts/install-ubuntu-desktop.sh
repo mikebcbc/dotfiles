@@ -76,6 +76,8 @@ APT_PKGS=(
     # Hyprland package itself (only for hyprlock, which we disable).
     libsdbus-c++-dev
     libsdbus-c++2
+    # PipeWire Bluetooth AAC
+    libspa-0.2-modules-extra
 )
 
 sudo apt-get install -y "${APT_PKGS[@]}"
