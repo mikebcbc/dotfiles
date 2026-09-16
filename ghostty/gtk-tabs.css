@@ -16,3 +16,25 @@ tabbar tabbox tab:selected label {
 tabbar tabbox tab label {
   color: #a0a0a0;
 }
+
+/* Sequence indicator */
+.key-state-overlay {
+  background-color: #ff8080;
+  color: #000000;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-weight: 600;
+}
+
+.key-state-overlay label {
+  color: #000000;
+  text-transform: capitalize;
+}
+
+.key-state-overlay image {
+  color: #000000;
+}
+
+.key-state-overlay .dim-label {
+  color: alpha(#000000, 0.55);
+}

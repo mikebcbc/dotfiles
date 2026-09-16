@@ -18,16 +18,16 @@ unfocused-split-fill = #2d2d2d
 gtk-custom-css = gtk-tabs.css
 
 ## Tabs - submap (like Hyprland): alt+t enters, escape / alt+t exits
-keybind = tabs/
-keybind = alt+t=activate_key_table:tabs
-keybind = tabs/h=previous_tab
-keybind = tabs/l=next_tab
-keybind = tabs/n=new_tab
-keybind = tabs/w=close_tab:this
-keybind = tabs/r=prompt_surface_title
-keybind = tabs/f=toggle_quick_terminal
-keybind = tabs/escape=deactivate_key_table
-keybind = tabs/alt+t=deactivate_key_table
+keybind = tabs control/
+keybind = alt+t=activate_key_table:tabs control
+keybind = tabs control/h=previous_tab
+keybind = tabs control/l=next_tab
+keybind = tabs control/n=new_tab
+keybind = tabs control/w=close_tab:this
+keybind = tabs control/r=prompt_surface_title
+keybind = tabs control/f=toggle_quick_terminal
+keybind = tabs control/escape=deactivate_key_table
+keybind = tabs control/alt+t=deactivate_key_table
 
 ## Splits
 keybind = alt+p>n=new_split:auto
