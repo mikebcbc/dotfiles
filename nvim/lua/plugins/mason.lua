@@ -12,10 +12,10 @@ return {
         ensure_installed = {
           'lua-language-server',
           'tsc',
+          'oxlint',
           'gopls',
           'stylua',
           'markdownlint',
-          'eslint_d',
           'golangci-lint',
           'opa',
           'prettierd',

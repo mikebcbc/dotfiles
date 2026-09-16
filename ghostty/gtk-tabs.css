@@ -1,0 +1,18 @@
+/* Active tab indicator */
+tabbar tabbox tab {
+  border-bottom: 2px solid transparent;
+}
+
+tabbar tabbox tab:selected {
+  border-bottom-color: #ffc799;
+  background-color: alpha(#ffc799, 0.09);
+}
+
+tabbar tabbox tab:selected label {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+tabbar tabbox tab label {
+  color: #a0a0a0;
+}

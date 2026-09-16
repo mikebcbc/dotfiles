@@ -5,13 +5,14 @@ return {
     event = { 'BufReadPre', 'BufNewFile' },
     config = function()
       local lint = require 'lint'
+      -- Prefer oxlint LSP for JS/TS (see lsp/servers/oxlint.lua) over eslint_d.
       lint.linters_by_ft = {
         markdown = { 'markdownlint' },
-        javascript = { 'eslint_d' },
-        typescript = { 'eslint_d' },
-        javascriptreact = { 'eslint_d' },
-        typescriptreact = { 'eslint_d' },
-        astro = { 'eslint_d' },
+        -- javascript = { 'eslint_d' },
+        -- typescript = { 'eslint_d' },
+        -- javascriptreact = { 'eslint_d' },
+        -- typescriptreact = { 'eslint_d' },
+        -- astro = { 'eslint_d' },
         go = { 'golangcilint' },
         rego = { 'opa_check' },
       }
@@ -32,8 +33,6 @@ return {
         '--',
       }
 
-      -- Create autocommand which carries out the actual linting
-      -- on the specified events.
       local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })
       vim.api.nvim_create_autocmd({ 'TextChanged', 'BufWritePost', 'InsertLeave' }, {
         group = lint_augroup,
