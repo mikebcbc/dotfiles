@@ -192,6 +192,5 @@ hl.bind(mainMod .. " + CONTROL + mouse_down", hl.dsp.focus({ workspace = "m+1" }
 -- Lid / dock clamshell
 hl.bind("switch:on:Lid Switch", sync_laptop_monitor, { locked = true })
 hl.bind("switch:off:Lid Switch", sync_laptop_monitor, { locked = true })
-hl.on("monitor.added", function()
-	sync_laptop_monitor()
-end)
+hl.on("monitor.added", sync_laptop_monitor)
+hl.on("monitor.removed", sync_laptop_monitor)
