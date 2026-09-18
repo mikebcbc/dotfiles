@@ -22,24 +22,21 @@ local function lid_closed()
 	return state ~= nil and state:match("closed") ~= nil
 end
 
-local function has_external()
+local function has_external(except)
 	for _, m in ipairs(hl.get_monitors()) do
-		if m.name ~= "eDP-1" then
+		if m.name ~= "eDP-1" and m.name ~= except then
 			return true
 		end
 	end
 	return false
 end
 
--- Clamshell Behaviors
-function on_lid_closed()
-	set_laptop_monitor(not has_external())
-end
-
-function on_lid_opened()
-	set_laptop_monitor(true)
-end
-
-function sync_laptop_monitor()
-	set_laptop_monitor(not (lid_closed() and has_external()))
+-- Laptop panel on, unless the lid is closed and another monitor is present.
+-- `closed` comes from the lid switch when we have it
+-- `except` is an output that's going away (monitor.removed)
+function sync_laptop_monitor(closed, except)
+	if closed == nil then
+		closed = lid_closed()
+	end
+	set_laptop_monitor(not (closed and has_external(except)))
 end
