@@ -1,6 +1,12 @@
 function set_laptop_monitor(enabled)
 	if enabled then
-		hl.monitor({ output = "eDP-1", mode = "preferred", position = "auto", scale = "1" })
+		hl.monitor({
+			output = "eDP-1",
+			disabled = false,
+			mode = "preferred",
+			position = "auto",
+			scale = "1",
+		})
 	else
 		hl.monitor({ output = "eDP-1", disabled = true })
 	end
@@ -25,7 +31,15 @@ local function has_external()
 	return false
 end
 
--- Clamshell: disable eDP only when lid is closed AND an external is present.
+-- Clamshell Behaviors
+function on_lid_closed()
+	set_laptop_monitor(not has_external())
+end
+
+function on_lid_opened()
+	set_laptop_monitor(true)
+end
+
 function sync_laptop_monitor()
 	set_laptop_monitor(not (lid_closed() and has_external()))
 end

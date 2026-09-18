@@ -189,8 +189,8 @@ hl.bind(mainMod .. " + CONTROL + mouse_down", hl.dsp.focus({ workspace = "m+1" }
 -- hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special" }))
 -- hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special())
 
--- Lid / dock clamshell
-hl.bind("switch:on:Lid Switch", sync_laptop_monitor, { locked = true })
-hl.bind("switch:off:Lid Switch", sync_laptop_monitor, { locked = true })
+-- Lid / dock clamshell (after monitor rules so the switch binds actually fire)
+hl.bind("switch:on:Lid Switch", on_lid_closed, { locked = true })
+hl.bind("switch:off:Lid Switch", on_lid_opened, { locked = true })
 hl.on("monitor.added", sync_laptop_monitor)
 hl.on("monitor.removed", sync_laptop_monitor)
