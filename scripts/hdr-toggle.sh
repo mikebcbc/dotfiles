@@ -9,7 +9,7 @@ MONITOR="HDMI-A-2"
 MODE="5120x1440@240"
 
 # SDR compensation values
-SDR_BRIGHTNESS=4.5
+SDR_BRIGHTNESS=1.5
 SDR_SATURATION=1.4
 
 while [[ $# -gt 0 ]]; do
