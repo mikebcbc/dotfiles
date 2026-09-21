@@ -56,6 +56,12 @@ hl.window_rule({
 	workspace = gamingWorkspace,
 })
 
+hl.on("window.active", function()
+	local win = hl.get_active_window()
+	local gameFocused = win ~= nil and win.content_type == "game"
+	hl.config({ ["input.repeat_rate"] = gameFocused and 0 or 25 })
+end)
+
 -- Apps
 hl.window_rule({
 	match = { class = "^(.*\\.exe)$", float = true },
