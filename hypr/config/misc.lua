@@ -14,6 +14,9 @@ hl.config({
 		key_press_enables_dpms = true,
 		mouse_move_enables_dpms = true,
 	},
+	layout = {
+		single_window_aspect_ratio = { 2, 1 },
+	},
 	render = {
 		direct_scanout = 2,
 	},
