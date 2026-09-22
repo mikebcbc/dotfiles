@@ -2,6 +2,7 @@
 ui_scale = 1.20
 
 [bar.default]
+background_opacity = 0.3
 center = [ "workspaces", "spacer_1", "active_window" ]
 concave_edge_corners = true
 end = [ "media", "spacer_1", "tray", "notifications", "network", "volume", "session" ]
@@ -77,6 +78,7 @@ settings_show_advanced = true
     open_near_click_control_center = true
     session_placement = "floating"
     session_position = "center"
+    transparency_mode = "glass"
     wallpaper_placement = "floating"
 
     [shell.screenshot]
