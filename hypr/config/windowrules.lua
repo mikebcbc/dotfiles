@@ -86,10 +86,12 @@ hl.window_rule({
 	size = { "max(monitor_w, monitor_h)*0.28", "min(monitor_w, monitor_h)*0.35" },
 })
 hl.window_rule({
-	match = { class = "^(.*satty.*)$", title = "^(Satty)$" },
+	match = { class = "^(.*satty.*)$" },
 	min_size = { "max(monitor_w, monitor_h)*0.35", "min(monitor_w, monitor_h)*0.35" },
 	float = true,
 })
+hl.window_rule({ match = { class = "^([Bb]itwarden)$" }, float = true, center = true })
+hl.window_rule({ match = { title = "^(Bitwarden.*)$" }, float = true, center = true }) -- Browser extension popup
 hl.window_rule({
 	match = { class = "^(dev\\.)?(noctalia\\.Noctalia(\\.Settings)?)$" },
 	float = true,
