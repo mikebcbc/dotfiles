@@ -5,7 +5,6 @@ hl.monitor({
 	position = "auto",
 	scale = "auto",
 	cm = "dp3",
-	bitdepth = 10,
 })
 
 hl.monitor({
@@ -14,7 +13,6 @@ hl.monitor({
 	position = "auto",
 	scale = "auto",
 	cm = "srgb",
-	bitdepth = 10,
 })
 
 -- Fallback: any other monitor
