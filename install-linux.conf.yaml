@@ -14,11 +14,14 @@
   - ~/.config/noctalia
   - ~/.config/Thunar
   - ~/.config/xfce4/xfconf/xfce-perchannel-xml
+  - ~/.config/pipewire/pipewire.conf.d
+  - ~/.local/lib/ladspa
 - shell:
   - ['[ -L "$HOME/.config/hypr" ] || rm -rf "$HOME/.config/hypr"', Replace Hyprbuntu hypr dir so the repo symlink can take over]
   - ['mkdir -p "$HOME/Pictures/Wallpapers"; src="wallpapers/Dueling Planets.jpg"; dest="$HOME/Pictures/Wallpapers/Dueling Planets.jpg"; [ -f "$dest" ] || cp "$src" "$dest"', Install wallpaper]
   - ['[ -L "$HOME/.config/Thunar/uca.xml" ] || rm -f "$HOME/.config/Thunar/uca.xml"', Replace Thunar uca.xml so the repo symlink can take over]
   - ['[ -L "$HOME/.config/xfce4/xfconf/xfce-perchannel-xml/thunar.xml" ] || rm -f "$HOME/.config/xfce4/xfconf/xfce-perchannel-xml/thunar.xml"', Replace Thunar prefs so the repo symlink can take over]
+  - ['scripts/install-rnnoise-ladspa.sh', Install RNNoise LADSPA plugin for PipeWire mic denoising]
 - link:
     ~/.config/hypr: hypr
     ~/.config/lazygit/config.yml: lazygit/config.yml
@@ -27,3 +30,4 @@
     ~/.config/xdg-desktop-portal/portals.conf: xdg-desktop-portal/portals.conf
     ~/.config/Thunar/uca.xml: thunar/uca.xml
     ~/.config/xfce4/xfconf/xfce-perchannel-xml/thunar.xml: thunar/thunar.xml
+    ~/.config/pipewire/pipewire.conf.d/99-rnnoise.conf: pipewire/pipewire.conf.d/99-rnnoise.conf
