@@ -91,7 +91,12 @@ hl.window_rule({
 	float = true,
 })
 hl.window_rule({ match = { class = "^([Bb]itwarden)$" }, float = true, center = true })
-hl.window_rule({ match = { title = "^(Bitwarden.*)$" }, float = true, center = true }) -- Browser extension popup
+hl.window_rule({
+	match = { initial_title = "^_crx_.*$" },
+	float = true,
+	center = true,
+	size = { "max(monitor_w, monitor_h)*0.09", "min(monitor_w, monitor_h)*0.5" },
+}) -- All Chromium extension popups (Brave, Chrome, Edge, etc.)
 hl.window_rule({
 	match = { class = "^(dev\\.)?(noctalia\\.Noctalia(\\.Settings)?)$" },
 	float = true,
