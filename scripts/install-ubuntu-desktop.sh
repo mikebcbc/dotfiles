@@ -78,6 +78,9 @@ APT_PKGS=(
     libsdbus-c++2
     # PipeWire Bluetooth AAC
     libspa-0.2-modules-extra
+    # satty copy-command uses wl-copy; the Ubuntu satty binary is a GitHub
+    # release with no dependency resolution, so install wl-clipboard explicitly.
+    wl-clipboard
 )
 
 sudo apt-get install -y "${APT_PKGS[@]}"

@@ -12,6 +12,7 @@
   - ~/.config/uwsm
   - ~/.config/xdg-desktop-portal
   - ~/.config/noctalia
+  - ~/.config/satty
   - ~/.config/Thunar
   - ~/.config/xfce4/xfconf/xfce-perchannel-xml
   - ~/.config/pipewire/pipewire.conf.d
@@ -26,6 +27,7 @@
     ~/.config/hypr: hypr
     ~/.config/lazygit/config.yml: lazygit/config.yml
     ~/.config/noctalia/config.toml: noctalia/config.toml
+    ~/.config/satty/config.toml: satty/config.toml
     ~/.config/uwsm/env: uwsm/env
     ~/.config/xdg-desktop-portal/portals.conf: xdg-desktop-portal/portals.conf
     ~/.config/Thunar/uca.xml: thunar/uca.xml
